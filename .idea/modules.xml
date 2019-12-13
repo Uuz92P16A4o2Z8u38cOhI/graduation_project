@@ -3,8 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/eureka/eureka.iml" filepath="$PROJECT_DIR$/eureka/eureka.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gateway/gateway.iml" filepath="$PROJECT_DIR$/gateway/gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/graduation_project.iml" filepath="$PROJECT_DIR$/graduation_project.iml" />
       <module fileurl="file://$PROJECT_DIR$/project_ui/project_ui.iml" filepath="$PROJECT_DIR$/project_ui/project_ui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/security_oauth/security_oauth.iml" filepath="$PROJECT_DIR$/security_oauth/security_oauth.iml" />
     </modules>
   </component>
 </project>

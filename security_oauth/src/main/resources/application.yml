@@ -1,0 +1,20 @@
+server:
+  port: 9056
+
+eureka:
+  instance:
+    hostname: 127.0.0.1
+    port: 7001
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        -id:
+        uri:
+        predicates:
+          -path=

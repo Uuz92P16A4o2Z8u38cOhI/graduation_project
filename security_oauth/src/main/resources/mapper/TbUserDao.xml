@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cuit.hyl.graduation.security_oauth.dao.TbUserDao">
+
+    <resultMap type="cuit.hyl.graduation.security_oauth.entity.TbUser" id="TbUserMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="created" column="created" jdbcType="TIMESTAMP"/>
+        <result property="updated" column="updated" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--自己自己自己自己自己自己自己自己自己自己自己自己自己自己自己自己自己自己自己自己自己自己自己自己-->
+    <!--通过用户名查询用户-->
+    <select id="queryByUserName" resultMap="TbUserMap">
+        select
+          id, username, password, phone, email, created, updated
+        from graduation_authority.tb_user
+        where username = #{username}
+    </select>
+
+    <!--生成********************************************************************************-->
+    <!--查询单个-->
+    <select id="queryById" resultMap="TbUserMap">
+        select
+          id, username, password, phone, email, created, updated
+        from graduation_authority.tb_user
+        where id = #{id}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="TbUserMap">
+        select
+          id, username, password, phone, email, created, updated
+        from graduation_authority.tb_user
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="username != null and username != ''">
+                and username = #{username}
+            </if>
+            <if test="password != null and password != ''">
+                and password = #{password}
+            </if>
+            <if test="phone != null and phone != ''">
+                and phone = #{phone}
+            </if>
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+            <if test="created != null">
+                and created = #{created}
+            </if>
+            <if test="updated != null">
+                and updated = #{updated}
+            </if>
+        </where>
+    </select>
+
+</mapper>

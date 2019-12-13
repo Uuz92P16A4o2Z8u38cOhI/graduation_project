@@ -6,15 +6,28 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="eureka" />
         <module name="graduation_project" />
+        <module name="gateway" />
         <module name="project_ui" />
+        <module name="security_oauth" />
+        <module name="eureka" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="eureka" target="1.8" />
+      <module name="gateway" target="1.8" />
       <module name="graduation_project" target="1.8" />
       <module name="project_ui" target="1.8" />
+      <module name="security_oauth" target="1.8" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="eureka" options="-parameters" />
+      <module name="gateway" options="-parameters" />
+      <module name="graduation_project" options="-parameters" />
+      <module name="project_ui" options="-parameters" />
+      <module name="security_oauth" options="-parameters" />
+    </option>
   </component>
 </project>
