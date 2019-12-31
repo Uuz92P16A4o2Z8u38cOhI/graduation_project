@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cuit.hyl.graduation.project_ui.dao.MenuDao">
+
+    <resultMap type="cuit.hyl.graduation.project_ui.entity.Menu" id="MenuMap">
+        <result property="id" column="ID" jdbcType="INTEGER"/>
+        <result property="name" column="NAME" jdbcType="VARCHAR"/>
+        <result property="parentId" column="PARENT_ID" jdbcType="INTEGER"/>
+        <result property="path" column="PATH" jdbcType="VARCHAR"/>
+        <result property="status" column="STATUS" jdbcType="INTEGER"/>
+        <result property="code" column="CODE" jdbcType="VARCHAR"/>
+        <result property="icon" column="ICON" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--父id查询-->
+    <select id="queryByParentId" resultMap="MenuMap">
+        select
+          ID, NAME, PARENT_ID, PATH, STATUS, CODE, ICON
+        from graduation_ui.menu
+        where PARENT_ID = #{id}
+    </select>
+
+    <!--全部菜单-->
+    <select id="queryAll" resultMap="MenuMap">
+        select
+            ID, NAME, PARENT_ID, PATH, STATUS, CODE, ICON
+        from graduation_ui.menu
+    </select>
+
+</mapper>
