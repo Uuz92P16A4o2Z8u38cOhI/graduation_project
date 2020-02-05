@@ -13,4 +13,5 @@ public interface TbUserService {
 
     List<TbUser> queryByUserName(String username);
 
+    List<TbUser> queryAllUser();
 }

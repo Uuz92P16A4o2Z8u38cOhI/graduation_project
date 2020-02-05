@@ -13,4 +13,5 @@ public interface TbPermissionService {
 
     List<TbPermission> queryByUserId(Long id);
 
+    List<TbPermission> queryAllPermission();
 }

@@ -22,5 +22,5 @@ public interface TbUserDao {
      */
     List<TbUser> queryByUserName(String username);
 
-
+    List<TbUser> queryAllUser();
 }

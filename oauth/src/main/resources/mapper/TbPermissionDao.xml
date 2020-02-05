@@ -30,5 +30,12 @@
         WHERE u.id = #{id}
     </select>
 
+    <!--通过用户名查询用户-->
+    <select id="queryAllPermission" resultMap="TbPermission">
+        select
+            id, name, enname, url, description
+        from graduation_authority.tb_permission
+
+    </select>
 
 </mapper>

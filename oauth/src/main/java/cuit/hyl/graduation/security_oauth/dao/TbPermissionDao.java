@@ -16,4 +16,5 @@ public interface TbPermissionDao {
 
     List<TbPermission> queryByUserId(Long id);
 
+    List<TbPermission> queryAllPermission();
 }

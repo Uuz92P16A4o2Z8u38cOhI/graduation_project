@@ -30,5 +30,10 @@ public class TbPermissionServiceImpl implements TbPermissionService {
         return this.tbPermissionDao.queryByUserId(id);
     }
 
+    @Override
+    public List<TbPermission> queryAllPermission() {
+        return this.tbPermissionDao.queryAllPermission();
+    }
+
 
 }

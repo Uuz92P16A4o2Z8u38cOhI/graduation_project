@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/graduation_project.iml" filepath="$PROJECT_DIR$/graduation_project.iml" />
       <module fileurl="file://$PROJECT_DIR$/oauth/oauth.iml" filepath="$PROJECT_DIR$/oauth/oauth.iml" />
       <module fileurl="file://$PROJECT_DIR$/ui/ui.iml" filepath="$PROJECT_DIR$/ui/ui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/webservice/webservice.iml" filepath="$PROJECT_DIR$/webservice/webservice.iml" />
     </modules>
   </component>
 </project>

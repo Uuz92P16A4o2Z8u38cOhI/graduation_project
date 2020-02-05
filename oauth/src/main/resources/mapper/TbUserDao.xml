@@ -12,7 +12,6 @@
         <result property="updated" column="updated" jdbcType="TIMESTAMP"/>
     </resultMap>
 
-    <!--自己自己自己自己自己自己自己自己自己自己自己自己自己自己自己自己自己自己自己自己自己自己自己自己-->
     <!--通过用户名查询用户-->
     <select id="queryByUserName" resultMap="TbUserMap">
         select
@@ -21,43 +20,12 @@
         where username = #{username}
     </select>
 
-    <!--生成********************************************************************************-->
-    <!--查询单个-->
-    <select id="queryById" resultMap="TbUserMap">
+    <!--查询所有用户-->
+    <select id="queryAllUser" resultMap="TbUserMap">
         select
-          id, username, password, phone, email, created, updated
+            id, username, phone, email
         from graduation_authority.tb_user
-        where id = #{id}
-    </select>
 
-    <!--通过实体作为筛选条件查询-->
-    <select id="queryAll" resultMap="TbUserMap">
-        select
-          id, username, password, phone, email, created, updated
-        from graduation_authority.tb_user
-        <where>
-            <if test="id != null">
-                and id = #{id}
-            </if>
-            <if test="username != null and username != ''">
-                and username = #{username}
-            </if>
-            <if test="password != null and password != ''">
-                and password = #{password}
-            </if>
-            <if test="phone != null and phone != ''">
-                and phone = #{phone}
-            </if>
-            <if test="email != null and email != ''">
-                and email = #{email}
-            </if>
-            <if test="created != null">
-                and created = #{created}
-            </if>
-            <if test="updated != null">
-                and updated = #{updated}
-            </if>
-        </where>
     </select>
 
 </mapper>

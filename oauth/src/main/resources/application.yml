@@ -17,6 +17,7 @@ server:
 spring:
   application:
     name: oauth
+
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
@@ -32,20 +33,34 @@ spring:
     password: 123456
     type: com.zaxxer.hikari.HikariDataSource
     username: root
+
   http:
     encoding:
       charset: utf-8
       enabled: true
       force: true
+
+  jpa:
+    show-sql: true
+
   main:
     allow-bean-definition-overriding: true
-  redis:
-    database: 0
-    host: 127.0.0.1
-    jedis:
-      pool:
-        maxActive: 100
-        maxIdle: 10
-        minIdle: 5
-    password: zp123789
-    port: 6379
+
+#  redis:
+#    lettuce:
+#      pool:
+#        max-active: 100
+#        max-idle: 8
+#        max-wait: -1ms
+#        min-idle: 0
+#    sentinel:
+#      master: mymaster
+#      nodes: 192.168.91.130:26379
+#
+#  session:
+#    store-type: redis
+
+logging:
+  level:
+    cuit.hyl.graduation.security_oauth.dao: debug
+

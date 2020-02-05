@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cuit.hyl.graduation.project_ui.dao.TeachUnitDao">
+
+    <resultMap type="cuit.hyl.graduation.project_ui.entity.TeachUnit" id="TeachUnitMap">
+        <result property="id" column="ID" jdbcType="INTEGER"/>
+        <result property="name" column="NAME" jdbcType="VARCHAR"/>
+        <result property="code" column="CODE" jdbcType="VARCHAR"/>
+        <result property="parentId" column="PARENT_ID" jdbcType="INTEGER"/>
+        <result property="schoolCode" column="SCHOOL_CODE" jdbcType="INTEGER"/>
+        <result property="icon" column="ICON" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryAll" resultMap="TeachUnitMap">
+        select
+          ID, NAME, CODE, PARENT_ID, SCHOOL_CODE, ICON
+        from graduation_ui.teach_unit
+        where SCHOOL_CODE = #{schoolCode}
+    </select>
+
+
+</mapper>

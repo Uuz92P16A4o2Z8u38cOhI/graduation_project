@@ -24,4 +24,9 @@ public class TbUserServiceImpl implements TbUserService {
     public List<TbUser> queryByUserName(String username) {
         return tbUserDao.queryByUserName(username);
     }
+
+    @Override
+    public List<TbUser> queryAllUser() {
+        return tbUserDao.queryAllUser();
+    }
 }
