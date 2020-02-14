@@ -37,8 +37,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     public DataSource dataSource() {
         return DataSourceBuilder.create().build();
     }
-    /*@Resource
-    public DataSource dataSource;*/
 
     @Bean
     public TokenStore tokenStore(){
@@ -55,8 +53,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         return jwtAccessTokenConverter;
     }
 
-   /* @Autowired
-    private AuthenticationManager authenticationManager;*/
+   @Autowired
+    private AuthenticationManager authenticationManager;
 
     @Bean
     public ClientDetailsService clientDetailsService(){

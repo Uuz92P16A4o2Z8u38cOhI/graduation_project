@@ -9,6 +9,7 @@
         <option value="$PROJECT_DIR$/security_oauth/pom.xml" />
         <option value="$PROJECT_DIR$/gateway/pom.xml" />
         <option value="$PROJECT_DIR$/webservice/pom.xml" />
+        <option value="$PROJECT_DIR$/fastdfs/pom.xml" />
       </list>
     </option>
   </component>

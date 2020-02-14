@@ -12,10 +12,12 @@
         <module name="gateway" />
         <module name="eureka" />
         <module name="oauth" />
+        <module name="fastdfs" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="eureka" target="1.8" />
+      <module name="fastdfs" target="1.8" />
       <module name="gateway" target="1.8" />
       <module name="graduation_project" target="1.8" />
       <module name="oauth" target="1.8" />
@@ -26,6 +28,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="eureka" options="-parameters" />
+      <module name="fastdfs" options="-parameters" />
       <module name="gateway" options="-parameters" />
       <module name="graduation_project" options="-parameters" />
       <module name="oauth" options="-parameters" />

@@ -51,3 +51,7 @@ spring:
     sentinel:
       master:
       nodes:
+
+logging:
+  level:
+    cuit.hyl.graduation.project_ui.dao: debug

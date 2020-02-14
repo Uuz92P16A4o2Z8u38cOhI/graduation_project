@@ -43,7 +43,39 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        super.configure(http);
+        http.csrf().disable()
+                .httpBasic()
+
+                .and()
+                .authorizeRequests()
+                // 所有/权限认证 的所有请求 都放行
+                .antMatchers("/user/**").permitAll()
+                .antMatchers("/auth/**").permitAll()
+                // swagger start
+                .antMatchers("/swagger-ui.html").permitAll()
+                .antMatchers("/swagger-resources/**").permitAll()
+                .antMatchers("/images/**").permitAll()
+                .antMatchers("/webjars/**").permitAll()
+                .antMatchers("/v2/api-docs").permitAll()
+
+                .anyRequest()
+                .authenticated()// 其他 url 需要身份认证
+
+                .and()
+                .formLogin()  // 开启登录
+                .loginProcessingUrl("/user/login")
+                .usernameParameter("username")//请求验证参数
+                .passwordParameter("password")//请求验证参数
+                //.successHandler(authenticationSuccessHandler) // 登录成功
+                //.failureHandler(authenticationFailureHandler) // 登录失败
+                .permitAll()
+
+                .and()
+                .logout()
+                //.logoutSuccessHandler(logoutSuccessHandler)
+                .permitAll();
+
+       // http.exceptionHandling().accessDeniedHandler(accessDeniedHandler); // 无权访问
     }
 
     /**
