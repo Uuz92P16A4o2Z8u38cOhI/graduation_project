@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cuit.hyl.graduation.sys.dao.TbUserDao">
+
+    <resultMap type="cuit.hyl.graduation.sys.entity.TbUser" id="TbUserMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="created" column="created" jdbcType="TIMESTAMP"/>
+        <result property="updated" column="updated" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+
+
+    <!--查询所有用户-->
+    <select id="queryAllUser" resultMap="TbUserMap">
+        select
+            id, username, phone, email
+        from graduation_authority.tb_user
+
+    </select>
+
+</mapper>

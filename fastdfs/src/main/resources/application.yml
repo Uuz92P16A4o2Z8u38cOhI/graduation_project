@@ -19,6 +19,49 @@ spring:
       enabled: true
       force: true
 
+  rabbitmq:
+    host: 192.168.91.130
+    port: 5672
+    username: rabbit
+    password: 123456
+
+#  cloud:
+#    stream:
+#      rocketmq:
+#        binder:
+##          namesrv-addr:
+#          name-server: 192.168.91.130:9876
+#          bindings:
+#          input: {consumer.orderly: true}
+#      bindings:
+#        output1: {destination: topic-codeEmail, content-type: application/json}
+#        output2: {destination: topic-passwordChangeEmail, content-type: application/json}
+#
+#        input1: {destination: topic-codeEmail, content-type: application/json, group: group-Email}
+#        input2: {destination: topic-passwordChangeEmail, content-type: application/json, group: group-Email}
+
+  thymeleaf:
+    cache: false
+    mode: HTML
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+
+  mail:
+    host: smtp.qq.com
+    # 发送邮件的邮箱地址
+    username: 2546615650@qq.com
+    # 你的邮箱授权码
+    password: jyyxlkxpptefebii
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+
+
 fastdfs.base.url: http://192.168.91.130:8888/
 storage:
   type: fastdfs

@@ -40,7 +40,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Bean
     public TokenStore tokenStore(){
-        //return new JdbcTokenStore(dataSource());
+//        return new JdbcTokenStore(dataSource());
         //JWT令牌存储
         return new JwtTokenStore(accessTokenConverter());
     }
@@ -61,12 +61,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         return new JdbcClientDetailsService(dataSource());
     }
 
-    /*@Override
+    @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security.tokenKeyAccess("permitAll()")
                 .checkTokenAccess("permitAll()")
                 .allowFormAuthenticationForClients();
-    }*/
+    }
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
@@ -78,7 +78,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         endpoints
                 .tokenStore(tokenStore())
                 .tokenServices(tokenServices())
-                /*.authenticationManager(authenticationManager)*/;
+                .authenticationManager(authenticationManager);
     }
 
     @Bean
@@ -92,8 +92,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         tokenEnhancerChain.setTokenEnhancers(Arrays.asList(accessTokenConverter()));
         defaultTokenServices.setTokenEnhancer(tokenEnhancerChain);
 
-        defaultTokenServices.setAccessTokenValiditySeconds(7200); // 两小时
-        defaultTokenServices.setRefreshTokenValiditySeconds(7200); // 3天
+        defaultTokenServices.setAccessTokenValiditySeconds(7200);
+        defaultTokenServices.setRefreshTokenValiditySeconds(7200);
         return defaultTokenServices;
     }
 

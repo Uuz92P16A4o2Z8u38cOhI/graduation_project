@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cuit.hyl.graduation.security_oauth.dao.TbMenuDao">
+
+    <resultMap type="cuit.hyl.graduation.security_oauth.entity.TbMenu" id="TbMenuMap">
+        <result property="id" column="ID" jdbcType="INTEGER"/>
+        <result property="name" column="NAME" jdbcType="VARCHAR"/>
+        <result property="parentId" column="PARENT_ID" jdbcType="INTEGER"/>
+        <result property="path" column="PATH" jdbcType="VARCHAR"/>
+        <result property="status" column="STATUS" jdbcType="INTEGER"/>
+        <result property="code" column="CODE" jdbcType="VARCHAR"/>
+        <result property="icon" column="ICON" jdbcType="VARCHAR"/>
+        <result property="odr" column="ODR" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="queryById" resultMap="TbMenuMap">
+        SELECT
+            p.*
+        FROM
+            graduation_authority.tb_user AS u
+                LEFT JOIN graduation_authority.tb_user_role AS ur ON u.id = ur.user_id
+                LEFT JOIN graduation_authority.tb_role AS r ON r.id = ur.role_id
+                LEFT JOIN graduation_authority.tb_role_menu AS rm ON r.id = rm.role_id
+                LEFT JOIN graduation_authority.tb_menu AS p ON p.id = rm.menu_id
+        WHERE
+            u.id = #{id} AND r.parent_id = 0
+    </select>
+
+</mapper>

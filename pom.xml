@@ -19,6 +19,9 @@
         <module>oauth</module>
         <module>ui</module>
         <module>gateway</module>
+        <module>webservice</module>
+        <module>fastdfs</module>
+        <module>utils</module>
     </modules>
 
     <properties>

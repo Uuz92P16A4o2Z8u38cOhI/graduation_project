@@ -10,7 +10,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-//@EnableHystrix
 //@EnableFeignClients
 public class OauthApplication {
 

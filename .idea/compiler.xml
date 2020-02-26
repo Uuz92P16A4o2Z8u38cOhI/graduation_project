@@ -7,12 +7,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="graduation_project" />
-        <module name="webservice" />
         <module name="ui" />
+        <module name="sys" />
         <module name="gateway" />
         <module name="eureka" />
-        <module name="oauth" />
+        <module name="webservice" />
         <module name="fastdfs" />
+        <module name="utils" />
+        <module name="oauth" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -21,7 +23,9 @@
       <module name="gateway" target="1.8" />
       <module name="graduation_project" target="1.8" />
       <module name="oauth" target="1.8" />
+      <module name="sys" target="1.8" />
       <module name="ui" target="1.8" />
+      <module name="utils" target="1.8" />
       <module name="webservice" target="1.8" />
     </bytecodeTargetLevel>
   </component>
@@ -32,7 +36,9 @@
       <module name="gateway" options="-parameters" />
       <module name="graduation_project" options="-parameters" />
       <module name="oauth" options="-parameters" />
+      <module name="sys" options="-parameters" />
       <module name="ui" options="-parameters" />
+      <module name="utils" options="-parameters" />
       <module name="webservice" options="-parameters" />
     </option>
   </component>

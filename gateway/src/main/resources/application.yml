@@ -52,11 +52,22 @@ spring:
           uri: lb://ui
           # Predicate 翻译过来是“谓词”的意思，必须，主要作用是匹配用户的请求，有很多种用法
           predicates:
+#            - Path=/ui/**
             # Method 方法谓词，这里是匹配 GET 和 POST 请求
             - Method=GET,POST,PUT,DELETE
         - id: OAUTH
           uri: lb://oauth
           predicates:
-            - Method=GET,POST
+#            - Path=/oauth/**
+            - Method=GET,POST,PUT,DELETE
 
+        - id: FASTDFS
+          uri: lb://fastdfs
+          predicates:
+            - Method=GET,POST,PUT,DELETE
+
+        - id: SYS
+          uri: lb://sys
+          predicates:
+            - Method=GET,POST,PUT,DELETE
 

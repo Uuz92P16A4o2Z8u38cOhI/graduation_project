@@ -1,5 +1,6 @@
 package cuit.hyl.graduation.security_oauth.config.service;
 
+import com.alibaba.fastjson.JSON;
 import cuit.hyl.graduation.security_oauth.entity.TbPermission;
 import cuit.hyl.graduation.security_oauth.entity.TbUser;
 import cuit.hyl.graduation.security_oauth.service.TbPermissionService;
@@ -42,7 +43,13 @@ public class UserDetailServiceImpl implements UserDetailsService {
                 }
             });
         }
-        // 由框架完成认证工作
-        return new User(tbUser.getUsername(), tbUser.getPassword(), grantedAuthorities);
+        TbUser TbUserInfo = new TbUser();
+        TbUserInfo.setId(tbUser.getId());
+        TbUserInfo.setUsername(tbUser.getUsername());
+        TbUserInfo.setEmail(tbUser.getEmail());
+        TbUserInfo.setPhone(tbUser.getPhone());
+        String userInfo = JSON.toJSONString(TbUserInfo);
+        // 由框架完成认证工
+        return new User(userInfo, tbUser.getPassword(), grantedAuthorities);
     }
 }

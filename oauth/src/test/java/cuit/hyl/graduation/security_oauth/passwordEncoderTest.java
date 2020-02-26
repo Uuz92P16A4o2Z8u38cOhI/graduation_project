@@ -12,5 +12,7 @@ public class passwordEncoderTest {
         TbUserService tbUserService = new TbUserServiceImpl();
         System.out.println(new BCryptPasswordEncoder().encode("secret"));
         System.out.println(new BCryptPasswordEncoder().encode("123456"));
+        System.out.println(new BCryptPasswordEncoder().encode("zhuren"));
+        System.out.println(new BCryptPasswordEncoder().encode("teacher"));
     }
 }

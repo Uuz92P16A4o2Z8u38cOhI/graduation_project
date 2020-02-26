@@ -1,6 +1,8 @@
 package cuit.hyl.graduation.fastdfs.controller;
 
 import cuit.hyl.graduation.fastdfs.service.StorageService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
+@Api( tags = "文件上传")
 @RestController
 @RequestMapping("api/fastdfs/upload")
 public class UploadController {
@@ -32,6 +35,7 @@ public class UploadController {
      * @param editorFiles wangEditor
      * @return
      */
+    @ApiOperation("MultipartFile dropFile, MultipartFile[] editorFiles")
     @RequestMapping(value = "upload", method = RequestMethod.POST)
     public Map<String, Object> upload(MultipartFile dropFile, MultipartFile[] editorFiles) {
         Map<String, Object> result = new HashMap<>();

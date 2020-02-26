@@ -18,7 +18,7 @@ import java.util.List;
  */
 @Api(tags = "前端目录")
 @RestController
-@RequestMapping("menuTree")
+@RequestMapping("api/ui/menuTree")
 public class MenuController {
     /**
      * 服务对象
@@ -42,12 +42,13 @@ public class MenuController {
     }
 
     public void addMenu(List<Menu> menus){
-        if (menus.size() != 0)
-            for(Menu menu : menus){
-                if(!(this.menuService.queryByParentId(menu.getId()).isEmpty())) {
+        if (menus.size() != 0) {
+            for (Menu menu : menus) {
+                if (!(this.menuService.queryByParentId(menu.getId()).isEmpty())) {
                     menu.setChildren(this.menuService.queryByParentId(menu.getId()));
-                   addMenu(menu.getChildren());
+                    addMenu(menu.getChildren());
                 }
             }
+        }
     }
 }

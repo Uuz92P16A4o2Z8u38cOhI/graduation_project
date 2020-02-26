@@ -1,0 +1,121 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>验证码</title>
+
+    <style type="text/css">
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #fafafa;
+        }
+
+        .shinchou-menu {
+            --highlight-text-color: #00ACF0;
+            display: flex;
+            flex-direction: column;
+            list-style-type: none;
+        }
+
+        .shinchou-menu li {
+            margin: 6px;
+        }
+
+        .shinchou-menu li p {
+            position: relative;
+            display: inline-flex;
+            padding: 6px 2px 6px 2px;
+            margin: 0;
+            color: black;
+            font-size: 1.6em;
+            font-weight: 700;
+            line-height: 1;
+        / / ensure span is a square text-decoration: none;
+            overflow: hidden;
+        }
+
+        .shinchou-menu li p::before {
+             position: absolute;
+             content: '';
+             top: 0;
+             left: 0;
+             z-index: -2;
+             width: 100%;
+             height: 100%;
+             background: black;
+         }
+
+        .shinchou-menu li p:hover span{
+            color: white !important;
+            text-shadow: 0 0 10px var(--highlight-text-color);
+        }
+
+        .shinchou-menu li p span {
+            position: relative;
+            margin: 0 5px 0 4px;
+            transition: 0.3s
+        }
+
+        .shinchou-menu li p span .highlight::before {
+             position: absolute;
+             content: '';
+             top: -3px;
+             left: -3px;
+             bottom: -3px;
+             right: -3px;
+             z-index: -1;
+             background: var(--highlight-text-color);
+         }
+
+        .shinchou-menu li p span:not(.highlight) {
+             color: var(--highlight-text-color);
+         }
+
+        .frosted-glass {
+            /*display: flex;*/
+            justify-content: center;
+            align-items: center;
+            width: 72vw;
+            height: 36vh;
+            box-shadow: 0 0.3px 0.7px rgba(0, 0, 0, 0.126),
+            0 0.9px 1.7px rgba(0, 0, 0, 0.179), 0 1.8px 3.5px rgba(0, 0, 0, 0.224),
+            0 3.7px 7.3px rgba(0, 0, 0, 0.277), 0 10px 20px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(20px);
+            transition: 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="content frosted-glass" style=" width: 500px;
+        margin: auto; padding: 10px">
+        <h2 style="text-align: center;">高校学院级教师基础信息管理系统</h2>
+        <ul class="shinchou-menu">
+            <li><p>用户：<span th:text="${username}"></span></p></li>
+            <li><p>验证码 ： <span th:text="${code}"></span></p></li>
+            <li><p>时间：<span th:text="${time}"></span></p></p></li>
+        </ul>
+    </div>
+</body>
+<script>
+    var shinchouMenuLinks = document.querySelectorAll(".shinchou-menu li p");
+    shinchouMenuLinks.forEach(function (link) {
+        var letters = link.textContent.split("");
+        link.textContent = "";
+        letters.forEach(function (letter, i) {
+            var span = document.createElement("span");
+            span.textContent = letter;
+            if (i < 2) {
+                span.className = "highlight";
+            }
+            span.style.transitionDelay = i / 10 + "s";
+            link.append(span);
+        });
+    });
+</script>
+</html>

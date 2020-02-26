@@ -64,3 +64,13 @@ logging:
   level:
     cuit.hyl.graduation.security_oauth.dao: debug
 
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+
+
+
+

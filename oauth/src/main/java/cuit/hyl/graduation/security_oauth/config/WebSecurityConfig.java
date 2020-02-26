@@ -1,6 +1,11 @@
 package cuit.hyl.graduation.security_oauth.config;
 
 import cuit.hyl.graduation.security_oauth.config.service.UserDetailServiceImpl;
+import cuit.hyl.graduation.security_oauth.config.loginHandler.LoginAccessDeniedHandler;
+import cuit.hyl.graduation.security_oauth.config.loginHandler.LoginAuthenticationFailureHandler;
+import cuit.hyl.graduation.security_oauth.config.loginHandler.LoginAuthenticationSuccessHandler;
+import cuit.hyl.graduation.security_oauth.config.loginHandler.LoginLogoutSuccessHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,6 +23,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private LoginLogoutSuccessHandler logoutSuccessHandler;
+    @Autowired
+    private LoginAuthenticationSuccessHandler authenticationSuccessHandler;
+    @Autowired
+    private LoginAuthenticationFailureHandler authenticationFailureHandler;
+    @Autowired
+    private LoginAccessDeniedHandler accessDeniedHandler;
+
 
     @Bean
     public PasswordEncoder passwordEncoder(){
@@ -48,9 +63,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .authorizeRequests()
-                // 所有/权限认证 的所有请求 都放行
-                .antMatchers("/user/**").permitAll()
-                .antMatchers("/auth/**").permitAll()
                 // swagger start
                 .antMatchers("/swagger-ui.html").permitAll()
                 .antMatchers("/swagger-resources/**").permitAll()
@@ -64,18 +76,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()  // 开启登录
                 .loginProcessingUrl("/user/login")
-                .usernameParameter("username")//请求验证参数
-                .passwordParameter("password")//请求验证参数
-                //.successHandler(authenticationSuccessHandler) // 登录成功
-                //.failureHandler(authenticationFailureHandler) // 登录失败
+                .successHandler(authenticationSuccessHandler) // 登录成功
+                .failureHandler(authenticationFailureHandler) // 登录失败
                 .permitAll()
 
                 .and()
                 .logout()
-                //.logoutSuccessHandler(logoutSuccessHandler)
-                .permitAll();
+                .logoutSuccessHandler(logoutSuccessHandler)
+                .permitAll()
 
-       // http.exceptionHandling().accessDeniedHandler(accessDeniedHandler); // 无权访问
+                .and().rememberMe()
+                .rememberMeParameter("remember")
+                .rememberMeCookieName("remember")
+
+                .and().cors().and().csrf().disable();
+
+        http.headers().frameOptions().disable();
+        http.exceptionHandling().accessDeniedHandler(accessDeniedHandler); // 无权访问
     }
 
     /**

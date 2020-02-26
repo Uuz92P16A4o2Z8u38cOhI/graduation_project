@@ -13,7 +13,6 @@
         <result property="updated" column="updated" jdbcType="TIMESTAMP"/>
     </resultMap>
 
-    <!--查询单个-->
     <select id="queryByUserId" resultMap="TbPermissionMap">
         SELECT
         p.*
@@ -22,7 +21,7 @@
         LEFT JOIN graduation_authority.tb_user_role AS ur
         ON u.id = ur.user_id
         LEFT JOIN graduation_authority.tb_role AS r
-        ON r.id = ur.role_id
+        ON r.id = ur.role_id AND r.parent_id = 0
         LEFT JOIN graduation_authority.tb_role_permission AS rp
         ON r.id = rp.role_id
         LEFT JOIN graduation_authority.tb_permission AS p
@@ -33,7 +32,7 @@
     <!--通过用户名查询用户-->
     <select id="queryAllPermission" resultMap="TbPermissionMap">
         select
-            id, name, enname, url, description
+            id, name, enname, url, description, created, updated
         from graduation_authority.tb_permission
 
     </select>
