@@ -57,6 +57,9 @@ pagehelper:
   supportMethodsArguments: true
   params: count=countSql
 
+swagger:
+  show: true
+
 security:
   oauth2:
     client:

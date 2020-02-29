@@ -29,12 +29,96 @@
         WHERE u.id = #{id}
     </select>
 
-    <!--通过用户名查询用户-->
+    <!--查询用户-->
     <select id="queryAllPermission" resultMap="TbPermissionMap">
         select
             id, name, enname, url, description, created, updated
         from graduation_authority.tb_permission
-
+        <where>
+            <if test="name != null and name != '' ">
+                and name = #{name}
+            </if>
+            <if test="enname != null and enname != '' ">
+                and enname = #{enname}
+            </if>
+            <if test="url != null and url != ''">
+                and url like "%"#{url}"%"
+            </if>
+            <if test="description != null and description != ''">
+                and description like "%"#{description}"%"
+            </if>
+        </where>
     </select>
+
+    <!--新增资源权限-->
+    <insert id="insertPermission" >
+        INSERT INTO graduation_authority.tb_permission
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                id,
+            </if>
+            <if test="name != null and '' != name">
+                name,
+            </if>
+            <if test="enname != null and '' != enname">
+                enname,
+            </if>
+            <if test="url != null and '' != url">
+                url,
+            </if>
+            <if test="description != null and '' != description">
+                description,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                #{id},
+            </if>
+            <if test="name != null and '' != name">
+                #{name},
+            </if>
+            <if test="enname != null and '' != enname">
+                #{enname},
+            </if>
+            <if test="url != null and '' != url">
+                #{url},
+            </if>
+            <if test="description != null and '' != description">
+                #{description},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updatePermission">
+        UPDATE graduation_authority.tb_permission
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and '' != name">
+                name= #{name},
+            </if>
+            <if test="enname != null and '' != enname">
+                enname= #{enname},
+            </if>
+            <if test="url != null and '' != url">
+                url= #{url},
+            </if>
+            <if test="description != null and '' != description">
+                description= #{description},
+            </if>
+        </trim>
+        where id= #{id}
+    </update>
+
+    <!--删除资源权限-->
+    <delete id="deletePermission">
+        DELETE FROM graduation_authority.tb_permission WHERE id = #{id}
+    </delete>
+
+    <!--批量删除-->
+    <delete id="multipleDeletePermission">
+        DELETE FROM graduation_authority.tb_permission WHERE id IN
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 
 </mapper>

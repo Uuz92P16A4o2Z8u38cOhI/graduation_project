@@ -1,4 +1,4 @@
-package cuit.hyl.graduation.utils.serial;
+package cuit.hyl.graduation.sys.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

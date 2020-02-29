@@ -1,4 +1,4 @@
-package cuit.hyl.graduation.utils.serial;
+package cuit.hyl.graduation.sys.utils;
 
 /**
  * Created by mrt on 2018/3/27.

@@ -8,12 +8,11 @@
         <outputRelativeToContentRoot value="true" />
         <module name="graduation_project" />
         <module name="ui" />
-        <module name="sys" />
         <module name="gateway" />
         <module name="eureka" />
         <module name="webservice" />
+        <module name="sys" />
         <module name="fastdfs" />
-        <module name="utils" />
         <module name="oauth" />
       </profile>
     </annotationProcessing>

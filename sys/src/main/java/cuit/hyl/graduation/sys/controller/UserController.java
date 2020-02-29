@@ -6,10 +6,7 @@ import cuit.hyl.graduation.sys.service.TbUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,7 +19,7 @@ public class UserController {
     private TbUserService tbUserService;
 
     @ApiOperation(value="查询所有用户--分页")
-    @GetMapping("allUser/{pageNum}/{pageSize}")
+    @PostMapping("allUser/{pageNum}/{pageSize}")
     List<TbUser> queryAllRole(@PathVariable Integer pageNum, @PathVariable Integer pageSize){
         PageHelper.startPage(pageNum,pageSize);
         return this.tbUserService.queryAllUser();

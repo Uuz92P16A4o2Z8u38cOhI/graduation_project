@@ -6,10 +6,7 @@ import cuit.hyl.graduation.sys.service.TbRoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,7 +18,7 @@ public class RoleController {
     private TbRoleService tbRoleService;
 
     @ApiOperation(value="查询所有角色--分页")
-    @GetMapping("allRole/{pageNum}/{pageSize}")
+    @PostMapping("allRole/{pageNum}/{pageSize}")
     List<TbRole> queryAllRole(@PathVariable Integer pageNum, @PathVariable Integer pageSize){
         PageHelper.startPage(pageNum,pageSize);
         return this.tbRoleService.queryAllRole();

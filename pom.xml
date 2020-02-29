@@ -21,7 +21,7 @@
         <module>gateway</module>
         <module>webservice</module>
         <module>fastdfs</module>
-        <module>utils</module>
+        <module>sys</module>
     </modules>
 
     <properties>

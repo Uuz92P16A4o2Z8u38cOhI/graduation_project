@@ -56,6 +56,9 @@ logging:
   level:
     cuit.hyl.graduation.project_ui.dao: debug
 
+swagger:
+  show: true
+
 security:
   oauth2:
     client:

@@ -1,5 +1,9 @@
 package cuit.hyl.graduation.sys.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.ser.std.ToStringSerializer;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -11,7 +15,8 @@ import java.util.Date;
  */
 public class TbPermission implements Serializable {
     private static final long serialVersionUID = 874795164460647626L;
-    
+
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
     /**
     * 父权限
