@@ -1,5 +1,6 @@
 package cuit.hyl.graduation.sys.service;
 
+import com.alibaba.fastjson.JSONObject;
 import cuit.hyl.graduation.sys.entity.TbUser;
 
 import java.util.List;
@@ -12,5 +13,13 @@ import java.util.List;
  */
 public interface TbUserService {
 
-    List<TbUser> queryAllUser();
+    List<TbUser> queryAllUser(JSONObject params);
+
+    int insertUser(JSONObject params);
+
+    int updateUser(JSONObject parans);
+
+    int deleteUser(Long id);
+
+    int multipleDeleteUser(Long[] id);
 }

@@ -1,4 +1,6 @@
 package cuit.hyl.graduation.security_oauth.config.loginHandler;
+import java.time.LocalDateTime;
+import	java.util.HashMap;
 
 import com.alibaba.fastjson.JSON;
 import cuit.hyl.graduation.security_oauth.common.utils.ResultUtils;
@@ -11,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * 登录成功
@@ -21,6 +24,9 @@ public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessH
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
 
         ResponseResult<Object> result = ResultUtils.success("登录成功!");
+        Map map = new HashMap<String, Object>();
+        map.put("登陆时间",LocalDateTime.now());
+        result.setData(map);
         httpServletResponse.setCharacterEncoding("utf-8");
         httpServletResponse.setContentType("application/json;charset=utf-8");
         httpServletResponse.getWriter().write(JSON.toJSONString(result));

@@ -1,5 +1,6 @@
 package cuit.hyl.graduation.sys.service;
 
+import com.alibaba.fastjson.JSONObject;
 import cuit.hyl.graduation.sys.entity.TbRole;
 
 import java.util.List;
@@ -12,5 +13,13 @@ import java.util.List;
  */
 public interface TbRoleService {
 
-    List<TbRole> queryAllRole();
+    List<TbRole> queryAllRole(JSONObject params);
+
+    int insertRole(JSONObject params);
+
+    int updateRole(JSONObject parans);
+
+    int deleteRole(Long id);
+
+    int multipleDeleteRole(Long[] id);
 }

@@ -11,6 +11,9 @@
         <result property="description" column="description" jdbcType="VARCHAR"/>
         <result property="created" column="created" jdbcType="TIMESTAMP"/>
         <result property="updated" column="updated" jdbcType="TIMESTAMP"/>
+
+        <result property="roleId" column="roleId" jdbcType="INTEGER"/>
+        <result property="permissionId" column="permissionId" jdbcType="INTEGER"/>
     </resultMap>
 
     <select id="queryByUserId" resultMap="TbPermissionMap">
@@ -116,6 +119,27 @@
     <!--批量删除-->
     <delete id="multipleDeletePermission">
         DELETE FROM graduation_authority.tb_permission WHERE id IN
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+<!--   5;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+    <!--通过角色Id查找权限-->
+    <select id="queryPermissionByRoleId">
+        SELECT * FROM graduation_authority.tb_permission WHERE id = #{id}
+    </select>
+
+    <!--增加角色权限-->
+    <insert id="insertRolePermission">
+        INSERT INTO graduation_authority.tb_role_permission (role_id, permission_id)
+        VALUES (#{roleId}, #{permissionId})
+    </insert>
+
+    <!--删除角色权限-->
+    <delete id="deleteRolePermission">
+        DELETE FROM graduation_authority.tb_role_permission
+        WHERE id IN
         <foreach collection="array" item="id" open="(" separator="," close=")">
             #{id}
         </foreach>

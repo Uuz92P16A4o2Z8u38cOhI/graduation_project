@@ -56,5 +56,20 @@ public class TbPermissionServiceImpl implements TbPermissionService {
         return this.tbPermissionDao.multipleDeletePermission(id);
     }
 
+    @Override
+    public List<TbPermission> queryPermissionByRoleId(Long id) {
+        return this.tbPermissionDao.queryPermissionByRoleId(id);
+    }
+
+    @Override
+    public int insertRolePermission(Long roleId, Long permissionId) {
+        return this.tbPermissionDao.insertRolePermission(roleId, permissionId);
+    }
+
+    @Override
+    public int deleteRolePermission(Long[] id) {
+        return this.tbPermissionDao.deleteRolePermission(id);
+    }
+
 
 }

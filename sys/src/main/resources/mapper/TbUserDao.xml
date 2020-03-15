@@ -12,14 +12,93 @@
         <result property="updated" column="updated" jdbcType="TIMESTAMP"/>
     </resultMap>
 
-
-
     <!--查询所有用户-->
     <select id="queryAllUser" resultMap="TbUserMap">
         select
-            id, username, phone, email
+            id, username, phone, email, created, updated
         from graduation_authority.tb_user
-
+        <where>
+            <if test="username != null and username != '' ">
+                and username = #{username}
+            </if>
+            <if test="phone != null and phone != '' ">
+                and phone = #{phone}
+            </if>
+            <if test="email != null and email != ''">
+                and email like #{email}
+            </if>
+        </where>
     </select>
+
+    <!--新增用户-->
+    <insert id="insertUser" >
+        INSERT INTO graduation_authority.tb_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                id,
+            </if>
+            <if test="username != null and '' != username">
+                username,
+            </if>
+            <if test="password != null and '' != password">
+                password,
+            </if>
+            <if test="phone != null and '' != phone">
+                phone,
+            </if>
+            <if test="email != null and '' != email">
+                email,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                #{id},
+            </if>
+            <if test="username != null and '' != username">
+                #{username},
+            </if>
+            <if test="password != null and '' != password">
+                #{password},
+            </if>
+            <if test="phone != null and '' != phone">
+                #{phone},
+            </if>
+            <if test="email != null and '' != email">
+                #{email},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateUser">
+        UPDATE graduation_authority.tb_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="username != null and '' != username">
+                username= #{username},
+            </if>
+            <if test="password != null and '' != password">
+                password= #{password},
+            </if>
+            <if test="phone != null and '' != phone">
+                phone= #{phone},
+            </if>
+            <if test="email != null and '' != email">
+                email= #{email},
+            </if>
+        </trim>
+        where id= #{id}
+    </update>
+
+    <!--删除角色-->
+    <delete id="deleteUser">
+        DELETE FROM graduation_authority.tb_user WHERE id = #{id}
+    </delete>
+
+    <!--批量删除-->
+    <delete id="multipleDeleteUser">
+        DELETE FROM graduation_authority.tb_user WHERE id IN
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 
 </mapper>

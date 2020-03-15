@@ -1,9 +1,11 @@
 package cuit.hyl.graduation.sys.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import cuit.hyl.graduation.sys.dao.TbUserDao;
 import cuit.hyl.graduation.sys.entity.TbUser;
 import cuit.hyl.graduation.sys.service.TbUserService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -20,7 +22,31 @@ public class TbUserServiceImpl implements TbUserService {
     private TbUserDao tbUserDao;
 
     @Override
-    public List<TbUser> queryAllUser() {
-        return tbUserDao.queryAllUser();
+    public List<TbUser> queryAllUser(JSONObject params) {
+        return this.tbUserDao.queryAllUser(params);
+    }
+
+    @Override
+    @Transactional
+    public int insertUser(JSONObject params) {
+        return this.tbUserDao.insertUser(params);
+    }
+
+    @Override
+    @Transactional
+    public int updateUser(JSONObject parans) {
+        return this.tbUserDao.updateUser(parans);
+    }
+
+    @Override
+    @Transactional
+    public int deleteUser(Long id) {
+        return this.tbUserDao.deleteUser(id);
+    }
+
+    @Override
+    @Transactional
+    public int multipleDeleteUser(Long[] id) {
+        return this.tbUserDao.multipleDeleteUser(id);
     }
 }

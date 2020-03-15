@@ -25,4 +25,12 @@ public interface TbPermissionService {
     int deletePermission(Long id);
 
     int multipleDeletePermission(Long[] id);
+
+//    -----------------------------
+
+    List<TbPermission> queryPermissionByRoleId(Long id);
+
+    int insertRolePermission(Long roleId, Long permissionId);
+
+    int deleteRolePermission(Long[] id);
 }
