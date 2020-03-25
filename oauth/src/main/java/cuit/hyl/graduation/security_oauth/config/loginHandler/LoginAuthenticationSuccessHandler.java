@@ -25,7 +25,8 @@ public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessH
 
         ResponseResult<Object> result = ResultUtils.success("登录成功!");
         Map map = new HashMap<String, Object>();
-        map.put("登陆时间",LocalDateTime.now());
+        map.put("loginTime",LocalDateTime.now());
+
         result.setData(map);
         httpServletResponse.setCharacterEncoding("utf-8");
         httpServletResponse.setContentType("application/json;charset=utf-8");

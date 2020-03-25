@@ -1,5 +1,6 @@
 package cuit.hyl.graduation.project_ui.controller;
 
+import cuit.hyl.graduation.project_ui.entity.ResponseResult;
 import cuit.hyl.graduation.project_ui.entity.TeachUnit;
 import cuit.hyl.graduation.project_ui.service.TeachUnitService;
 import io.swagger.annotations.Api;
@@ -25,10 +26,11 @@ public class TeachUnitController {
 
     @ApiOperation("所有教学单位")
     @GetMapping("queryAll/{schoolCode}")
-    public List<TeachUnit> queryAll(@PathVariable Integer schoolCode) {
+    public ResponseResult queryAll(@PathVariable Integer schoolCode) {
         if(schoolCode == null)
             schoolCode = 10621;
-        return this.teachUnitService.queryAll(schoolCode);
+
+        return new ResponseResult(ResponseResult.CodeStatus.OK,"成功查询所有教学单位", this.teachUnitService.queryAll(schoolCode));
     }
 
 }

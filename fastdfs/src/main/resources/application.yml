@@ -20,7 +20,7 @@ spring:
       force: true
 
   rabbitmq:
-    host: 192.168.91.130
+    host: 192.168.91.128
     port: 5672
     username: rabbit
     password: 123456
@@ -30,7 +30,7 @@ spring:
 #      rocketmq:
 #        binder:
 ##          namesrv-addr:
-#          name-server: 192.168.91.130:9876
+#          name-server: 192.168.91.128:9876
 #          bindings:
 #          input: {consumer.orderly: true}
 #      bindings:
@@ -62,8 +62,8 @@ spring:
             required: true
 
 
-fastdfs.base.url: http://192.168.91.130:8888/
+fastdfs.base.url: http://192.168.91.128:8888/
 storage:
   type: fastdfs
   fastdfs:
-    tracker_server: 192.168.91.130:22122
+    tracker_server: 192.168.91.128:22122
