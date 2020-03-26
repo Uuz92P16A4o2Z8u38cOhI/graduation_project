@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import cuit.hyl.graduation.project_ui.annotation.ExcelAttributes;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
+import java.sql.Date;
 import java.io.Serializable;
 
 /**
