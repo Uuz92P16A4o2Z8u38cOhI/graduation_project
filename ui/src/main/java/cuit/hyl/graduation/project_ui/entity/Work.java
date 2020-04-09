@@ -11,8 +11,8 @@ import java.io.Serializable;
  */
 public class Work implements Serializable {
     private static final long serialVersionUID = -48890067351278327L;
-    
-    private Integer id;
+
+    private Long id;
     /**
     * 职位
     */
@@ -38,14 +38,14 @@ public class Work implements Serializable {
     */
     private Date endTime;
     
-    private Integer peopleId;
+    private Long peopleId;
 
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -97,11 +97,11 @@ public class Work implements Serializable {
         this.endTime = endTime;
     }
 
-    public Integer getPeopleId() {
+    public Long getPeopleId() {
         return peopleId;
     }
 
-    public void setPeopleId(Integer peopleId) {
+    public void setPeopleId(Long peopleId) {
         this.peopleId = peopleId;
     }
 

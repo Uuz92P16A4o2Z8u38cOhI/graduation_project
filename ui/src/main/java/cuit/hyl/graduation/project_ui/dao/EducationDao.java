@@ -1,29 +1,29 @@
 package cuit.hyl.graduation.project_ui.dao;
 
-import cuit.hyl.graduation.project_ui.entity.Work;
+import cuit.hyl.graduation.project_ui.entity.Education;
 import cuit.hyl.graduation.project_ui.entity.vo.Versions;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 /**
- * 工作情况(Work)表数据库访问层
+ * 教育经历(Education)表数据库访问层
  *
  * @author makejava
- * @since 2020-03-25 19:38:13
+ * @since 2020-04-02 20:22:55
  */
 @Mapper
-public interface WorkDao {
+public interface EducationDao {
 
     /**
      * 通过ID查询单条数据
      */
-    List<Work> queryInitInfo(Long id);
+    List<Education> queryInitInfo(Long id);
 
     /**
      * 通过版本查询
      */
-    List<Work> queryByVersion(Long id, Integer version);
+    List<Education> queryByVersion(Long id, Integer version);
 
     /**
      * 查询所有版本号
@@ -33,9 +33,6 @@ public interface WorkDao {
     /**
      * excel 导出所有
      */
-    List<Work> queryAll(Long id);
-
-
-
+    List<Education> queryAll(Long id);
 
 }

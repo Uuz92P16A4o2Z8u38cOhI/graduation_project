@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cuit.hyl.graduation.project_ui.dao.FamilyBaseDao">
+
+    <resultMap type="cuit.hyl.graduation.project_ui.entity.FamilyBase" id="FamilyBaseMap">
+        <result property="id" column="ID" jdbcType="INTEGER"/>
+        <result property="population" column="POPULATION" jdbcType="INTEGER"/>
+        <result property="address" column="ADDRESS" jdbcType="VARCHAR"/>
+        <result property="peopleId" column="PEOPLE_ID" jdbcType="INTEGER"/>
+        <result property="uploadTime" column="UPLOAD_TIME" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <resultMap type="cuit.hyl.graduation.project_ui.entity.FamilyMember" id="FamilyMemberMap">
+        <result property="id" column="ID" jdbcType="INTEGER"/>
+        <result property="avatarType" column="AVATAR_TYPE" jdbcType="INTEGER"/>
+        <result property="name" column="NAME" jdbcType="VARCHAR"/>
+        <result property="sex" column="SEX" jdbcType="INTEGER"/>
+        <result property="birth" column="BIRTH" jdbcType="TIMESTAMP"/>
+        <result property="job" column="JOB" jdbcType="VARCHAR"/>
+        <result property="politicalStatus" column="POLITICAL_STATUS" jdbcType="INTEGER"/>
+        <result property="relation" column="RELATION" jdbcType="VARCHAR"/>
+        <result property="email" column="EMAIL" jdbcType="VARCHAR"/>
+        <result property="phone" column="PHONE" jdbcType="VARCHAR"/>
+        <result property="baseId" column="BASE_ID" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--个人最新信息-->
+    <select id="initInfo" resultMap="FamilyBaseMap">
+        select
+          ID, POPULATION, ADDRESS, PEOPLE_ID, UPLOAD_TIME
+        from graduation_ui.family_base
+        where PEOPLE_ID = #{id}
+        order by UPLOAD_TIME desc
+    </select>
+
+    <select id="memberByBaseId" resultMap="FamilyMemberMap">
+        select
+            *
+        from graduation_ui.family_member
+        where BASE_ID = #{id}
+    </select>
+
+
+</mapper>

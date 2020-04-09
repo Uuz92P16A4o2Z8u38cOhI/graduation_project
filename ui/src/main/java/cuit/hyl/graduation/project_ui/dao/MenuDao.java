@@ -17,7 +17,7 @@ public interface MenuDao {
     /**
      * 通过PARENT_ID查询单条数据
      */
-    List<Menu> queryByParentId(Integer id);
+    List<Menu> queryByParentId(Long id);
 
     /**
      * 全部

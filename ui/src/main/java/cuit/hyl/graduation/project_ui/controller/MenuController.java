@@ -29,7 +29,7 @@ public class MenuController {
     @ApiOperation(value = "嵌套菜单")
     @GetMapping("/menuInfo")
     public List<Menu> menuInfo(){
-        int parentId = -1;
+        Long parentId = -1L;
         List<Menu> menu = this.menuService.queryByParentId(parentId);
         addMenu(menu);
         return menu;

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cuit.hyl.graduation.project_ui.dao.EducationDao">
+
+    <resultMap type="cuit.hyl.graduation.project_ui.entity.Education" id="EducationMap">
+        <result property="id" column="ID" jdbcType="INTEGER"/>
+        <result property="schoole" column="SCHOOLE" jdbcType="VARCHAR"/>
+        <result property="degree" column="DEGREE" jdbcType="VARCHAR"/>
+        <result property="subject" column="SUBJECT" jdbcType="VARCHAR"/>
+        <result property="startTime" column="START_TIME" jdbcType="TIMESTAMP"/>
+        <result property="endTime" column="END_TIME" jdbcType="TIMESTAMP"/>
+        <result property="peopleId" column="PEOPLE_ID" jdbcType="INTEGER"/>
+        <result property="uploadTime" column="UPLOAD_TIME" jdbcType="TIMESTAMP"/>
+        <result property="version" column="VERSION" jdbcType="INTEGER"/>
+    </resultMap>
+    <resultMap type="cuit.hyl.graduation.project_ui.entity.vo.Versions" id="VersionsMap">
+        <result property="uploadTime" column="UPLOAD_TIME" jdbcType="TIMESTAMP"/>
+        <result property="version" column="VERSION" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--最新消息查询-->
+    <select id="queryInitInfo" resultMap="EducationMap">
+        select
+            ID, SCHOOLE, DEGREE, SUBJECT, START_TIME, END_TIME, PEOPLE_ID, VERSION
+        from graduation_ui.education
+        where PEOPLE_ID = #{id} AND VERSION = ( SELECT MAX( VERSION ) FROM graduation_ui.education )
+        order by START_TIME desc
+    </select>
+
+    <!--通过版本查询 -->
+    <select id="queryByVersion" resultMap="EducationMap">
+        select
+            ID, SCHOOLE, DEGREE, SUBJECT, START_TIME, END_TIME, PEOPLE_ID, VERSION
+        from graduation_ui.education
+        where PEOPLE_ID = #{id} and VERSION = #{version}
+        order by START_TIME desc
+    </select>
+
+
+    <!--查询所有版本号 -->
+    <select id="queryAllVersion" resultMap="VersionsMap">
+        SELECT DISTINCT VERSION, UPLOAD_TIME FROM graduation_ui.education where PEOPLE_ID = #{id};
+    </select>
+
+    <!-- excel 导出所有 -->
+    <select id="queryAll" resultMap="EducationMap">
+        select
+            ID, SCHOOLE, DEGREE, SUBJECT, START_TIME, END_TIME, PEOPLE_ID, VERSION
+        from graduation_ui.education
+        where PEOPLE_ID = #{id}
+        order by VERSION desc ,START_TIME desc
+    </select>
+
+</mapper>

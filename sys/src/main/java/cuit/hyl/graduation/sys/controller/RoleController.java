@@ -4,14 +4,20 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import cuit.hyl.graduation.sys.entity.ResponseResult;
+import cuit.hyl.graduation.sys.entity.TbMenu;
 import cuit.hyl.graduation.sys.entity.TbRole;
+import cuit.hyl.graduation.sys.entity.vo.RoleTree;
 import cuit.hyl.graduation.sys.service.TbRoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Api(tags = "角色查询")
 @RequestMapping("api/sys/role")
@@ -71,6 +77,55 @@ public class RoleController {
             return new ResponseResult(ResponseResult.CodeStatus.OK,"成功删除"+row+"个角色", "删除" + row + "行");
         }else {
             return new ResponseResult(ResponseResult.CodeStatus.FAIL, "删除失败" , "删除" + row + "行");
+        }
+    }
+
+    /*@ApiOperation(value="查询所有角色--分页")
+    @PostMapping("allRoleTree")
+    ResponseResult queryAllRoleTree(){
+        List<TbRole> list = this.tbRoleService.queryAllRole();
+        PageInfo<TbRole> pageInfo = new PageInfo<TbRole> (list);
+        return new ResponseResult(ResponseResult.CodeStatus.OK,pageInfo);
+    }*/
+
+    @ApiOperation(value="查询用户拥有的角色")
+    @PostMapping("queryByUserId/{id}")
+    ResponseResult queryByUserId(@PathVariable Long id){
+        Long[] ids = this.tbRoleService.queryByUserIds(id);
+        List<RoleTree> adminList = this.tbRoleService.roleTree(0L);
+        List<RoleTree> webList = this.tbRoleService.roleTree(1L);
+        Map<String,Object> map = new HashMap<>();
+        map.put("ids",ids);
+
+        List<RoleTree> sortAdminList = new ArrayList<>();
+        List<RoleTree> sortWebList = new ArrayList<>();
+
+        adminList.forEach(list ->{
+            if(list.getParentId() == 0){
+                sortAdminList.add(list);
+            }
+        });
+        webList.forEach(list ->{
+            if(list.getParentId() == 1){
+                sortWebList.add(list);
+            }
+        });
+        addMenu(sortAdminList, adminList);
+        addMenu(sortWebList, webList);
+
+        map.put("sortAdminList",sortAdminList);
+        map.put("sortWebList",sortWebList);
+
+        return new ResponseResult(ResponseResult.CodeStatus.OK,map);
+    }
+
+
+    public void addMenu(List<RoleTree> menus, List<RoleTree> menuList){
+        if (menus.size() != menuList.size()) {
+            for (RoleTree menu : menus) {
+                menu.setChildren(menuList.stream().filter(list -> list.getParentId().equals(menu.getId())).collect(Collectors.toList()));
+                addMenu(menu.getChildren(),menuList);
+            }
         }
     }
 }

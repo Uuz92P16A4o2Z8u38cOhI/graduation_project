@@ -16,7 +16,7 @@ import java.io.Serializable;
 public class BasicInfo implements Serializable {
     private static final long serialVersionUID = 266121383832773046L;
     
-    private Integer id;
+    private Long id;
     /**
     * 姓名
     */
@@ -146,14 +146,14 @@ public class BasicInfo implements Serializable {
     private Integer schoolId;
 
     @ExcelAttributes(importSort = 999)
-    private Integer peopleId;
+    private Long peopleId;
 
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -357,11 +357,11 @@ public class BasicInfo implements Serializable {
         this.schoolId = schoolId;
     }
 
-    public Integer getPeopleId() {
+    public Long getPeopleId() {
         return peopleId;
     }
 
-    public void setPeopleId(Integer peopleId) {
+    public void setPeopleId(Long peopleId) {
         this.peopleId = peopleId;
     }
 

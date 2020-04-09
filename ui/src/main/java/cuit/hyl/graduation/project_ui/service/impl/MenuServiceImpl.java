@@ -23,7 +23,7 @@ public class MenuServiceImpl implements MenuService {
      * 通过parentId查询单条数据
      */
     @Override
-    public List<Menu> queryByParentId(Integer id) {
+    public List<Menu> queryByParentId(Long id) {
         return this.menuDao.queryByParentId(id);
     }
 

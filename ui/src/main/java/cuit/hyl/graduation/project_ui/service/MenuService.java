@@ -14,7 +14,7 @@ public interface MenuService {
     /**
      * 通过parentId查询单条数据
      */
-    List<Menu> queryByParentId(Integer id);
+    List<Menu> queryByParentId(Long id);
 
     /**
      * 全部查询

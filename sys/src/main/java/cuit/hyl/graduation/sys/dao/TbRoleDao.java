@@ -2,6 +2,7 @@ package cuit.hyl.graduation.sys.dao;
 
 import com.alibaba.fastjson.JSONObject;
 import cuit.hyl.graduation.sys.entity.TbRole;
+import cuit.hyl.graduation.sys.entity.vo.RoleTree;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -24,4 +25,16 @@ public interface TbRoleDao {
     int deleteRole(Long id);
 
     int multipleDeleteRole(Long[] id);
+
+    List<RoleTree> queryByUserId(Long id);
+    Long[] queryByUserIds(Long id);
+    List<RoleTree> roleTree(Long id);
+
+    int deleteUserRole(Long id);
+
+    int multipleDeleteUserRole(Long[] id);
+
+    /*int insertUserRole();
+
+    int multipleInsertUserRole();*/
 }

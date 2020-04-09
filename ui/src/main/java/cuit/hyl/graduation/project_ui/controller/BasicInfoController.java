@@ -30,14 +30,14 @@ public class BasicInfoController {
      */
     @ApiOperation("通过用户id查询单条数据")
     @GetMapping("queryByPeopleId/{id}")
-    public ResponseResult queryByPeopleId(@PathVariable Integer id) {
+    public ResponseResult queryByPeopleId(@PathVariable Long id) {
 
         return new ResponseResult(ResponseResult.CodeStatus.OK,"成功查询数据", this.basicInfoService.queryByPeopleId(id).get(0));
     }
 
     @ApiOperation("通过用户id查询初始化数据")
     @GetMapping("queryInitInfo/{id}")
-    public ResponseResult queryInitInfo(@PathVariable Integer id) {
+    public ResponseResult queryInitInfo(@PathVariable Long id) {
 
         return new ResponseResult(ResponseResult.CodeStatus.OK,"成功查询数据", this.basicInfoService.queryInitInfo(id).get(0));
     }

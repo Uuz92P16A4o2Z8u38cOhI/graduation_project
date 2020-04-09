@@ -34,7 +34,7 @@ public class PoiController {
 
     @ApiOperation("导出定制化Excel--个人")
     @PostMapping("exportModelExcel/{id}")
-    public void exportModelExcel(@PathVariable Integer id,HttpServletResponse response) {
+    public void exportModelExcel(@PathVariable Long id,HttpServletResponse response) {
         List<BasicInfo> list = basicInfoService.queryByPeopleId(id);
         ExportExcel<BasicInfo> exportExcel = new ExportExcel<>();
         Map<String, Object> param = new HashMap<>();

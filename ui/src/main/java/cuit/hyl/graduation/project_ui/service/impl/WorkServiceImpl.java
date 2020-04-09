@@ -2,6 +2,7 @@ package cuit.hyl.graduation.project_ui.service.impl;
 
 import cuit.hyl.graduation.project_ui.entity.Work;
 import cuit.hyl.graduation.project_ui.dao.WorkDao;
+import cuit.hyl.graduation.project_ui.entity.vo.Versions;
 import cuit.hyl.graduation.project_ui.service.WorkService;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +11,6 @@ import java.util.List;
 
 /**
  * 工作情况(Work)表服务实现类
- *
- * @author makejava
- * @since 2020-03-25 19:38:13
  */
 @Service("workService")
 public class WorkServiceImpl implements WorkService {
@@ -20,22 +18,22 @@ public class WorkServiceImpl implements WorkService {
     private WorkDao workDao;
 
     @Override
-    public List<Work> queryInitInfo(Integer id) {
+    public List<Work> queryInitInfo(Long id) {
         return this.workDao.queryInitInfo(id);
     }
 
     @Override
-    public List<Work> queryByVersion(Integer id, Integer version) {
+    public List<Work> queryByVersion(Long id, Integer version) {
         return this.workDao.queryByVersion(id,version);
     }
 
     @Override
-    public int[] queryAllVersion(Integer id) {
+    public List<Versions> queryAllVersion(Long id) {
         return this.workDao.queryAllVersion(id);
     }
 
     @Override
-    public List<Work> queryAll(Integer id) {
+    public List<Work> queryAll(Long id) {
         return this.workDao.queryAll(id);
     }
 }

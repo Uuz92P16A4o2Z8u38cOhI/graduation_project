@@ -16,12 +16,12 @@ public interface BasicInfoService {
     /**
      * 通过用户ID查询单条数据
      */
-    List<BasicInfo> queryByPeopleId(Integer id);
+    List<BasicInfo> queryByPeopleId(Long id);
 
     /**
      * 通过用户ID查询初始化信息
      */
-    List<InitInfo> queryInitInfo(Integer id);
+    List<InitInfo> queryInitInfo(Long id);
 
     /**
      * excel导入
