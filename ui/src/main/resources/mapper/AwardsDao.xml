@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cuit.hyl.graduation.project_ui.dao.AwardsDao">
+
+    <resultMap type="cuit.hyl.graduation.project_ui.entity.Awards" id="AwardsMap">
+        <result property="id" column="ID" jdbcType="INTEGER"/>
+        <result property="academicHonors" column="ACADEMIC_HONORS" jdbcType="INTEGER"/>
+        <result property="scientificAwards" column="SCIENTIFIC_AWARDS" jdbcType="INTEGER"/>
+        <result property="otherAwards" column="OTHER_AWARDS" jdbcType="INTEGER"/>
+        <result property="honoraryTitle" column="HONORARY_TITLE" jdbcType="INTEGER"/>
+        <result property="peopleId" column="PEOPLE_ID" jdbcType="INTEGER"/>
+        <result property="uploadTime" column="UPLOAD_TIME" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <resultMap type="cuit.hyl.graduation.project_ui.entity.AwardsItem" id="AwardsItemMap">
+        <result property="id" column="ID" jdbcType="INTEGER"/>
+        <result property="item" column="ITEM" jdbcType="OTHER"/>
+        <result property="parentId" column="PARENT_ID" jdbcType="INTEGER"/>
+        <result property="type" column="TYPE" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="AwardsMap">
+        select
+          ID, ACADEMIC_HONORS, SCIENTIFIC_AWARDS, OTHER_AWARDS, HONORARY_TITLE, PEOPLE_ID, UPLOAD_TIME
+        from graduation_ui.awards
+        where ID = #{id}
+    </select>
+
+
+</mapper>

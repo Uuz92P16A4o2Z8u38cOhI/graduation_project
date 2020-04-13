@@ -1,8 +1,12 @@
 package cuit.hyl.graduation.project_ui.controller;
 
 import cuit.hyl.graduation.project_ui.entity.BasicInfo;
+import cuit.hyl.graduation.project_ui.entity.Education;
 import cuit.hyl.graduation.project_ui.entity.ResponseResult;
+import cuit.hyl.graduation.project_ui.entity.Work;
 import cuit.hyl.graduation.project_ui.service.BasicInfoService;
+import cuit.hyl.graduation.project_ui.service.EducationService;
+import cuit.hyl.graduation.project_ui.service.WorkService;
 import cuit.hyl.graduation.project_ui.utils.poi.excel.ExportExcel;
 import cuit.hyl.graduation.project_ui.utils.poi.excel.ImportExcel;
 import io.swagger.annotations.Api;
@@ -24,6 +28,10 @@ import java.util.Map;
 public class PoiController {
     @Autowired
     private BasicInfoService basicInfoService;
+    @Autowired
+    private EducationService educationService;
+    @Autowired
+    private WorkService workService;
 
     @ApiOperation("导出Excel")
     @PostMapping("exportExcel")
@@ -33,25 +41,37 @@ public class PoiController {
     }
 
     @ApiOperation("导出定制化Excel--个人")
-    @PostMapping("exportModelExcel/{id}")
-    public void exportModelExcel(@PathVariable Long id,HttpServletResponse response) {
-        List<BasicInfo> list = basicInfoService.queryByPeopleId(id);
+    @PostMapping("exportModelExcel/{type}/{id}")
+    public void exportModelExcel(@PathVariable String type,@PathVariable Long id,HttpServletResponse response) {
+
         ExportExcel<BasicInfo> exportExcel = new ExportExcel<>();
+
         Map<String, Object> param = new HashMap<>();
-        param.put("list", list);
-        param.put("path","static/excel/BasicInfo.xlsx");
         param.put("rowStartIndex", 1);
         param.put("response", response);
-        param.put("fileName","基础信息.xlsx");
 
-        try {
-            exportExcel.exportByXSSF(param);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
+        switch(type){
+            case "BasicInfo":
+                List<BasicInfo> BasicInfoList = basicInfoService.queryByPeopleId(id);
+                param.put("list", BasicInfoList);
+                param.put("fileName","BasicInfo.xlsx");
+                param.put("path","static/excel/BasicInfo.xlsx");
+                break;
+            case "Education":
+                List<Education> educationList = educationService.queryAll(id);
+                param.put("list", educationList);
+                param.put("fileName","Education.xlsx");
+                param.put("path","static/excel/Education.xlsx");
+                break;
+            case "Work":
+                List<Work> WorkList = workService.queryAll(id);
+                param.put("list", WorkList);
+                param.put("fileName","Work.xlsx");
+                param.put("path","static/excel/Work.xlsx");
+                break;
+
         }
-
+        exportExcel.exportByXSSF(param);
 
 //        return new ResponseResult(ResponseResult.CodeStatus.OK,"成功导出");
     }

@@ -43,6 +43,7 @@
             *
         from graduation_ui.teaching_class
         where TYPE = #{type} and CLASS_INFO_ID = #{id}
+
     </select>
 
     <select id="initTeachItem" resultMap="TeachingItemMap">

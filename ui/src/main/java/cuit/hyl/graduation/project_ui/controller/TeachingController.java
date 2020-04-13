@@ -2,6 +2,8 @@ package cuit.hyl.graduation.project_ui.controller;
 
 import cuit.hyl.graduation.project_ui.entity.ResponseResult;
 import cuit.hyl.graduation.project_ui.entity.Teaching;
+import cuit.hyl.graduation.project_ui.entity.TeachingClass;
+import cuit.hyl.graduation.project_ui.entity.TeachingItem;
 import cuit.hyl.graduation.project_ui.service.TeachingService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -39,6 +42,30 @@ public class TeachingController {
         ResponseResult result = new ResponseResult();
         Map<String, Object> map = new HashMap<>();
 
+        Teaching teach = this.teachingService.initTeach(id).get(0);
+
+        if (teach != null){
+            //教学研究
+            List<TeachingItem> research = this.teachingService.initTeachItem(1, teach.getResearch());
+            //教学资源
+            List<TeachingItem> resources = this.teachingService.initTeachItem(2, teach.getResources());
+            //教学成果
+            List<TeachingItem> achievements = this.teachingService.initTeachItem(3, teach .getAchievements());
+            //授课信息
+            //本科生
+            List<TeachingClass> undergraduate = this.teachingService.initTeachClass(1, teach.getClassInfo());
+            //研究生
+            List<TeachingClass> postgraduate = this.teachingService.initTeachClass(2, teach.getClassInfo());
+
+            teach.getClassInfo();
+            map.put("research", research);
+            map.put("resources", resources);
+            map.put("achievements", achievements);
+            map.put("undergraduate", undergraduate);
+            map.put("postgraduate", postgraduate);
+        }else{
+            result.setMessage("目前没有教学活动信息！");
+        }
 
 
         result.setData(map);

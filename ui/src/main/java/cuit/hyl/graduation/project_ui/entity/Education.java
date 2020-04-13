@@ -1,6 +1,8 @@
 package cuit.hyl.graduation.project_ui.entity;
 
-import java.sql.Date;
+import cuit.hyl.graduation.project_ui.annotation.ExcelAttributes;
+
+import java.util.Date;
 import java.io.Serializable;
 
 /**
@@ -18,32 +20,40 @@ public class Education implements Serializable {
     /**
     * 学校
     */
+    @ExcelAttributes(exportSort = 0, importSort = 0)
     private String schoole;
     /**
     * 学历
     */
+    @ExcelAttributes(exportSort = 1, importSort = 1)
     private String degree;
     /**
     * 专业
     */
+    @ExcelAttributes(exportSort = 2, importSort = 2)
     private String subject;
     /**
     * 开始时间
     */
+    @ExcelAttributes(exportSort = 3, importSort = 3)
     private Date startTime;
     /**
     * 结束时间
     */
+    @ExcelAttributes(exportSort = 4, importSort = 4)
     private Date endTime;
-    
+
+    @ExcelAttributes(importSort = 999)
     private Integer peopleId;
     /**
     * 上传时间
     */
+//    @ExcelAttributes(exportSort = 5, importSort = 5)
     private Date uploadTime;
     /**
     * 版本号
     */
+    @ExcelAttributes(exportSort = 5, importSort = 5)
     private Integer version;
 
 

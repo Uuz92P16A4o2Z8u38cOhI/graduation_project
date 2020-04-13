@@ -1,6 +1,7 @@
 package cuit.hyl.graduation.project_ui.entity;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 /**
  * 授课信息(TeachingClass)实体类
@@ -45,6 +46,35 @@ public class TeachingClass implements Serializable {
     
     private Long classInfoId;
 
+    private Long peopleId;
+
+    private Timestamp uploadTime;
+
+    private Integer version;
+
+    public Long getPeopleId() {
+        return peopleId;
+    }
+
+    public void setPeopleId(Long peopleId) {
+        this.peopleId = peopleId;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
+    public Timestamp getUploadTime() {
+        return uploadTime;
+    }
+
+    public void setUploadTime(Timestamp uploadTime) {
+        this.uploadTime = uploadTime;
+    }
 
     public Long getId() {
         return id;

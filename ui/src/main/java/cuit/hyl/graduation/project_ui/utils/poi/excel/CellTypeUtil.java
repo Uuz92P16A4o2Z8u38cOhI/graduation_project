@@ -8,7 +8,7 @@ public class CellTypeUtil {
         Object value = null;
         switch (cell.getCellType()){
             case NUMERIC: // 数字
-                if (DateUtil.isCellDateFormatted(cell)){
+                if (DateUtil.isCellDateFormatted(cell)){  //时间
                     value = cell.getDateCellValue();
                 }else {
                     value = cell.getNumericCellValue();

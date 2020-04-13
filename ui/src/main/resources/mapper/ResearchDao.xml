@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cuit.hyl.graduation.project_ui.dao.ResearchDao">
+
+    <resultMap type="cuit.hyl.graduation.project_ui.entity.Research" id="ResearchMap">
+        <result property="id" column="ID" jdbcType="INTEGER"/>
+        <result property="researchAreas" column="RESEARCH_AREAS" jdbcType="INTEGER"/>
+        <result property="thesisResults" column="THESIS_RESULTS" jdbcType="INTEGER"/>
+        <result property="patent" column="PATENT" jdbcType="INTEGER"/>
+        <result property="achievements" column="ACHIEVEMENTS" jdbcType="INTEGER"/>
+        <result property="researchProjects" column="RESEARCH_PROJECTS" jdbcType="INTEGER"/>
+        <result property="researchTeam" column="RESEARCH_TEAM" jdbcType="INTEGER"/>
+        <result property="peopleId" column="PEOPLE_ID" jdbcType="INTEGER"/>
+        <result property="uploadTime" column="UPLOAD_TIME" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <resultMap type="cuit.hyl.graduation.project_ui.entity.ResearchItem" id="ResearchItemMap">
+        <result property="id" column="ID" jdbcType="INTEGER"/>
+        <result property="itemName" column="ITEM_NAME" jdbcType="VARCHAR"/>
+        <result property="itemContent" column="ITEM_CONTENT" jdbcType="OTHER"/>
+        <result property="parentId" column="PARENT_ID" jdbcType="INTEGER"/>
+        <result property="type" column="TYPE" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="initInfo" resultMap="ResearchMap">
+        select
+          ID, RESEARCH_AREAS, THESIS_RESULTS, PATENT, ACHIEVEMENTS, RESEARCH_PROJECTS, RESEARCH_TEAM, PEOPLE_ID, UPLOAD_TIME
+        from graduation_ui.research
+        where PEOPLE_ID = #{id}
+        order by UPLOAD_TIME desc
+    </select>
+
+    <select id="queryItems" resultMap="ResearchItemMap">
+        select
+            *
+        from graduation_ui.research_item
+        where PARENT_ID = #{id} and TYPE = #{type}
+    </select>
+
+
+</mapper>

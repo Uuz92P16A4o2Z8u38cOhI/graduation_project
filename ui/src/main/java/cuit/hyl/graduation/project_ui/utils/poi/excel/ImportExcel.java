@@ -7,13 +7,11 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class ImportExcel<T> {
 
@@ -52,6 +50,8 @@ public class ImportExcel<T> {
                         if(importSort == j){
                             if (value instanceof Double){
                                 field.set(obj, ((Double) value).intValue());
+                            }else if (value instanceof Date){
+                                field.set(obj, value);
                             }else {
                                 field.set(obj, value);
                             }
