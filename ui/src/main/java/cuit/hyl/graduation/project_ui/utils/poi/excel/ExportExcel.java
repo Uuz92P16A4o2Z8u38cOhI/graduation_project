@@ -40,6 +40,14 @@ public class ExportExcel<T> {
             for (int i = 0; i < cellStyles.length; i++){
                 cellStyles[i] = rowModel.getCell(i).getCellStyle();
             }
+            if (list.size() == 0 || list == null){
+                Row row = sheet.createRow(rowStartIndex);
+                for (int j = 0; j < cellStyles.length; j++) {
+                    Cell cell = row.createCell(j);
+                    cell.setCellStyle(cellStyles[j]);
+                    cell.setCellValue("暂无数据");
+                }
+            }
 
             for (int i = 0; i < list.size(); i++) {
                 Row row = sheet.createRow(i + rowStartIndex);
@@ -91,7 +99,7 @@ public class ExportExcel<T> {
 //        SXSSFWorkbook workbook = new SXSSFWorkbook();
         XSSFWorkbook workbook = null;
         try {
-            workbook = new XSSFWorkbook(Objects.requireNonNull(ExportExcel.class.getClassLoader().getResourceAsStream(path)));
+            workbook = new XSSFWorkbook(Objects.requireNonNull(ExportExcel.class.getClassLoader().getResourceAsStream(path), "模板文件路径问题"));
             //循环map创建sheet
             for (String name: map.keySet()) {
                 List<T> list = (List<T>) map.get(name);
@@ -102,7 +110,14 @@ public class ExportExcel<T> {
                 for (int i = 0; i < cellStyles.length; i++) {
                     cellStyles[i] = rowModel.getCell(i).getCellStyle();
                 }
-
+                if (list.size() == 0 || list == null){
+                    Row row = sheet.createRow(rowStartIndex);
+                    for (int j = 0; j < cellStyles.length; j++) {
+                        Cell cell = row.createCell(j);
+                        cell.setCellStyle(cellStyles[j]);
+                        cell.setCellValue("暂无数据");
+                    }
+                }
                 for (int i = 0; i < list.size(); i++) {
                     Row row = sheet.createRow(i + rowStartIndex);
                     T obj = list.get(i);
@@ -119,8 +134,12 @@ public class ExportExcel<T> {
                                 int exportSort = attributes.exportSort();
                                 if (exportSort == j) {
                                     field.setAccessible(true);
-                                    if (field.get(obj) != null)
+                                    if (field.get(obj) != null){
                                         cell.setCellValue(field.get(obj).toString());
+                                    }else if (field.get(obj) == null || field.get(obj) == ""){
+                                        cell.setCellValue("暂无数据");
+                                    }
+
                                     break;
                                 }
                             }

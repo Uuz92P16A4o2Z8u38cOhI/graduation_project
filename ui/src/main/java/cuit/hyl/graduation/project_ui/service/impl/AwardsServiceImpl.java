@@ -2,6 +2,7 @@ package cuit.hyl.graduation.project_ui.service.impl;
 
 import cuit.hyl.graduation.project_ui.entity.Awards;
 import cuit.hyl.graduation.project_ui.dao.AwardsDao;
+import cuit.hyl.graduation.project_ui.entity.AwardsItem;
 import cuit.hyl.graduation.project_ui.service.AwardsService;
 import org.springframework.stereotype.Service;
 
@@ -21,9 +22,12 @@ public class AwardsServiceImpl implements AwardsService {
 
 
     @Override
-    public Awards queryById(Long id) {
-        return this.awardsDao.queryById(id);
+    public List<Awards> initInfo(Long id) {
+        return this.awardsDao.initInfo(id);
     }
 
-
+    @Override
+    public List<AwardsItem> initItemInfo(Long id, Integer type) {
+        return this.awardsDao.initItemInfo(id, type);
+    }
 }

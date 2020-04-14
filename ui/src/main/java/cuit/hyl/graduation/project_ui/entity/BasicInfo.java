@@ -15,7 +15,8 @@ import java.io.Serializable;
  */
 public class BasicInfo implements Serializable {
     private static final long serialVersionUID = 266121383832773046L;
-    
+
+    @ExcelAttributes(importSort = 1000)
     private Long id;
     /**
     * 姓名

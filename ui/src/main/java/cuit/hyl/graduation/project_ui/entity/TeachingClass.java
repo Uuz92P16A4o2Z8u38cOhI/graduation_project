@@ -1,5 +1,7 @@
 package cuit.hyl.graduation.project_ui.entity;
 
+import cuit.hyl.graduation.project_ui.annotation.ExcelAttributes;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -22,26 +24,32 @@ public class TeachingClass implements Serializable {
     /**
     * 课程名称
     */
+    @ExcelAttributes(importSort = 0,exportSort = 0)
     private String courseName;
     /**
     * 学年
     */
+    @ExcelAttributes(importSort = 1,exportSort = 1)
     private String schoolYear;
     /**
     * 学期
     */
+    @ExcelAttributes(importSort = 2,exportSort = 2)
     private Integer semester;
     /**
     * 学时
     */
+    @ExcelAttributes(importSort = 3,exportSort = 3)
     private Integer hours;
     /**
     * 学分
     */
+    @ExcelAttributes(importSort = 4,exportSort = 4)
     private Double credit;
     /**
     * 课程号
     */
+    @ExcelAttributes(importSort = 5,exportSort = 5)
     private String courseNum;
     
     private Long classInfoId;

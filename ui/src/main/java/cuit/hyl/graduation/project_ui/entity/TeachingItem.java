@@ -1,5 +1,7 @@
 package cuit.hyl.graduation.project_ui.entity;
 
+import cuit.hyl.graduation.project_ui.annotation.ExcelAttributes;
+
 import java.io.Serializable;
 
 /**
@@ -14,7 +16,8 @@ public class TeachingItem implements Serializable {
     * id
     */
     private Long id;
-    
+
+    @ExcelAttributes(importSort = 0,exportSort = 0)
     private Object item;
     
     private Long parentId;

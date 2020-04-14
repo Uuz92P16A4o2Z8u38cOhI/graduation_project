@@ -1,6 +1,7 @@
 package cuit.hyl.graduation.project_ui.utils.poi.excel;
 
 import cuit.hyl.graduation.project_ui.annotation.ExcelAttributes;
+import cuit.hyl.graduation.project_ui.utils.snowflake.SnowflakeIdWorker;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -18,8 +19,10 @@ public class ImportExcel<T> {
     public List<T> importByXSSF(Map<String, Object> param) throws IOException, IllegalAccessException, InstantiationException {
         InputStream inputStream = (InputStream) param.get("inputStream");
         Class<T> clazz = (Class) param.get("clazz");
-        Integer id = (Integer) param.get("id");
+        Long id = (Long) param.get("id");
         int startIndex = (int) param.get("startIndex");
+
+        SnowflakeIdWorker idWorker = new SnowflakeIdWorker(1, 1);
 
         Workbook workbook = new XSSFWorkbook(inputStream);
         Sheet sheet = workbook.getSheetAt(0);
@@ -46,6 +49,9 @@ public class ImportExcel<T> {
                         int importSort = attributes.importSort();
                         if (importSort == 999){
                             field.set(obj, id);
+                        }
+                        if (importSort == 1000){
+                            field.set(obj, idWorker.nextId());
                         }
                         if(importSort == j){
                             if (value instanceof Double){

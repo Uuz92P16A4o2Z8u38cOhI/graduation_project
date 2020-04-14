@@ -57,7 +57,6 @@ public class TeachingController {
             //研究生
             List<TeachingClass> postgraduate = this.teachingService.initTeachClass(2, teach.getClassInfo());
 
-            teach.getClassInfo();
             map.put("research", research);
             map.put("resources", resources);
             map.put("achievements", achievements);

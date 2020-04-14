@@ -8,22 +8,33 @@
         <result property="scientificAwards" column="SCIENTIFIC_AWARDS" jdbcType="INTEGER"/>
         <result property="otherAwards" column="OTHER_AWARDS" jdbcType="INTEGER"/>
         <result property="honoraryTitle" column="HONORARY_TITLE" jdbcType="INTEGER"/>
+        <result property="honorWall" column="HONOR_WALL" jdbcType="INTEGER"/>
         <result property="peopleId" column="PEOPLE_ID" jdbcType="INTEGER"/>
         <result property="uploadTime" column="UPLOAD_TIME" jdbcType="TIMESTAMP"/>
     </resultMap>
     <resultMap type="cuit.hyl.graduation.project_ui.entity.AwardsItem" id="AwardsItemMap">
         <result property="id" column="ID" jdbcType="INTEGER"/>
-        <result property="item" column="ITEM" jdbcType="OTHER"/>
+        <result property="itemName" column="ITEM_NAME" jdbcType="VARCHAR"/>
+        <result property="itemContent" column="ITEM_CONTENT" jdbcType="OTHER"/>
         <result property="parentId" column="PARENT_ID" jdbcType="INTEGER"/>
         <result property="type" column="TYPE" jdbcType="INTEGER"/>
     </resultMap>
 
-    <!--查询单个-->
-    <select id="queryById" resultMap="AwardsMap">
+
+    <select id="initInfo" resultMap="AwardsMap">
         select
-          ID, ACADEMIC_HONORS, SCIENTIFIC_AWARDS, OTHER_AWARDS, HONORARY_TITLE, PEOPLE_ID, UPLOAD_TIME
+          ID, ACADEMIC_HONORS, SCIENTIFIC_AWARDS, OTHER_AWARDS, HONORARY_TITLE, HONOR_WALL, PEOPLE_ID, UPLOAD_TIME
         from graduation_ui.awards
-        where ID = #{id}
+        where PEOPLE_ID = #{id}
+        order by UPLOAD_TIME desc
+    </select>
+
+
+    <select id="initItemInfo" resultMap="AwardsItemMap">
+        select
+            *
+        from graduation_ui.awards_item
+        where PARENT_ID = #{id} and TYPE = #{type}
     </select>
 
 

@@ -1,5 +1,7 @@
 package cuit.hyl.graduation.project_ui.entity;
 
+import cuit.hyl.graduation.project_ui.annotation.ExcelAttributes;
+
 import java.util.Date;
 import java.io.Serializable;
 
@@ -39,7 +41,8 @@ public class Research implements Serializable {
     * 科研团队
     */
     private Long researchTeam;
-    
+
+    @ExcelAttributes(importSort = 999)
     private Long peopleId;
     /**
     * 上传时间

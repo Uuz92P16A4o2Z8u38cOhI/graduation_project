@@ -1,5 +1,8 @@
 package cuit.hyl.graduation.project_ui.entity;
 
+import cuit.hyl.graduation.project_ui.annotation.ExcelAttributes;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.Date;
 import java.io.Serializable;
 
@@ -31,7 +34,8 @@ public class Teaching implements Serializable {
     * 教学成果
     */
     private Long achievements;
-    
+
+    @ExcelAttributes(importSort = 999)
     private Long peopleId;
     /**
     * 上传时间

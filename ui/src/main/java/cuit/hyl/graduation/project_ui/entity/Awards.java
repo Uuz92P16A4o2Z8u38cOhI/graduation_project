@@ -1,5 +1,7 @@
 package cuit.hyl.graduation.project_ui.entity;
 
+import cuit.hyl.graduation.project_ui.annotation.ExcelAttributes;
+
 import java.util.Date;
 import java.io.Serializable;
 
@@ -27,11 +29,15 @@ public class Awards implements Serializable {
     * 其它获奖
     */
     private Long otherAwards;
+
+
     /**
     * 荣誉称号
     */
     private Long honoraryTitle;
-    
+
+    private Long honorWall;
+    @ExcelAttributes(importSort = 999)
     private Long peopleId;
     /**
     * 上传时间
@@ -69,6 +75,14 @@ public class Awards implements Serializable {
 
     public void setOtherAwards(Long otherAwards) {
         this.otherAwards = otherAwards;
+    }
+
+    public Long getHonorWall() {
+        return honorWall;
+    }
+
+    public void setHonorWall(Long honorWall) {
+        this.honorWall = honorWall;
     }
 
     public Long getHonoraryTitle() {

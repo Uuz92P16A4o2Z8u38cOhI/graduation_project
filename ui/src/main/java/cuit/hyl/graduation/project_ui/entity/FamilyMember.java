@@ -1,5 +1,7 @@
 package cuit.hyl.graduation.project_ui.entity;
 
+import cuit.hyl.graduation.project_ui.annotation.ExcelAttributes;
+
 import java.util.Date;
 import java.io.Serializable;
 
@@ -22,34 +24,42 @@ public class FamilyMember implements Serializable {
     /**
     * 姓名
     */
+    @ExcelAttributes(exportSort = 0, importSort = 0)
     private String name;
     /**
     * 性别
     */
+    @ExcelAttributes(exportSort = 1, importSort = 1)
     private Integer sex;
     /**
     * 出生日期
     */
+    @ExcelAttributes(exportSort = 2, importSort = 2)
     private Date birth;
     /**
     * 工作单位
     */
+    @ExcelAttributes(exportSort = 3, importSort = 3)
     private String job;
     /**
     * 政治面貌
     */
+    @ExcelAttributes(exportSort = 4, importSort = 4)
     private Integer politicalStatus;
     /**
     * 关系
     */
+    @ExcelAttributes(exportSort = 5, importSort = 5)
     private String relation;
     /**
     * 邮箱
     */
+    @ExcelAttributes(exportSort = 6, importSort = 6)
     private String email;
     /**
     * 电话
     */
+    @ExcelAttributes(exportSort = 7, importSort = 7)
     private String phone;
     
     private Long baseId;

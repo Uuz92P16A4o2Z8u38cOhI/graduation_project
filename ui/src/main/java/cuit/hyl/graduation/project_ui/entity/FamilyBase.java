@@ -1,5 +1,7 @@
 package cuit.hyl.graduation.project_ui.entity;
 
+import cuit.hyl.graduation.project_ui.annotation.ExcelAttributes;
+
 import java.util.Date;
 import java.io.Serializable;
 
@@ -18,12 +20,15 @@ public class FamilyBase implements Serializable {
     /**
     * 家庭人口
     */
+    @ExcelAttributes(exportSort = 0, importSort = 0)
     private Integer population;
     /**
     * 家庭地址
     */
+    @ExcelAttributes(exportSort = 1, importSort = 1)
     private String address;
-    
+
+    @ExcelAttributes(importSort = 999)
     private Long peopleId;
     /**
     * 上传时间

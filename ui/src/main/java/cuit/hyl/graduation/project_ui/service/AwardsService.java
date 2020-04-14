@@ -1,6 +1,8 @@
 package cuit.hyl.graduation.project_ui.service;
 
 import cuit.hyl.graduation.project_ui.entity.Awards;
+import cuit.hyl.graduation.project_ui.entity.AwardsItem;
+
 import java.util.List;
 
 /**
@@ -12,7 +14,9 @@ import java.util.List;
 public interface AwardsService {
 
 
-    Awards queryById(Long id);
+    List<Awards> initInfo(Long id);
+
+    List<AwardsItem> initItemInfo(Long id, Integer type);
 
 
 }

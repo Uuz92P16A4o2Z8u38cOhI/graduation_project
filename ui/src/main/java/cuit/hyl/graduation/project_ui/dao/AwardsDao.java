@@ -1,6 +1,7 @@
 package cuit.hyl.graduation.project_ui.dao;
 
 import cuit.hyl.graduation.project_ui.entity.Awards;
+import cuit.hyl.graduation.project_ui.entity.AwardsItem;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
@@ -14,7 +15,9 @@ import java.util.List;
 @Mapper
 public interface AwardsDao {
 
-    Awards queryById(Long id);
+    List<Awards> initInfo(Long id);
+
+    List<AwardsItem> initItemInfo(Long id, Integer type);
 
 
 }

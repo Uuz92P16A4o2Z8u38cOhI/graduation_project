@@ -1,5 +1,7 @@
 package cuit.hyl.graduation.project_ui.entity;
 
+import cuit.hyl.graduation.project_ui.annotation.ExcelAttributes;
+
 import java.io.Serializable;
 
 /**
@@ -14,8 +16,28 @@ public class AwardsItem implements Serializable {
     * id
     */
     private Long id;
-    
-    private Object item;
+
+    public Object getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(Object itemName) {
+        this.itemName = itemName;
+    }
+
+    public String getItemContent() {
+        return itemContent;
+    }
+
+    public void setItemContent(String itemContent) {
+        this.itemContent = itemContent;
+    }
+
+    @ExcelAttributes(importSort = 0,exportSort = 0)
+    private Object itemName;
+
+    @ExcelAttributes(importSort = 1,exportSort = 1)
+    private String itemContent;
     
     private Long parentId;
     /**
@@ -30,14 +52,6 @@ public class AwardsItem implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Object getItem() {
-        return item;
-    }
-
-    public void setItem(Object item) {
-        this.item = item;
     }
 
     public Long getParentId() {
