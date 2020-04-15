@@ -1,6 +1,8 @@
 package cuit.hyl.graduation.project_ui.entity;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import cuit.hyl.graduation.project_ui.annotation.ExcelAttributes;
+import lombok.Data;
 
 import java.util.Date;
 import java.io.Serializable;
@@ -11,6 +13,7 @@ import java.io.Serializable;
  * @author makejava
  * @since 2020-04-02 20:22:54
  */
+@Data
 public class Education implements Serializable {
     private static final long serialVersionUID = 890685807107640271L;
     /**
@@ -20,26 +23,31 @@ public class Education implements Serializable {
     /**
     * 学校
     */
+    @Excel(name = "学校", orderNum = "1", width = 25)
     @ExcelAttributes(exportSort = 0, importSort = 0)
     private String schoole;
     /**
     * 学历
     */
+    @Excel(name = "学历", orderNum = "2", width = 20)
     @ExcelAttributes(exportSort = 1, importSort = 1)
     private String degree;
     /**
     * 专业
     */
+    @Excel(name = "专业", orderNum = "3", width = 30)
     @ExcelAttributes(exportSort = 2, importSort = 2)
     private String subject;
     /**
     * 开始时间
     */
+    @Excel(name = "开始时间", format = "yyyy-MM-dd", orderNum = "4", width = 25)
     @ExcelAttributes(exportSort = 3, importSort = 3)
     private Date startTime;
     /**
     * 结束时间
     */
+    @Excel(name = "结束时间", format = "yyyy-MM-dd", orderNum = "5", width = 25)
     @ExcelAttributes(exportSort = 4, importSort = 4)
     private Date endTime;
 
@@ -53,80 +61,8 @@ public class Education implements Serializable {
     /**
     * 版本号
     */
+    @Excel(name = "版本号", orderNum = "6", width = 25)
     @ExcelAttributes(exportSort = 5, importSort = 5)
     private Integer version;
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getSchoole() {
-        return schoole;
-    }
-
-    public void setSchoole(String schoole) {
-        this.schoole = schoole;
-    }
-
-    public String getDegree() {
-        return degree;
-    }
-
-    public void setDegree(String degree) {
-        this.degree = degree;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public Date getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
-    }
-
-    public Date getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
-    }
-
-    public Integer getPeopleId() {
-        return peopleId;
-    }
-
-    public void setPeopleId(Integer peopleId) {
-        this.peopleId = peopleId;
-    }
-
-    public Date getUploadTime() {
-        return uploadTime;
-    }
-
-    public void setUploadTime(Date uploadTime) {
-        this.uploadTime = uploadTime;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
 
 }

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 教学活动(Teaching)实体类
@@ -41,6 +42,12 @@ public class Teaching implements Serializable {
     * 上传时间
     */
     private Date uploadTime;
+
+    private List<TeachingItem> researchList;
+
+    private List<TeachingItem> resourcesList;
+
+    private List<TeachingItem> achievementsList;
 
 
     public Long getId() {
@@ -99,4 +106,27 @@ public class Teaching implements Serializable {
         this.uploadTime = uploadTime;
     }
 
+    public List<TeachingItem> getResearchList() {
+        return researchList;
+    }
+
+    public void setResearchList(List<TeachingItem> researchList) {
+        this.researchList = researchList;
+    }
+
+    public List<TeachingItem> getResourcesList() {
+        return resourcesList;
+    }
+
+    public void setResourcesList(List<TeachingItem> resourcesList) {
+        this.resourcesList = resourcesList;
+    }
+
+    public List<TeachingItem> getAchievementsList() {
+        return achievementsList;
+    }
+
+    public void setAchievementsList(List<TeachingItem> achievementsList) {
+        this.achievementsList = achievementsList;
+    }
 }

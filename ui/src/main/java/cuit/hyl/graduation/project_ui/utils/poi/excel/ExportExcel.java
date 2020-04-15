@@ -135,6 +135,7 @@ public class ExportExcel<T> {
                                 if (exportSort == j) {
                                     field.setAccessible(true);
                                     if (field.get(obj) != null){
+
                                         cell.setCellValue(field.get(obj).toString());
                                     }else if (field.get(obj) == null || field.get(obj) == ""){
                                         cell.setCellValue("暂无数据");

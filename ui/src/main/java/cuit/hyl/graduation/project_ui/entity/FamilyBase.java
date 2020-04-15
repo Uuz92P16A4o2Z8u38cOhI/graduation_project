@@ -1,9 +1,12 @@
 package cuit.hyl.graduation.project_ui.entity;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
+import cn.afterturn.easypoi.excel.annotation.ExcelCollection;
 import cuit.hyl.graduation.project_ui.annotation.ExcelAttributes;
 
 import java.util.Date;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 家庭情况_基础(FamilyBase)实体类
@@ -20,11 +23,13 @@ public class FamilyBase implements Serializable {
     /**
     * 家庭人口
     */
+    @Excel(name = "家庭人口", orderNum = "1", width = 25, needMerge = true)
     @ExcelAttributes(exportSort = 0, importSort = 0)
     private Integer population;
     /**
     * 家庭地址
     */
+    @Excel(name = "家庭地址", orderNum = "3", width = 55, needMerge = true)
     @ExcelAttributes(exportSort = 1, importSort = 1)
     private String address;
 
@@ -34,6 +39,12 @@ public class FamilyBase implements Serializable {
     * 上传时间
     */
     private Date uploadTime;
+
+    /**
+     * 家庭成员
+     */
+    @ExcelCollection(name = "家庭成员", orderNum = "2")
+    private List<FamilyMember> familyMembers;
 
 
     public Long getId() {
@@ -76,4 +87,11 @@ public class FamilyBase implements Serializable {
         this.uploadTime = uploadTime;
     }
 
+    public List<FamilyMember> getFamilyMembers() {
+        return familyMembers;
+    }
+
+    public void setFamilyMembers(List<FamilyMember> familyMembers) {
+        this.familyMembers = familyMembers;
+    }
 }
