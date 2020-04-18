@@ -107,11 +107,22 @@ public class ExcelUtils {
      * @param response
      * @param workbook excel数据
      */
-    private static void downLoadExcel(String fileName, HttpServletResponse response, Workbook workbook) throws IOException {
+    public static void downLoadExcel(String fileName, HttpServletResponse response, Workbook workbook) throws IOException {
         try {
             response.setCharacterEncoding("UTF-8");
             response.setHeader("content-Type", "application/vnd.ms-excel");
             response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName + "." + ExcelTypeEnum.XLSX.getValue(), "UTF-8"));
+            workbook.write(response.getOutputStream());
+        } catch (Exception e) {
+            throw new IOException(e.getMessage());
+        }
+    }
+
+    public static void downLoadExcelHssf(String fileName, HttpServletResponse response, Workbook workbook) throws IOException {
+        try {
+            response.setCharacterEncoding("UTF-8");
+            response.setHeader("content-Type", "application/vnd.ms-excel");
+            response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName + "." + ExcelTypeEnum.XLS.getValue(), "UTF-8"));
             workbook.write(response.getOutputStream());
         } catch (Exception e) {
             throw new IOException(e.getMessage());

@@ -51,7 +51,7 @@ public class UploadController {
             for (MultipartFile editorFile : editorFiles) {
                 fileNames.add(writeFile(editorFile));
             }
-            result.put("data", fileNames);
+            result.put("filePath", fileNames);
         }
 
         return result;
@@ -74,6 +74,29 @@ public class UploadController {
             String uploadUrl = storageService.upload(multipartFile.getBytes(), extName);
             url = FASTDFS_BASE_URL + uploadUrl;
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 返回文件完整路径
+        return url;
+    }
+
+    /**
+     * 返回文件名
+     * @param multipartFile
+     * @return
+     */
+    private String writeFile2(MultipartFile multipartFile) {
+        // 获取文件后缀
+        String oName = multipartFile.getOriginalFilename();
+        String extName = oName.substring(oName.lastIndexOf(".") + 1);
+
+        // 文件存放路径
+        String url = null;
+        try {
+            String uploadUrl = storageService.upload(multipartFile.getBytes(), extName);
+            url = uploadUrl;
         } catch (IOException e) {
             e.printStackTrace();
         }

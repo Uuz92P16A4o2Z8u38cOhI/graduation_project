@@ -50,5 +50,15 @@
         order by VERSION desc ,START_TIME desc
     </select>
 
+    <!-- easyPoi导入 -->
+    <insert id="easyExcelImport">
+        INSERT INTO graduation_ui.work  (ID, POSITION, WORK_UNIT, COLLEGE, SUBJECT, START_TIME, END_TIME, PEOPLE_ID, UPLOAD_TIME, VERSION)
+        VALUES
+        <foreach collection="list" item="work" separator=",">
+            (#{work.id},#{work.position},#{work.workUnit},#{work.college},#{work.subject},
+            #{work.startTime},#{work.endTime},#{work.peopleId},#{work.uploadTime},#{work.version})
+        </foreach>
+    </insert>
+
 
 </mapper>

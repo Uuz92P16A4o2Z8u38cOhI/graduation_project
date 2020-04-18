@@ -28,4 +28,6 @@ public interface BasicInfoService {
      */
     int excelImport(List<BasicInfo> list);
 
+    int easyPoiExcelImport(List<BasicInfo> list);
+
 }

@@ -5,6 +5,7 @@ import cuit.hyl.graduation.project_ui.dao.EducationDao;
 import cuit.hyl.graduation.project_ui.entity.vo.Versions;
 import cuit.hyl.graduation.project_ui.service.EducationService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -38,5 +39,11 @@ public class EducationServiceImpl implements EducationService {
     @Override
     public List<Education> queryAll(Long id) {
         return this.educationDao.queryAll(id);
+    }
+
+    @Override
+    @Transactional
+    public int easyExcelImport(List<Education> list) {
+        return this.educationDao.easyExcelImport(list);
     }
 }

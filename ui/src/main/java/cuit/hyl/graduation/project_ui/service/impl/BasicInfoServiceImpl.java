@@ -5,6 +5,7 @@ import cuit.hyl.graduation.project_ui.dao.BasicInfoDao;
 import cuit.hyl.graduation.project_ui.entity.vo.InitInfo;
 import cuit.hyl.graduation.project_ui.service.BasicInfoService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -34,8 +35,15 @@ public class BasicInfoServiceImpl implements BasicInfoService {
     }
 
     @Override
+    @Transactional
     public int excelImport(List<BasicInfo> list) {
         return this.basicInfoDao.excelImport(list);
+    }
+
+    @Override
+    @Transactional
+    public int easyPoiExcelImport(List<BasicInfo> list) {
+        return this.basicInfoDao.easyPoiExcelImport(list);
     }
 
 

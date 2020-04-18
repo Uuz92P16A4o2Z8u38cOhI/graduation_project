@@ -68,6 +68,17 @@
         order by TIME desc
     </select>
 
+    <insert id="easyPoiExcelImport">
+        INSERT INTO graduation_ui.basic_info (ID,NAME,NICK_NAME,SEX,BIRTHDAY,POLITICAL_STATUS,AGE,HOMETOWN,AVATAT_URL,PHONE,FAX,EMAIL,QQ,WECHAT,BLOG,POST_CODE,ADDRESS,DEPARTMENT,DEGREE,SUBJECT,POSITION,JOB_TITLE,INTRODUCTION,RESEARCH_AREAS,UNIT_ID,SCHOOL_ID,PEOPLE_ID)
+        VALUES
+        <foreach collection="list" item="basicInfo" separator=",">
+            (#{basicInfo.id},#{basicInfo.name},#{basicInfo.nickName},#{basicInfo.sex},#{basicInfo.birthday},#{basicInfo.politicalStatus},
+            #{basicInfo.age},#{basicInfo.hometown},#{basicInfo.avatatUrl},#{basicInfo.phone},#{basicInfo.fax},#{basicInfo.email},
+            #{basicInfo.qq},#{basicInfo.wechat},#{basicInfo.blog},#{basicInfo.postCode},#{basicInfo.address},#{basicInfo.department},
+            #{basicInfo.degree},#{basicInfo.subject},#{basicInfo.position},#{basicInfo.jobTitle},#{basicInfo.introduction},#{basicInfo.researchAreas},
+            #{basicInfo.unitId},#{basicInfo.schoolId},#{basicInfo.peopleId})
+        </foreach>
+    </insert>
 
     <insert id="excelImport">
         INSERT INTO graduation_ui.basic_info (

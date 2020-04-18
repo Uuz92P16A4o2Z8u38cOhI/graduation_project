@@ -1,5 +1,6 @@
 package cuit.hyl.graduation.fastdfs.service.mq.provider;
 
+import cuit.hyl.graduation.fastdfs.utils.RedisUtils;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
@@ -16,16 +17,26 @@ public class EmailProvider {
     @Autowired
     private AmqpTemplate amqpTemplate;
 
+    @Autowired
+    private RedisUtils redisUtils;
+
     /**
      * 发送验证码邮件
      */
     @Async
     public void sendCodeEmail() {
         Map<String,Object> msgMap=new HashMap<>();
+
+        String code = getCode();
+        String email = "2963487848@qq.com";
+
         msgMap.put("username","用户");
-        msgMap.put("code",getCode());
-        msgMap.put("email", "2963487848@qq.com");
+        msgMap.put("code", code);
+        msgMap.put("email", email);
         msgMap.put("time", LocalDateTime.now());
+
+        redisUtils.set(email, code, 180L);
+
         amqpTemplate.convertAndSend("emailExchange","codeEmail",msgMap);
     }
 

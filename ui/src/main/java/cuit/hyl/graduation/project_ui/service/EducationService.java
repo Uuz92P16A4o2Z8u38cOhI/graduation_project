@@ -32,4 +32,6 @@ public interface EducationService {
      * excel 导出所有
      */
     List<Education> queryAll(Long id);
+
+    int easyExcelImport(List<Education> list);
 }

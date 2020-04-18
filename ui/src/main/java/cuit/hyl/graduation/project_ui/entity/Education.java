@@ -52,7 +52,7 @@ public class Education implements Serializable {
     private Date endTime;
 
     @ExcelAttributes(importSort = 999)
-    private Integer peopleId;
+    private Long peopleId;
     /**
     * 上传时间
     */

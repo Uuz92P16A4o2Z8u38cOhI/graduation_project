@@ -17,4 +17,7 @@ public interface FamilyBaseService {
 
     List<FamilyMember> memberByBaseId(Long id);
 
+    int easyExcelImportBase(List<FamilyBase> list);
+
+    int easyExcelImportMember(List<FamilyMember> list);
 }

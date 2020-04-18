@@ -39,5 +39,24 @@
         where BASE_ID = #{id}
     </select>
 
+    <!-- easyPoi导入 家庭基本信息 -->
+    <insert id="easyExcelImportBase">
+        INSERT INTO graduation_ui.family_base  (ID, POPULATION, ADDRESS, PEOPLE_ID, UPLOAD_TIME)
+        VALUES
+        <foreach collection="list" item="family" separator=",">
+            (#{family.id},#{family.population},#{family.address},#{family.peopleId},#{family.uploadTime})
+        </foreach>
+    </insert>
+
+    <!-- easyPoi导入 家庭成员 -->
+    <insert id="easyExcelImportMember">
+        INSERT INTO graduation_ui.family_member  (ID, AVATAR_TYPE, NAME, SEX, BIRTH, JOB, POLITICAL_STATUS, RELATION, EMAIL, PHONE, BASE_ID)
+        VALUES
+        <foreach collection="list" item="member" separator=",">
+            (#{member.id},#{member.avatarType},#{member.name},#{member.sex},#{member.birth},
+            #{member.job},#{member.politicalStatus},#{member.relation},#{member.email},#{member.phone},#{member.baseId})
+        </foreach>
+    </insert>
+
 
 </mapper>

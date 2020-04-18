@@ -35,7 +35,7 @@ public interface WorkDao {
      */
     List<Work> queryAll(Long id);
 
-
+    int easyExcelImport(List<Work> list);
 
 
 }

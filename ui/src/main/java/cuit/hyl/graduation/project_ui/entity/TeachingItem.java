@@ -1,5 +1,6 @@
 package cuit.hyl.graduation.project_ui.entity;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import cuit.hyl.graduation.project_ui.annotation.ExcelAttributes;
 
 import java.io.Serializable;
@@ -17,6 +18,7 @@ public class TeachingItem implements Serializable {
     */
     private Long id;
 
+    @Excel(name = "内容", orderNum = "2", width = 65)
     @ExcelAttributes(importSort = 0,exportSort = 0)
     private Object item;
     
@@ -24,6 +26,7 @@ public class TeachingItem implements Serializable {
     /**
     * 类型：1、教学研究2、教学资源、3、教学成果
     */
+    @Excel(name = "教学",replace = {"教学研究_1", "教学资源_2", "教学成果_3"}, orderNum = "1", width = 15)
     private Integer type;
 
 

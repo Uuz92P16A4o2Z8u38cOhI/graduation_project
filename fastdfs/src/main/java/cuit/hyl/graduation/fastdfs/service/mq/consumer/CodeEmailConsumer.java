@@ -33,7 +33,8 @@ public class CodeEmailConsumer {
         context.setVariable("code", msgMap.get("code"));
         context.setVariable("username", msgMap.get("username"));
         context.setVariable("time", msgMap.get("time"));
-        String emailTemplate = templateEngine.process("codeEmail", context);
+        String emailTemplate = templateEngine.process("alCodeEmail", context);
+//        String emailTemplate = templateEngine.process("codeEmail", context);
         sendTemplateCodeEmail("验证码", emailTemplate, msgMap.get("email").toString());
     }
 

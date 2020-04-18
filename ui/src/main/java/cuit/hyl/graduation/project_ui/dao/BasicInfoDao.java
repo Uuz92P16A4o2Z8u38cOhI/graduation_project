@@ -30,5 +30,9 @@ public interface BasicInfoDao {
      */
     int excelImport(List<BasicInfo> list);
 
+    /**
+     * easyExcel导入
+     */
+    int easyPoiExcelImport(List<BasicInfo> list);
 
 }

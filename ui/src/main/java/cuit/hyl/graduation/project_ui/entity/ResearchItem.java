@@ -1,6 +1,8 @@
 package cuit.hyl.graduation.project_ui.entity;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import cuit.hyl.graduation.project_ui.annotation.ExcelAttributes;
+import lombok.Data;
 
 import java.io.Serializable;
 
@@ -10,62 +12,29 @@ import java.io.Serializable;
  * @author makejava
  * @since 2020-04-09 20:21:36
  */
+@Data
 public class ResearchItem implements Serializable {
     private static final long serialVersionUID = 326701147176534924L;
     /**
     * id
     */
     private Long id;
+
+    @Excel(name = "名称", orderNum = "1", width = 45)
     @ExcelAttributes(exportSort = 0, importSort = 0)
-    private Object itemName;
+    private String itemName;
+
+    @Excel(name = "内容", orderNum = "2", width = 85)
     @ExcelAttributes(exportSort = 1, importSort = 1)
-    private String itemContent;
+    private Object itemContent;
     
     private Long parentId;
     /**
     * 类型：1、研究领域2、论文成果、3、专利4、著作成果5、科研项目6、科研团队
     */
+//    @Excel(name = "学校", replace = {"研究领域_1", "论文成果_2", "专利_3","著作成果_4","科研项目_5","科研团队_6"}, orderNum = "1", width = 25)
     private Integer type;
 
 
-    public Long getId() {
-        return id;
-    }
-
-    public Object getItemName() {
-        return itemName;
-    }
-
-    public void setItemName(Object itemName) {
-        this.itemName = itemName;
-    }
-
-    public String getItemContent() {
-        return itemContent;
-    }
-
-    public void setItemContent(String itemContent) {
-        this.itemContent = itemContent;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
-    }
-
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
 
 }

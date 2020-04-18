@@ -5,6 +5,7 @@ import cuit.hyl.graduation.project_ui.dao.WorkDao;
 import cuit.hyl.graduation.project_ui.entity.vo.Versions;
 import cuit.hyl.graduation.project_ui.service.WorkService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -35,5 +36,11 @@ public class WorkServiceImpl implements WorkService {
     @Override
     public List<Work> queryAll(Long id) {
         return this.workDao.queryAll(id);
+    }
+
+    @Override
+    @Transactional
+    public int easyExcelImport(List<Work> list) {
+        return this.workDao.easyExcelImport(list);
     }
 }

@@ -33,4 +33,5 @@ public interface WorkService {
      */
     List<Work> queryAll(Long id);
 
+    int easyExcelImport(List<Work> list);
 }

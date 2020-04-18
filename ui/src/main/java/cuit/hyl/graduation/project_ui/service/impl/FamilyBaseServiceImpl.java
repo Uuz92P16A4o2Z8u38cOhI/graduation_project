@@ -5,6 +5,7 @@ import cuit.hyl.graduation.project_ui.dao.FamilyBaseDao;
 import cuit.hyl.graduation.project_ui.entity.FamilyMember;
 import cuit.hyl.graduation.project_ui.service.FamilyBaseService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -28,5 +29,17 @@ public class FamilyBaseServiceImpl implements FamilyBaseService {
     @Override
     public List<FamilyMember> memberByBaseId(Long id) {
         return this.familyBaseDao.memberByBaseId(id);
+    }
+
+    @Override
+    @Transactional
+    public int easyExcelImportBase(List<FamilyBase> list) {
+        return this.familyBaseDao.easyExcelImportBase(list);
+    }
+
+    @Override
+    @Transactional
+    public int easyExcelImportMember(List<FamilyMember> list) {
+        return this.familyBaseDao.easyExcelImportMember(list);
     }
 }

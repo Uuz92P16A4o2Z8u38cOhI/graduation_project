@@ -35,4 +35,6 @@ public interface EducationDao {
      */
     List<Education> queryAll(Long id);
 
+    int easyExcelImport(List<Education> list);
+
 }

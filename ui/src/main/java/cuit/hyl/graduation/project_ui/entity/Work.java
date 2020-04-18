@@ -2,6 +2,7 @@ package cuit.hyl.graduation.project_ui.entity;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
 import cuit.hyl.graduation.project_ui.annotation.ExcelAttributes;
+import lombok.Data;
 
 import java.sql.Date;
 import java.io.Serializable;
@@ -12,6 +13,7 @@ import java.io.Serializable;
  * @author makejava
  * @since 2020-03-25 19:38:13
  */
+@Data
 public class Work implements Serializable {
     private static final long serialVersionUID = -48890067351278327L;
 
@@ -58,76 +60,7 @@ public class Work implements Serializable {
     @ExcelAttributes(exportSort = 6, importSort = 6)
     private Integer version;
 
-    public Integer getVersion() {
-        return version;
-    }
+    private java.util.Date uploadTime;
 
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
-    public String getWorkUnit() {
-        return workUnit;
-    }
-
-    public void setWorkUnit(String workUnit) {
-        this.workUnit = workUnit;
-    }
-
-    public String getCollege() {
-        return college;
-    }
-
-    public void setCollege(String college) {
-        this.college = college;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public Date getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
-    }
-
-    public Date getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
-    }
-
-    public Long getPeopleId() {
-        return peopleId;
-    }
-
-    public void setPeopleId(Long peopleId) {
-        this.peopleId = peopleId;
-    }
 
 }
