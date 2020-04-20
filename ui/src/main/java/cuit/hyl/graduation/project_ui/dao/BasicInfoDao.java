@@ -1,6 +1,7 @@
 package cuit.hyl.graduation.project_ui.dao;
 
 import cuit.hyl.graduation.project_ui.entity.BasicInfo;
+import cuit.hyl.graduation.project_ui.entity.School;
 import cuit.hyl.graduation.project_ui.entity.vo.InitInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -34,5 +35,10 @@ public interface BasicInfoDao {
      * easyExcel导入
      */
     int easyPoiExcelImport(List<BasicInfo> list);
+
+    /*
+    学校信息
+     */
+    School schoolInfo(Long id);
 
 }

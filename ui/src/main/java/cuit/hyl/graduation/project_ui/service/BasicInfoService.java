@@ -1,6 +1,7 @@
 package cuit.hyl.graduation.project_ui.service;
 
 import cuit.hyl.graduation.project_ui.entity.BasicInfo;
+import cuit.hyl.graduation.project_ui.entity.School;
 import cuit.hyl.graduation.project_ui.entity.vo.InitInfo;
 
 import java.util.List;
@@ -29,5 +30,7 @@ public interface BasicInfoService {
     int excelImport(List<BasicInfo> list);
 
     int easyPoiExcelImport(List<BasicInfo> list);
+
+    School schoolInfo(Long id);
 
 }

@@ -2,6 +2,7 @@ package cuit.hyl.graduation.project_ui.service.impl;
 
 import cuit.hyl.graduation.project_ui.entity.BasicInfo;
 import cuit.hyl.graduation.project_ui.dao.BasicInfoDao;
+import cuit.hyl.graduation.project_ui.entity.School;
 import cuit.hyl.graduation.project_ui.entity.vo.InitInfo;
 import cuit.hyl.graduation.project_ui.service.BasicInfoService;
 import org.springframework.stereotype.Service;
@@ -44,6 +45,11 @@ public class BasicInfoServiceImpl implements BasicInfoService {
     @Transactional
     public int easyPoiExcelImport(List<BasicInfo> list) {
         return this.basicInfoDao.easyPoiExcelImport(list);
+    }
+
+    @Override
+    public School schoolInfo(Long id) {
+        return this.basicInfoDao.schoolInfo(id);
     }
 
 

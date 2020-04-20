@@ -137,7 +137,7 @@ public class EasyPoiController {
                         exportParams.setSheetName(key);
                         map.put("title", exportParams);
                         map.put("data", researchMap.get(key));
-                        map.put("entity", TeachingClass.class);
+                        map.put("entity", ResearchItem.class);
                         researchSheetsList.add(map);
                     }
 //                    ExcelUtils.exportExcel(researchSheetsList, "Teaching", response);
@@ -156,10 +156,10 @@ public class EasyPoiController {
                         List<AwardsItem> honorWallList = this.awardsService.initItemInfo(awards.getHonorWall(), 5);
 
                         awardsMap.put("学术荣誉", academicHonorsList);
-//                        awardsMap.put("科研奖励", scientificAwardsList);
-//                        awardsMap.put("其它获奖", otherAwardsList);
-//                        awardsMap.put("荣誉称号", honoraryTitleList);
-//                    awardsMap.put("荣誉墙", honorWallList);
+                        awardsMap.put("科研奖励", scientificAwardsList);
+                        awardsMap.put("其它获奖", otherAwardsList);
+                        awardsMap.put("荣誉称号", honoraryTitleList);
+                        awardsMap.put("荣誉墙", honorWallList);
                     }
                     for (String key: awardsMap.keySet()) {
                         Map<String, Object> map = new HashMap<>();
@@ -167,12 +167,11 @@ public class EasyPoiController {
                         exportParams.setSheetName(key);
                         map.put("title", exportParams);
                         map.put("data", awardsMap.get(key));
-                        map.put("entity", TeachingClass.class);
+                        map.put("entity", AwardsItem.class);
                         awardsSheetsList.add(map);
                     }
                     Workbook awardsWorkbook = ExcelExportUtil.exportExcel(awardsSheetsList, ExcelType.HSSF);
                     ExcelUtils.downLoadExcelHssf("Awards", response, awardsWorkbook);
-
                     break;
                 default:
                     System.out.println("导出失败！");
@@ -193,9 +192,11 @@ public class EasyPoiController {
                 case "BasicInfo":
                     List<BasicInfo> basicInfoList = null;
                     basicInfoList = ExcelUtils.importExcel(multipartFile, 0, 1, BasicInfo.class);
-                    for(BasicInfo basicInfo: basicInfoList){
-                        basicInfo.setId(idWorker.nextId());
-                        basicInfo.setPeopleId(id);
+                    if(basicInfoList != null){
+                        for(BasicInfo basicInfo: basicInfoList){
+                            basicInfo.setId(idWorker.nextId());
+                            basicInfo.setPeopleId(id);
+                        }
                     }
 
                     this.basicInfoService.easyPoiExcelImport(basicInfoList);

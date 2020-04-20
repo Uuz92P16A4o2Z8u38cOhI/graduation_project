@@ -11,6 +11,14 @@
         <result property="icon" column="ICON" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <resultMap type="cuit.hyl.graduation.project_ui.entity.School" id="SchoolMap">
+        <result property="id" column="ID" jdbcType="INTEGER"/>
+        <result property="name" column="NAME" jdbcType="VARCHAR"/>
+        <result property="code" column="CODE" jdbcType="INTEGER"/>
+        <result property="address" column="ADDRESS" jdbcType="VARCHAR"/>
+        <result property="icon" column="ICON" jdbcType="VARCHAR"/>
+    </resultMap>
+
     <resultMap type="cuit.hyl.graduation.project_ui.entity.BasicInfo" id="BasicInfoMap">
         <result property="id" column="ID" jdbcType="INTEGER"/>
         <result property="name" column="NAME" jdbcType="VARCHAR"/>
@@ -289,6 +297,21 @@
         </foreach>-->
     </insert>
 
+
+    <!-- -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+    <!--查询学校信息-->
+    <select id="schoolInfo" resultMap="SchoolMap">
+        SELECT
+            s.`NAME`,
+            s.ADDRESS,
+            s.`CODE`,
+            s.ICON
+        FROM
+            graduation_ui.school AS s
+                LEFT JOIN basic_info AS bi ON s.`CODE` = bi.SCHOOL_ID
+        WHERE
+            bi.ID = #{id}
+    </select>
 
 
 </mapper>

@@ -1,10 +1,14 @@
 package cuit.hyl.graduation.fastdfs.controller;
 
+import cuit.hyl.graduation.fastdfs.entity.FileUpload;
+import cuit.hyl.graduation.fastdfs.service.FileUploadService;
 import cuit.hyl.graduation.fastdfs.service.StorageService;
+import cuit.hyl.graduation.fastdfs.utils.SnowflakeIdWorker;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,6 +31,9 @@ public class UploadController {
 
     @Autowired
     private StorageService storageService;
+
+    @Autowired
+    private FileUploadService fileUploadService;
 
     /**
      * 文件上传
@@ -63,45 +70,26 @@ public class UploadController {
      * @param multipartFile
      * @return 返回文件完整路径
      */
-    private String writeFile(MultipartFile multipartFile) {
+    public String writeFile(MultipartFile multipartFile) {
         // 获取文件后缀
         String oName = multipartFile.getOriginalFilename();
         String extName = oName.substring(oName.lastIndexOf(".") + 1);
 
         // 文件存放路径
         String url = null;
+        //文件名
+        String uploadUrl = null;
         try {
-            String uploadUrl = storageService.upload(multipartFile.getBytes(), extName);
+            uploadUrl = storageService.upload(multipartFile.getBytes(), extName);
             url = FASTDFS_BASE_URL + uploadUrl;
 
+            SnowflakeIdWorker idWorker = new SnowflakeIdWorker(1,3);
+            int i = fileUploadService.insert(idWorker.nextId(),uploadUrl,url);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        // 返回文件完整路径
-        return url;
+        return uploadUrl;
     }
 
-    /**
-     * 返回文件名
-     * @param multipartFile
-     * @return
-     */
-    private String writeFile2(MultipartFile multipartFile) {
-        // 获取文件后缀
-        String oName = multipartFile.getOriginalFilename();
-        String extName = oName.substring(oName.lastIndexOf(".") + 1);
-
-        // 文件存放路径
-        String url = null;
-        try {
-            String uploadUrl = storageService.upload(multipartFile.getBytes(), extName);
-            url = uploadUrl;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        // 返回文件完整路径
-        return url;
-    }
 }

@@ -1,5 +1,6 @@
 package cuit.hyl.graduation.fastdfs.service;
 
+import cuit.hyl.graduation.fastdfs.entity.FileUpload;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -51,5 +52,23 @@ public class StorageFactory implements FactoryBean<StorageService> {
     @Override
     public boolean isSingleton() {
         return true;
+    }
+
+    /**
+     * (FileUpload)表服务接口
+     *
+     * @author makejava
+     * @since 2020-04-20 15:44:27
+     */
+    public static interface FileUploadService {
+
+        /**
+         * 新增数据
+         *
+         * @param fileUpload 实例对象
+         * @return 实例对象
+         */
+        public abstract FileUpload insert(FileUpload fileUpload);
+
     }
 }

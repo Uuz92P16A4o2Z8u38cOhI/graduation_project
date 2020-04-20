@@ -42,4 +42,11 @@ public class BasicInfoController {
         return new ResponseResult(ResponseResult.CodeStatus.OK,"成功查询数据", this.basicInfoService.queryInitInfo(id).get(0));
     }
 
+    @ApiOperation("通过用户id查询初始化数据")
+    @PostMapping("querySchoolInfo/{id}")
+    public ResponseResult querySchoolInfo(@PathVariable Long id) {
+
+        return new ResponseResult(ResponseResult.CodeStatus.OK,"成功查询数据", this.basicInfoService.schoolInfo(id));
+    }
+
 }

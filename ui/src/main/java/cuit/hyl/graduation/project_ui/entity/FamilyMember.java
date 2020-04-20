@@ -31,7 +31,7 @@ public class FamilyMember implements Serializable {
     /**
     * 性别
     */
-    @Excel(name = "性别", orderNum = "2", replace = {"男_1","女_0"}, width = 25)
+    @Excel(name = "性别", orderNum = "2", replace = {"男_1","女_2"}, width = 25)
     @ExcelAttributes(exportSort = 1, importSort = 1)
     private Integer sex;
     /**
@@ -49,7 +49,7 @@ public class FamilyMember implements Serializable {
     /**
     * 政治面貌
     */
-    @Excel(name = "政治面貌", orderNum = "5", width = 25)
+    @Excel(name = "政治面貌", replace = {"团员_1","党员_2","无_0"}, orderNum = "5", width = 25)
     @ExcelAttributes(exportSort = 4, importSort = 4)
     private Integer politicalStatus;
     /**

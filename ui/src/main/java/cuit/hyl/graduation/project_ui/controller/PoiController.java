@@ -46,7 +46,7 @@ public class PoiController {
     @ApiOperation("导出定制化Excel--个人")
     @PostMapping("exportModelExcel/{type}/{id}")
     public void exportModelExcel(@PathVariable String type,@PathVariable Long id,HttpServletResponse response) {
-
+        response.addHeader("Access-Control-Expose-Headers", "Content-Disposition");
         ExportExcel<BasicInfo> exportExcel = new ExportExcel<>();
 
         Map<String, Object> param = new HashMap<>();
