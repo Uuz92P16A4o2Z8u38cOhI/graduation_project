@@ -2,6 +2,7 @@ package cuit.hyl.graduation.sys.service;
 
 import com.alibaba.fastjson.JSONObject;
 import cuit.hyl.graduation.sys.entity.TbRole;
+import cuit.hyl.graduation.sys.entity.TbUserRole;
 import cuit.hyl.graduation.sys.entity.vo.RoleTree;
 
 import java.util.List;
@@ -32,7 +33,9 @@ public interface TbRoleService {
 
     int multipleDeleteUserRole(Long[] id);
 
-    /*int insertUserRole();
+    int multipleDeleteAllUserRole(Long id);
 
-    int multipleInsertUserRole();*/
+    /*int insertUserRole();*/
+
+    int multipleInsertUserRole(List<TbUserRole> list);
 }

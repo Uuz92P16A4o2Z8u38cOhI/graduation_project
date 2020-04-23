@@ -12,6 +12,6 @@ import java.util.List;
  */
 public interface TbMenuService {
 
-    List<TbMenu> queryById(Integer id);
+    List<TbMenu> queryById(Long id);
 
 }

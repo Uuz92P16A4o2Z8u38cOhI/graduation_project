@@ -3,6 +3,10 @@ package cuit.hyl.graduation.sys.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import cuit.hyl.graduation.sys.dao.TbPermissionDao;
 import cuit.hyl.graduation.sys.entity.TbPermission;
+import cuit.hyl.graduation.sys.entity.TbRoleMenu;
+import cuit.hyl.graduation.sys.entity.TbRolePermission;
+import cuit.hyl.graduation.sys.entity.vo.MenuTree;
+import cuit.hyl.graduation.sys.entity.vo.PermissionTree;
 import cuit.hyl.graduation.sys.service.TbPermissionService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -69,6 +73,46 @@ public class TbPermissionServiceImpl implements TbPermissionService {
     @Override
     public int deleteRolePermission(Long[] id) {
         return this.tbPermissionDao.deleteRolePermission(id);
+    }
+
+    @Override
+    public Long[] permissionIds(Long id) {
+        return this.tbPermissionDao.permissionIds(id);
+    }
+
+    @Override
+    public Long[] menuIds(Long id) {
+        return this.tbPermissionDao.menuIds(id);
+    }
+
+    @Override
+    public List<PermissionTree> permissionTree() {
+        return this.tbPermissionDao.permissionTree();
+    }
+
+    @Override
+    public List<MenuTree> menuTree() {
+        return this.tbPermissionDao.menuTree();
+    }
+
+    @Override
+    public int multipleDeleteAllRoleMenu(Long id) {
+        return this.tbPermissionDao.multipleDeleteAllRoleMenu(id);
+    }
+
+    @Override
+    public int multipleDeleteAllRolePermission(Long id) {
+        return this.tbPermissionDao.multipleDeleteAllRolePermission(id);
+    }
+
+    @Override
+    public int multipleInsertRoleMenu(List<TbRoleMenu> list) {
+        return this.tbPermissionDao.multipleInsertRoleMenu(list);
+    }
+
+    @Override
+    public int multipleInsertRolePermission(List<TbRolePermission> list) {
+        return this.tbPermissionDao.multipleInsertRolePermission(list);
     }
 
 

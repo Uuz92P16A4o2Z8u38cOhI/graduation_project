@@ -2,6 +2,7 @@ package cuit.hyl.graduation.sys.dao;
 
 import com.alibaba.fastjson.JSONObject;
 import cuit.hyl.graduation.sys.entity.TbRole;
+import cuit.hyl.graduation.sys.entity.TbUserRole;
 import cuit.hyl.graduation.sys.entity.vo.RoleTree;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -34,7 +35,9 @@ public interface TbRoleDao {
 
     int multipleDeleteUserRole(Long[] id);
 
-    /*int insertUserRole();
+    int multipleDeleteAllUserRole(Long id);
 
-    int multipleInsertUserRole();*/
+    /*int insertUserRole();*/
+
+    int multipleInsertUserRole(List<TbUserRole> list);
 }

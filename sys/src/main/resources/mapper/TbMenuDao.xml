@@ -23,7 +23,7 @@
                 LEFT JOIN graduation_authority.tb_role_menu AS rm ON r.id = rm.role_id
                 LEFT JOIN graduation_authority.tb_menu AS p ON p.id = rm.menu_id
         WHERE
-            u.id = #{id} AND r.parent_id = 0
+            u.id = #{id} AND r.type = 1
     </select>
 
 </mapper>

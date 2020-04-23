@@ -2,6 +2,10 @@ package cuit.hyl.graduation.sys.dao;
 
 import com.alibaba.fastjson.JSONObject;
 import cuit.hyl.graduation.sys.entity.TbPermission;
+import cuit.hyl.graduation.sys.entity.TbRoleMenu;
+import cuit.hyl.graduation.sys.entity.TbRolePermission;
+import cuit.hyl.graduation.sys.entity.vo.MenuTree;
+import cuit.hyl.graduation.sys.entity.vo.PermissionTree;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Arrays;
@@ -35,4 +39,15 @@ public interface TbPermissionDao {
     int insertRolePermission(Long roleId, Long permissionId);
 
     int deleteRolePermission(Long[] id);
+
+    Long[] permissionIds(Long id);
+    Long[] menuIds(Long id);
+    List<PermissionTree> permissionTree();
+    List<MenuTree> menuTree();
+
+    int multipleDeleteAllRoleMenu(Long id);
+    int multipleDeleteAllRolePermission(Long id);
+    int multipleInsertRoleMenu(List<TbRoleMenu> list);
+    int multipleInsertRolePermission(List<TbRolePermission> list);
+
 }

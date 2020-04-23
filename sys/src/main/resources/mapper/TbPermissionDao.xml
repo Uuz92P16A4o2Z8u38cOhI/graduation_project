@@ -11,9 +11,24 @@
         <result property="description" column="description" jdbcType="VARCHAR"/>
         <result property="created" column="created" jdbcType="TIMESTAMP"/>
         <result property="updated" column="updated" jdbcType="TIMESTAMP"/>
-
         <result property="roleId" column="roleId" jdbcType="INTEGER"/>
         <result property="permissionId" column="permissionId" jdbcType="INTEGER"/>
+    </resultMap>
+    <resultMap id="permissionTree" type="cuit.hyl.graduation.sys.entity.vo.PermissionTree">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="parentId" column="parent_id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="menuTree" type="cuit.hyl.graduation.sys.entity.vo.MenuTree">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="parentId" column="parent_id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="odr" column="odr" jdbcType="INTEGER"/>
+    </resultMap>
+    <resultMap type="cuit.hyl.graduation.sys.entity.TbRoleMenu" id="TbRoleMenuMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="roleId" column="role_id" jdbcType="INTEGER"/>
+        <result property="menuId" column="menu_id" jdbcType="INTEGER"/>
     </resultMap>
 
     <select id="queryByUserId" resultMap="TbPermissionMap">
@@ -144,5 +159,56 @@
             #{id}
         </foreach>
     </delete>
+
+   <!-- -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+    <select id="permissionIds" resultType="Long">
+        SELECT
+            p.id
+        FROM
+            graduation_authority.tb_role_permission AS rp
+                LEFT JOIN graduation_authority.tb_permission AS p ON rp.permission_id = p.id
+        WHERE
+            rp.role_id = #{id}
+    </select>
+    <select id="menuIds" resultType="Long">
+        SELECT
+            m.id
+        FROM
+            graduation_authority.tb_role_menu AS rm
+                LEFT JOIN graduation_authority.tb_menu AS m ON rm.menu_id = m.id
+        WHERE
+            rm.role_id = #{id}
+    </select>
+
+    <select id="permissionTree" resultMap="permissionTree">
+        SELECT *
+        FROM graduation_authority.tb_permission
+    </select>
+    <select id="menuTree" resultMap="menuTree">
+        SELECT *
+        FROM graduation_authority.tb_menu
+    </select>
+
+    <!--删除某角色所有目录-->
+    <delete id="multipleDeleteAllRoleMenu">
+        DELETE FROM graduation_authority.tb_role_menu WHERE role_id = #{id}
+    </delete>
+    <!--删除某角色所有资源-->
+    <delete id="multipleDeleteAllRolePermission">
+        DELETE FROM graduation_authority.tb_role_permission WHERE role_id = #{id}
+    </delete>
+
+    <insert id="multipleInsertRoleMenu">
+        INSERT INTO graduation_authority.tb_role_menu (id, role_id, menu_id) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id},#{item.roleId},#{item.menuId})
+        </foreach>
+    </insert>
+    <insert id="multipleInsertRolePermission">
+        INSERT INTO graduation_authority.tb_role_permission (id, role_id, permission_id) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id},#{item.roleId},#{item.permissionId})
+        </foreach>
+    </insert>
 
 </mapper>

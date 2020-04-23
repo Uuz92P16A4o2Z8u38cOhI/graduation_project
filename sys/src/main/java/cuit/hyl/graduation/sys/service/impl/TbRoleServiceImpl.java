@@ -3,6 +3,7 @@ package cuit.hyl.graduation.sys.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import cuit.hyl.graduation.sys.dao.TbRoleDao;
 import cuit.hyl.graduation.sys.entity.TbRole;
+import cuit.hyl.graduation.sys.entity.TbUserRole;
 import cuit.hyl.graduation.sys.entity.vo.RoleTree;
 import cuit.hyl.graduation.sys.service.TbRoleService;
 import org.springframework.stereotype.Service;
@@ -79,15 +80,21 @@ public class TbRoleServiceImpl implements TbRoleService {
         return this.tbRoleDao.multipleDeleteUserRole(id);
     }
 
+    @Override
+    @Transactional
+    public int multipleDeleteAllUserRole(Long id){
+        return this.tbRoleDao.multipleDeleteAllUserRole(id);
+    }
+
     /*@Override
     @Transactional
     public int insertUserRole() {
         return this.tbRoleDao.insertUserRole();
-    }
+    }*/
 
     @Override
     @Transactional
-    public int multipleInsertUserRole() {
-        return this.tbRoleDao.multipleDeleteUserRole();
-    }*/
+    public int multipleInsertUserRole(List<TbUserRole> list) {
+        return this.tbRoleDao.multipleInsertUserRole(list);
+    }
 }

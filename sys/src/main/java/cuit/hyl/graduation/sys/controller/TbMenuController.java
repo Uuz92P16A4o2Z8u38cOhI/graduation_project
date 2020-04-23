@@ -1,6 +1,9 @@
 package cuit.hyl.graduation.sys.controller;
 
+import cuit.hyl.graduation.sys.entity.ResponseResult;
 import cuit.hyl.graduation.sys.entity.TbMenu;
+import cuit.hyl.graduation.sys.entity.vo.MenuTree;
+import cuit.hyl.graduation.sys.entity.vo.PermissionTree;
 import cuit.hyl.graduation.sys.service.TbMenuService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -8,7 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -27,7 +32,7 @@ public class TbMenuController {
 
     @ApiOperation(value="根据用户id查询目录菜单")
     @PostMapping("menuInfo/{id}")
-    public List<TbMenu> menuInfo(@PathVariable("id") Integer id) {
+    public List<TbMenu> menuInfo(@PathVariable("id") Long id) {
         List<TbMenu> sortMenu = new ArrayList<TbMenu>();
         List<TbMenu> menuList = this.tbMenuService.queryById(id);
 

@@ -14,6 +14,6 @@ import java.util.List;
 @Mapper
 public interface TbMenuDao {
 
-    List<TbMenu> queryById(Integer id);
+    List<TbMenu> queryById(Long id);
 
 }

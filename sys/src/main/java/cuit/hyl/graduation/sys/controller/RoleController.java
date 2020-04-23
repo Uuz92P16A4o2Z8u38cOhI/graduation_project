@@ -3,14 +3,14 @@ package cuit.hyl.graduation.sys.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import cuit.hyl.graduation.sys.entity.ResponseResult;
-import cuit.hyl.graduation.sys.entity.TbMenu;
-import cuit.hyl.graduation.sys.entity.TbRole;
+import cuit.hyl.graduation.sys.entity.*;
 import cuit.hyl.graduation.sys.entity.vo.RoleTree;
 import cuit.hyl.graduation.sys.service.TbRoleService;
+import cuit.hyl.graduation.sys.utils.SnowflakeIdWorker;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -119,7 +119,6 @@ public class RoleController {
         return new ResponseResult(ResponseResult.CodeStatus.OK,map);
     }
 
-
     public void addMenu(List<RoleTree> menus, List<RoleTree> menuList){
         if (menus.size() != menuList.size()) {
             for (RoleTree menu : menus) {
@@ -127,5 +126,23 @@ public class RoleController {
                 addMenu(menu.getChildren(),menuList);
             }
         }
+    }
+
+    @Transactional
+    @ApiOperation(value="更新用户拥有的角色")
+    @PostMapping("multipleInsertUserRole/{id}")
+    ResponseResult multipleInsertUserRole(@PathVariable Long id,@RequestBody Long[] ids){
+        List<TbUserRole> list = new ArrayList<>();
+        SnowflakeIdWorker idWorker = new SnowflakeIdWorker(1,4);
+        for (int i = 0; i < ids.length; i++){
+            TbUserRole tbUserRole = new TbUserRole();
+            tbUserRole.setId(idWorker.nextId());
+            tbUserRole.setRoleId(ids[i]);
+            tbUserRole.setUserId(id);
+            list.add(tbUserRole);
+        }
+        this.tbRoleService.multipleDeleteAllUserRole(id);
+        this.tbRoleService.multipleInsertUserRole(list);
+        return new ResponseResult(ResponseResult.CodeStatus.OK, "更新成功");
     }
 }

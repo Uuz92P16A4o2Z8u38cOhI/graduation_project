@@ -20,7 +20,7 @@ public class TbMenuServiceImpl implements TbMenuService {
     private TbMenuDao tbMenuDao;
 
     @Override
-    public List<TbMenu> queryById(Integer id) {
+    public List<TbMenu> queryById(Long id) {
         return this.tbMenuDao.queryById(id);
     }
 
