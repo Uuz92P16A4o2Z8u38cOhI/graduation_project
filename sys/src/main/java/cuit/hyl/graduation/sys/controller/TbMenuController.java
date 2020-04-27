@@ -7,6 +7,7 @@ import cuit.hyl.graduation.sys.entity.vo.PermissionTree;
 import cuit.hyl.graduation.sys.service.TbMenuService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
  * @author makejava
  * @since 2020-02-23 19:25:04
  */
+@Slf4j
 @Api(tags = "菜单查询")
 @RestController
 @RequestMapping("api/sys/menu")

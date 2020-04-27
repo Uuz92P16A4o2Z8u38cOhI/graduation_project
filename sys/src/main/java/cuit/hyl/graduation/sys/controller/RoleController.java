@@ -9,6 +9,7 @@ import cuit.hyl.graduation.sys.service.TbRoleService;
 import cuit.hyl.graduation.sys.utils.SnowflakeIdWorker;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -19,12 +20,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Api(tags = "角色查询")
 @RequestMapping("api/sys/role")
 @RestController
 public class RoleController {
     @Autowired
     private TbRoleService tbRoleService;
+
+    SnowflakeIdWorker idWorker = new SnowflakeIdWorker(1,4);
 
     @ApiOperation(value="查询所有角色--分页")
     @PostMapping("allRole/{pageNum}/{pageSize}")
@@ -39,6 +43,7 @@ public class RoleController {
     @ApiOperation(value="新增角色")
     @PostMapping("insertRole")
     ResponseResult insertRole(@RequestBody JSONObject params){
+        params.put("id", idWorker.nextId());
         int row = this.tbRoleService.insertRole(params);
         if (row == 1){
             return new ResponseResult(ResponseResult.CodeStatus.OK,"成功新增一个角色", "新增" + row + "行");
@@ -133,7 +138,6 @@ public class RoleController {
     @PostMapping("multipleInsertUserRole/{id}")
     ResponseResult multipleInsertUserRole(@PathVariable Long id,@RequestBody Long[] ids){
         List<TbUserRole> list = new ArrayList<>();
-        SnowflakeIdWorker idWorker = new SnowflakeIdWorker(1,4);
         for (int i = 0; i < ids.length; i++){
             TbUserRole tbUserRole = new TbUserRole();
             tbUserRole.setId(idWorker.nextId());

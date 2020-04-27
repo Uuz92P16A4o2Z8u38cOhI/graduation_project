@@ -49,4 +49,15 @@ public class TbUserServiceImpl implements TbUserService {
     public int multipleDeleteUser(Long[] id) {
         return this.tbUserDao.multipleDeleteUser(id);
     }
+
+    @Transactional
+    @Override
+    public int updatePasswordByEmail(String email, String password) {
+        return this.tbUserDao.updatePasswordByEmail(email, password);
+    }
+
+    @Override
+    public Long checkEmail(String email) {
+        return this.tbUserDao.checkEmail(email);
+    }
 }

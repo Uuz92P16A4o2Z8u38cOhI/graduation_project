@@ -6,6 +6,7 @@ import cuit.hyl.graduation.project_ui.utils.poi.excel.ExportExcel;
 import cuit.hyl.graduation.project_ui.utils.poi.excel.ImportExcel;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Api(tags = "Poi操作")
 @RestController
 @RequestMapping("api/ui/Poi")

@@ -9,6 +9,7 @@ import cuit.hyl.graduation.project_ui.utils.easypoi.ExcelUtils;
 import cuit.hyl.graduation.project_ui.utils.snowflake.SnowflakeIdWorker;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Api(tags = "EasyPoi操作")
 @RestController
 @RequestMapping("api/ui/easyPoi")

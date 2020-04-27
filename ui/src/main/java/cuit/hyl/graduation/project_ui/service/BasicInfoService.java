@@ -33,4 +33,6 @@ public interface BasicInfoService {
 
     School schoolInfo(Long id);
 
+    int updateAvatar(String avatar, Long id);
+
 }

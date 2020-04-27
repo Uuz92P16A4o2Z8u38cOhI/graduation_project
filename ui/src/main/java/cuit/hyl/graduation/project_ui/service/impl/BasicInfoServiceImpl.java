@@ -52,5 +52,10 @@ public class BasicInfoServiceImpl implements BasicInfoService {
         return this.basicInfoDao.schoolInfo(id);
     }
 
+    @Override
+    public int updateAvatar(String avatar, Long id) {
+        return this.basicInfoDao.updateAvatar(avatar, id);
+    }
+
 
 }

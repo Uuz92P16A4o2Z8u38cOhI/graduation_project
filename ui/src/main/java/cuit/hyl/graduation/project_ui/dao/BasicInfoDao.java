@@ -41,4 +41,6 @@ public interface BasicInfoDao {
      */
     School schoolInfo(Long id);
 
+    int updateAvatar(String avatar, Long id);
+
 }

@@ -6,6 +6,7 @@ import cuit.hyl.graduation.fastdfs.service.StorageService;
 import cuit.hyl.graduation.fastdfs.utils.SnowflakeIdWorker;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @CrossOrigin(origins = "*", maxAge = 3600)
 @Api( tags = "文件上传")
 @RestController
@@ -64,6 +66,18 @@ public class UploadController {
         return result;
     }
 
+    @ApiOperation("MultipartFile dropFile")
+    @RequestMapping(value = "uploadAvatar", method = RequestMethod.POST)
+    public String uploadAvatar(MultipartFile dropFile) {
+        String fileName = null;
+        // Dropzone 上传
+        if (dropFile != null) {
+            fileName = writeFile(dropFile);
+        }
+
+        return fileName;
+    }
+
     /**
      * 将图片写入指定目录
      *
@@ -85,6 +99,8 @@ public class UploadController {
 
             SnowflakeIdWorker idWorker = new SnowflakeIdWorker(1,3);
             int i = fileUploadService.insert(idWorker.nextId(),uploadUrl,url);
+
+            log.info("上传文件：" + uploadUrl + "地址：" + url);
         } catch (IOException e) {
             e.printStackTrace();
         }

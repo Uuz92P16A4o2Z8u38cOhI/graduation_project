@@ -5,6 +5,7 @@ import cuit.hyl.graduation.project_ui.entity.Work;
 import cuit.hyl.graduation.project_ui.service.WorkService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -12,6 +13,7 @@ import javax.annotation.Resource;
 /**
  * 工作情况(Work)表控制层
  */
+@Slf4j
 @Api(tags = "工作信息")
 @RestController
 @RequestMapping("api/ui/work")

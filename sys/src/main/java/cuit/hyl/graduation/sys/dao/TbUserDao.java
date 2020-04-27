@@ -24,4 +24,7 @@ public interface TbUserDao {
     int deleteUser(Long id);
 
     int multipleDeleteUser(Long[] id);
+
+    int updatePasswordByEmail(String email, String password);
+    Long checkEmail(String email);
 }

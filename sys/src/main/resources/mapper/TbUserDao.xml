@@ -101,4 +101,20 @@
         </foreach>
     </delete>
 
+    <update id="updatePasswordByEmail">
+        UPDATE graduation_authority.tb_user
+        SET `password` = #{password}
+        WHERE
+            email = #{email}
+    </update>
+    <select id="checkEmail" resultType="Long">
+        SELECT
+            id
+        FROM
+            graduation_authority.tb_user
+        WHERE
+            email = #{email}
+    </select>
+
+
 </mapper>

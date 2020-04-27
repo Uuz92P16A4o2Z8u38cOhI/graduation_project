@@ -6,6 +6,7 @@ import cuit.hyl.graduation.project_ui.entity.ResponseResult;
 import cuit.hyl.graduation.project_ui.service.FamilyBaseService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -19,6 +20,7 @@ import java.util.Map;
  * @author makejava
  * @since 2020-04-09 16:29:15
  */
+@Slf4j
 @Api(tags = "家庭情况")
 @RestController
 @RequestMapping("api/ui/family")

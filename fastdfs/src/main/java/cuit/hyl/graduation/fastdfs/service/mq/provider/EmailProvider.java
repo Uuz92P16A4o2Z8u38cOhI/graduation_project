@@ -24,11 +24,10 @@ public class EmailProvider {
      * 发送验证码邮件
      */
     @Async
-    public void sendCodeEmail() {
+    public void sendCodeEmail(String email) {
         Map<String,Object> msgMap=new HashMap<>();
 
         String code = getCode();
-        String email = "2963487848@qq.com";
 
         msgMap.put("username","用户");
         msgMap.put("code", code);

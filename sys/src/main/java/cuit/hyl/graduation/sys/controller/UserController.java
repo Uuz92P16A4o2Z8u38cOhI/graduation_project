@@ -7,14 +7,18 @@ import cuit.hyl.graduation.sys.entity.ResponseResult;
 import cuit.hyl.graduation.sys.entity.TbRole;
 import cuit.hyl.graduation.sys.entity.TbUser;
 import cuit.hyl.graduation.sys.service.TbUserService;
+import cuit.hyl.graduation.sys.utils.RedisUtils;
+import cuit.hyl.graduation.sys.utils.SnowflakeIdWorker;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @Api(tags = "用户查询")
 @RequestMapping("api/sys/user")
 @RestController
@@ -22,6 +26,11 @@ public class UserController {
 
     @Autowired
     private TbUserService tbUserService;
+
+    @Autowired
+    private RedisUtils redisUtils;
+
+    SnowflakeIdWorker idWorker = new SnowflakeIdWorker(1,4);
 
     @ApiOperation(value="查询所有用户--分页")
     @PostMapping("allUser/{pageNum}/{pageSize}")
@@ -36,6 +45,7 @@ public class UserController {
     @ApiOperation(value="新增角色")
     @PostMapping("insertUser")
     ResponseResult insertUser(@RequestBody JSONObject params){
+        params.put("id", idWorker.nextId());
         if (params.get("password") != null){
             params.put("password", new BCryptPasswordEncoder().encode(params.get("password").toString())) ;
         }
@@ -61,7 +71,7 @@ public class UserController {
         }
     }
 
-    @ApiOperation(value="删除权限资源--根据id")
+    @ApiOperation(value="删除用户--根据id")
     @DeleteMapping("deleteUser/{id}")
     ResponseResult deleteUser(@PathVariable Long id){
         int row = this.tbUserService.deleteUser(id);
@@ -80,6 +90,31 @@ public class UserController {
             return new ResponseResult(ResponseResult.CodeStatus.OK,"成功删除"+row+"个用户", "删除" + row + "行");
         }else {
             return new ResponseResult(ResponseResult.CodeStatus.FAIL, "删除失败" , "删除" + row + "行");
+        }
+    }
+
+    @ApiOperation(value="邮件发送验证码更新密码")
+    @PostMapping("updatePasswordByEmail")
+    ResponseResult updatePasswordByEmail(@RequestBody JSONObject params){
+        String newpassword = (String) params.get("newpassword");
+        String password = (String) params.get("password");
+        String email = (String) params.get("email");
+
+        Long id = this.tbUserService.checkEmail(email);
+        if (id == null) {
+            return new ResponseResult(ResponseResult.CodeStatus.FAIL,"不存在该邮箱用户，请重新输入邮箱号");
+        }else {
+            String check = (String) redisUtils.get(email);
+            if (password.equals(check)){
+                int row = this.tbUserService.updatePasswordByEmail(email,new BCryptPasswordEncoder().encode(newpassword));
+                if (row == 0){
+                    return new ResponseResult(ResponseResult.CodeStatus.FAIL,"密码更新失败");
+                }else {
+                    return new ResponseResult(ResponseResult.CodeStatus.OK,"修改密码成功");
+                }
+            }else {
+                return new ResponseResult(ResponseResult.CodeStatus.FAIL,"验证码过期或错误");
+            }
         }
     }
 

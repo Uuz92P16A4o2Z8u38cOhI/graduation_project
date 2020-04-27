@@ -5,6 +5,7 @@ import cuit.hyl.graduation.project_ui.entity.ResponseResult;
 import cuit.hyl.graduation.project_ui.service.EducationService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -15,6 +16,7 @@ import javax.annotation.Resource;
  * @author makejava
  * @since 2020-04-02 20:22:55
  */
+@Slf4j
 @Api(tags = "受教育情况")
 @RestController
 @RequestMapping("api/ui/education")

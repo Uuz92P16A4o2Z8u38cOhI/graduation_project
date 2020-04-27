@@ -11,6 +11,7 @@ import cuit.hyl.graduation.sys.service.TbPermissionService;
 import cuit.hyl.graduation.sys.utils.SnowflakeIdWorker;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.apache.bcel.classfile.Code;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,12 +23,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Api(tags = "权限查询")
 @RequestMapping("api/sys/permission")
 @RestController
 public class PermissionController {
     @Autowired
     private TbPermissionService tbPermissionService;
+
+    SnowflakeIdWorker idWorker = new SnowflakeIdWorker(1,4);
 
     @ApiOperation(value="查询所有资源--分页")
     @PostMapping("allPermission/{pageNum}/{pageSize}")
@@ -36,14 +40,17 @@ public class PermissionController {
         PageHelper.startPage(pageNum, pageSize);
         List<TbPermission> list = this.tbPermissionService.queryAllPermission(params);
         PageInfo<TbPermission> pageInfo = new PageInfo<TbPermission> (list);
+        log.info("查询所有资源--分页");
         return new ResponseResult(ResponseResult.CodeStatus.OK,pageInfo);
     }
 
     @ApiOperation(value="新增权限资源")
     @PostMapping("insertPermission")
     ResponseResult insertPermission(@RequestBody JSONObject params){
+        params.put("id", idWorker.nextId());
         int row = this.tbPermissionService.insertPermission(params);
         if (row == 1){
+            log.info("新增权限资源:" + "新增" + row + "行");
             return new ResponseResult(ResponseResult.CodeStatus.OK,"成功新增一条资源权限", "新增" + row + "行");
         }else {
             return new ResponseResult(ResponseResult.CodeStatus.FAIL, "新增失败" , "新增" + row + "行");
@@ -55,6 +62,7 @@ public class PermissionController {
     ResponseResult updatePermission(@RequestBody JSONObject params){
         int row = this.tbPermissionService.updatePermission(params);
         if (row == 1){
+            log.info("成功修改一条资源权限:" + "修改" + row + "行");
             return new ResponseResult(ResponseResult.CodeStatus.OK,"成功修改一条资源权限", "修改" + row + "行");
         }else {
             return new ResponseResult(ResponseResult.CodeStatus.FAIL, "修改失败" , "修改" + row + "行");
@@ -66,6 +74,7 @@ public class PermissionController {
     ResponseResult deletePermission(@PathVariable Long id){
         int row = this.tbPermissionService.deletePermission(id);
         if (row == 1){
+            log.info("成功删除一条资源权限:" + "删除" + row + "行");
             return new ResponseResult(ResponseResult.CodeStatus.OK,"成功删除一条资源权限", "删除" + row + "行");
         }else {
             return new ResponseResult(ResponseResult.CodeStatus.FAIL, "删除失败" , "删除" + row + "行");
@@ -77,6 +86,7 @@ public class PermissionController {
     ResponseResult multipleDeletePermission(@RequestBody Long[] id){
         int row = this.tbPermissionService.multipleDeletePermission(id);
         if (row != 0){
+            log.info("成功删除"+row+"条资源权限");
             return new ResponseResult(ResponseResult.CodeStatus.OK,"成功删除"+row+"条资源权限", "删除" + row + "行");
         }else {
             return new ResponseResult(ResponseResult.CodeStatus.FAIL, "删除失败" , "删除" + row + "行");
@@ -175,7 +185,6 @@ public class PermissionController {
     @PostMapping("multipleInsertRolePermission/{id}")
     ResponseResult multipleInsertRolePermission(@PathVariable Long id,@RequestBody Long[] ids){
         List<TbRolePermission> list = new ArrayList<>();
-        SnowflakeIdWorker idWorker = new SnowflakeIdWorker(1,4);
         for (int i = 0; i < ids.length; i++){
             TbRolePermission tbRolePermission = new TbRolePermission();
             tbRolePermission.setId(idWorker.nextId());
@@ -193,7 +202,6 @@ public class PermissionController {
     @PostMapping("multipleInsertRoleMenu/{id}")
     ResponseResult multipleInsertRoleMenu(@PathVariable Long id,@RequestBody Long[] ids){
         List<TbRoleMenu> list = new ArrayList<>();
-        SnowflakeIdWorker idWorker = new SnowflakeIdWorker(1,4);
         for (int i = 0; i < ids.length; i++){
             TbRoleMenu tbRoleMenu = new TbRoleMenu();
             tbRoleMenu.setId(idWorker.nextId());

@@ -4,9 +4,13 @@ import cuit.hyl.graduation.project_ui.entity.Awards;
 import cuit.hyl.graduation.project_ui.entity.AwardsItem;
 import cuit.hyl.graduation.project_ui.entity.ResponseResult;
 import cuit.hyl.graduation.project_ui.service.AwardsService;
+import cuit.hyl.graduation.project_ui.service.feign.FastDFSService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -19,6 +23,7 @@ import java.util.Map;
  * @author makejava
  * @since 2020-04-09 20:26:14
  */
+@Slf4j
 @Api(tags = "获奖情况")
 @RestController
 @RequestMapping("api/ui/awards")

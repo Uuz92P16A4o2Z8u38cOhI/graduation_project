@@ -5,6 +5,7 @@ import cuit.hyl.graduation.project_ui.service.MenuService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import javafx.scene.effect.Light;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -16,6 +17,7 @@ import java.util.List;
  * @author makejava
  * @since 2019-12-26 15:27:58
  */
+@Slf4j
 @Api(tags = "前端目录")
 @RestController
 @RequestMapping("api/ui/menuTree")

@@ -40,7 +40,7 @@ public class CxfConfig {
     @Bean
     public Endpoint endpoint() {
         EndpointImpl endpoints = new EndpointImpl(springBus(), demoService);
-        endpoints.publish("/webservice");
+        endpoints.publish("/demo");
         return endpoints;
     }
 
