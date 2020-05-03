@@ -31,13 +31,201 @@
         where PEOPLE_ID = #{id}
         order by UPLOAD_TIME desc
     </select>
-
     <select id="memberByBaseId" resultMap="FamilyMemberMap">
         select
             *
         from graduation_ui.family_member
         where BASE_ID = #{id}
     </select>
+
+    <!--新增家庭基础信息-->
+    <insert id="insertbase">
+        INSERT INTO graduation_ui.family_base
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                ID,
+            </if>
+            <if test="population != null and '' != population">
+                POPULATION,
+            </if>
+            <if test="address != null and '' != address">
+                ADDRESS,
+            </if>
+            <if test="peopleId != null and '' != peopleId">
+                PEOPLE_ID,
+            </if>
+            <if test="uploadTime != null and '' != uploadTime">
+                UPLOAD_TIME,
+            </if>
+            <if test="version != null and '' != version">
+                VERSION,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                #{id},
+            </if>
+            <if test="population != null and '' != population">
+                #{population},
+            </if>
+            <if test="address != null and '' != address">
+                #{address},
+            </if>
+            <if test="peopleId != null and '' != peopleId">
+                #{peopleId},
+            </if>
+            <if test="uploadTime != null and '' != uploadTime">
+                #{uploadTime},
+            </if>
+            <if test="version != null and '' != version">
+                #{version},
+            </if>
+        </trim>
+    </insert>
+    <!-- 修改家庭基础信息  -->
+    <update id="updatebase" >
+        UPDATE graduation_ui.family_base
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                ID = #{id},
+            </if>
+            <if test="population != null and '' != population">
+                POPULATION = #{population},
+            </if>
+            <if test="address != null and '' != address">
+                ADDRESS = #{address},
+            </if>
+            <if test="peopleId != null and '' != peopleId">
+                PEOPLE_ID = #{peopleId},
+            </if>
+            <if test="uploadTime != null and '' != uploadTime">
+                UPLOAD_TIME = #{uploadTime},
+            </if>
+            <if test="version != null and '' != version">
+                VERSION = #{version},
+            </if>
+        </trim>
+        where id= #{id}
+    </update>
+
+    <!--家庭成员-->
+    <insert id="insertItem">
+        INSERT INTO graduation_ui.family_member
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                ID,
+            </if>
+            <if test="avatarType != null and '' != avatarType">
+                AVATAR_TYPE,
+            </if>
+            <if test="name != null and '' != name">
+                NAME,
+            </if>
+            <if test="sex != null and '' != sex">
+                SEX,
+            </if>
+            <if test="birth != null and '' != birth">
+                BIRTH,
+            </if>
+            <if test="job != null and '' != job">
+                JOB,
+            </if>
+            <if test="politicalStatus != null and '' != politicalStatus">
+                POLITICAL_STATUS,
+            </if>
+            <if test="relation != null and '' != relation">
+                RELATION,
+            </if>
+            <if test="email != null and '' != email">
+                EMAIL,
+            </if>
+            <if test="phone != null and '' != phone">
+                PHONE,
+            </if>
+            <if test="baseId != null and '' != baseId">
+                BASE_ID,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                #{id},
+            </if>
+            <if test="avatarType != null and '' != avatarType">
+                #{avatarType},
+            </if>
+            <if test="name != null and '' != name">
+                #{name},
+            </if>
+            <if test="sex != null and '' != sex">
+                #{sex},
+            </if>
+            <if test="birth != null and '' != birth">
+                #{birth},
+            </if>
+            <if test="job != null and '' != job">
+                #{job},
+            </if>
+            <if test="politicalStatus != null and '' != politicalStatus">
+                #{politicalStatus},
+            </if>
+            <if test="relation != null and '' != relation">
+                #{relation},
+            </if>
+            <if test="email != null and '' != email">
+                #{email},
+            </if>
+            <if test="phone != null and '' != phone">
+                #{phone},
+            </if>
+            <if test="baseId != null and '' != baseId">
+                #{baseId},
+            </if>
+        </trim>
+    </insert>
+    <!-- 修改  -->
+    <update id="updateItem" >
+        UPDATE graduation_ui.family_member
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                ID = #{id},
+            </if>
+            <if test="avatarType != null and '' != avatarType">
+                AVATAR_TYPE = #{avatarType},
+            </if>
+            <if test="name != null and '' != name">
+                NAME = #{name},
+            </if>
+            <if test="sex != null and '' != sex">
+                SEX = #{sex},
+            </if>
+            <if test="birth != null and '' != birth">
+                BIRTH = #{birth},
+            </if>
+            <if test="job != null and '' != job">
+                JOB = #{job},
+            </if>
+            <if test="politicalStatus != null and '' != politicalStatus">
+                POLITICAL_STATUS = #{politicalStatus},
+            </if>
+            <if test="relation != null and '' != relation">
+                RELATION = #{relation},
+            </if>
+            <if test="email != null and '' != email">
+                EMAIL = #{email},
+            </if>
+            <if test="phone != null and '' != phone">
+                PHONE = #{phone},
+            </if>
+            <if test="baseId != null and '' != baseId">
+                BASE_ID = #{baseId},
+            </if>
+        </trim>
+        where id= #{id}
+    </update>
+    <!--删除一项-->
+    <delete id="deleteItem">
+        DELETE FROM graduation_ui.family_member WHERE id = #{id}
+    </delete>
 
     <!-- easyPoi导入 家庭基本信息 -->
     <insert id="easyExcelImportBase">

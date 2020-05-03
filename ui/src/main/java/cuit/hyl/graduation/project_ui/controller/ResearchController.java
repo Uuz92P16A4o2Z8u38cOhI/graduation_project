@@ -36,9 +36,9 @@ public class ResearchController {
         ResponseResult result = new ResponseResult();
         Map<String, Object> map = new HashMap<>();
 
-        Research research = researchService.initInfo(id).get(0);
-
-        if (research != null){
+        List<Research> researchList = researchService.initInfo(id);
+        if (researchList.size() != 0){
+            Research research = researchList.get(0);
             List<ResearchItem> researchAreas = researchService.queryItems(research.getResearchAreas() , 1);
             List<ResearchItem> thesisResults = researchService.queryItems(research.getThesisResults() , 2);
             List<ResearchItem> patent = researchService.queryItems(research.getPatent() , 3);
@@ -52,6 +52,8 @@ public class ResearchController {
             map.put("achievements", achievements);
             map.put("researchProjects", researchProjects);
             map.put("researchTeam", researchTeam);
+        }else {
+            result.setMessage("未设置教师科研活动信息");
         }
 
         result.setData(map);

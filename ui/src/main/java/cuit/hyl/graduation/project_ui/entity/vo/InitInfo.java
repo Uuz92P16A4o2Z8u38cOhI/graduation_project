@@ -27,5 +27,6 @@ public class InitInfo implements Serializable {
 
     private String icon;
 
+    private String school;
 
 }

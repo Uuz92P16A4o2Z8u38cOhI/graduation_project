@@ -1,5 +1,6 @@
 package cuit.hyl.graduation.project_ui.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import cuit.hyl.graduation.project_ui.entity.Education;
 import cuit.hyl.graduation.project_ui.dao.EducationDao;
 import cuit.hyl.graduation.project_ui.entity.vo.Versions;
@@ -24,6 +25,24 @@ public class EducationServiceImpl implements EducationService {
     @Override
     public List<Education> queryInitInfo(Long id) {
         return this.educationDao.queryInitInfo(id);
+    }
+
+    @Override
+    @Transactional
+    public int insertItem(JSONObject params) {
+        return this.educationDao.insertItem(params);
+    }
+
+    @Override
+    @Transactional
+    public int updateItem(JSONObject params) {
+        return this.educationDao.updateItem(params);
+    }
+
+    @Override
+    @Transactional
+    public int deleteItem(Long id) {
+        return this.educationDao.deleteItem(id);
     }
 
     @Override

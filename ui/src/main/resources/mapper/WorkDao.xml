@@ -18,13 +18,130 @@
     </resultMap>
 
     <!--最新消息查询-->
-    <select id="queryInitInfo" resultMap="WorkMap">
+    <!--<select id="queryInitInfo" resultMap="WorkMap">
         select
             ID, POSITION, WORK_UNIT, COLLEGE, SUBJECT, START_TIME, END_TIME, PEOPLE_ID, VERSION
         from graduation_ui.work
         where PEOPLE_ID = #{id} AND VERSION = ( SELECT MAX( VERSION ) FROM graduation_ui.WORK )
         order by START_TIME desc
+    </select>-->
+    <select id="queryInitInfo" resultMap="WorkMap">
+        select
+            ID, POSITION, WORK_UNIT, COLLEGE, SUBJECT, START_TIME, END_TIME, PEOPLE_ID, VERSION
+        from graduation_ui.work
+        where PEOPLE_ID = #{id} AND VERSION = 0
+        order by START_TIME desc
     </select>
+
+    <!--新增一项-->
+    <insert id="insertItem">
+        INSERT INTO graduation_ui.work
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                ID,
+            </if>
+            <if test="position != null and '' != position">
+                POSITION,
+            </if>
+            <if test="workUnit != null and '' != workUnit">
+                WORK_UNIT,
+            </if>
+            <if test="college != null and '' != college">
+                COLLEGE,
+            </if>
+            <if test="subject != null and '' != subject">
+                SUBJECT,
+            </if>
+            <if test="startTime != null and '' != startTime">
+                START_TIME,
+            </if>
+            <if test="endTime != null and '' != endTime">
+                END_TIME,
+            </if>
+            <if test="peopleId != null and '' != peopleId">
+                PEOPLE_ID,
+            </if>
+            <if test="uploadTime != null and '' != uploadTime">
+                UPLOAD_TIME,
+            </if>
+            <if test="version != null and '' != version">
+                VERSION,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                #{id},
+            </if>
+            <if test="position != null and '' != position">
+                #{position},
+            </if>
+            <if test="workUnit != null and '' != workUnit">
+                #{workUnit},
+            </if>
+            <if test="college != null and '' != college">
+                #{college},
+            </if>
+            <if test="subject != null and '' != subject">
+                #{subject},
+            </if>
+            <if test="startTime != null and '' != startTime">
+                #{startTime},
+            </if>
+            <if test="endTime != null and '' != endTime">
+                #{endTime},
+            </if>
+            <if test="peopleId != null and '' != peopleId">
+                #{peopleId},
+            </if>
+            <if test="uploadTime != null and '' != uploadTime">
+                #{uploadTime},
+            </if>
+            <if test="version != null and '' != version">
+                #{version},
+            </if>
+        </trim>
+    </insert>
+    <!-- 修改  -->
+    <update id="updateItem" >
+        UPDATE graduation_ui.work
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                ID = #{id},
+            </if>
+            <if test="position != null and '' != position">
+                POSITION = #{position},
+            </if>
+            <if test="workUnit != null and '' != workUnit">
+                WORK_UNIT = #{workUnit},
+            </if>
+            <if test="college != null and '' != college">
+                COLLEGE = #{college},
+            </if>
+            <if test="subject != null and '' != subject">
+                SUBJECT = #{subject},
+            </if>
+            <if test="startTime != null and '' != startTime">
+                START_TIME = #{startTime},
+            </if>
+            <if test="endTime != null and '' != endTime">
+                END_TIME = #{endTime},
+            </if>
+            <if test="peopleId != null and '' != peopleId">
+                PEOPLE_ID = #{peopleId},
+            </if>
+            <if test="uploadTime != null and '' != uploadTime">
+                UPLOAD_TIME = #{uploadTime},
+            </if>
+            <if test="version != null and '' != version">
+                VERSION = #{version},
+            </if>
+        </trim>
+        where id= #{id}
+    </update>
+    <!--删除一项-->
+    <delete id="deleteItem">
+        DELETE FROM graduation_ui.work WHERE id = #{id}
+    </delete>
 
     <!--通过版本查询 -->
     <select id="queryByVersion" resultMap="WorkMap">

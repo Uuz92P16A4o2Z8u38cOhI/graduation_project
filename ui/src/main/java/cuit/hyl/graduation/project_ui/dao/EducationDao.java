@@ -1,5 +1,7 @@
 package cuit.hyl.graduation.project_ui.dao;
 
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSONPObject;
 import cuit.hyl.graduation.project_ui.entity.Education;
 import cuit.hyl.graduation.project_ui.entity.vo.Versions;
 import org.apache.ibatis.annotations.Mapper;
@@ -19,6 +21,10 @@ public interface EducationDao {
      * 通过ID查询单条数据
      */
     List<Education> queryInitInfo(Long id);
+
+    int insertItem(JSONObject params);
+    int updateItem(JSONObject params);
+    int deleteItem(Long id);
 
     /**
      * 通过版本查询

@@ -1,5 +1,6 @@
 package cuit.hyl.graduation.project_ui.dao;
 
+import com.alibaba.fastjson.JSONObject;
 import cuit.hyl.graduation.project_ui.entity.Work;
 import cuit.hyl.graduation.project_ui.entity.vo.Versions;
 import org.apache.ibatis.annotations.Mapper;
@@ -19,6 +20,10 @@ public interface WorkDao {
      * 通过ID查询单条数据
      */
     List<Work> queryInitInfo(Long id);
+
+    int insertItem(JSONObject params);
+    int updateItem(JSONObject params);
+    int deleteItem(Long id);
 
     /**
      * 通过版本查询

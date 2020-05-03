@@ -1,5 +1,7 @@
 package cuit.hyl.graduation.project_ui.dao;
 
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSONPObject;
 import cuit.hyl.graduation.project_ui.entity.FamilyBase;
 import cuit.hyl.graduation.project_ui.entity.FamilyMember;
 import org.apache.ibatis.annotations.Mapper;
@@ -18,6 +20,12 @@ public interface FamilyBaseDao {
     List<FamilyBase> initInfo(Long id);
 
     List<FamilyMember> memberByBaseId(Long id);
+
+    int insertbase(JSONObject params);
+    int updatebase(JSONObject params);
+    int insertItem(JSONObject params);
+    int updateItem(JSONObject params);
+    int deleteItem(Long id);
 
     int easyExcelImportBase(List<FamilyBase> list);
 

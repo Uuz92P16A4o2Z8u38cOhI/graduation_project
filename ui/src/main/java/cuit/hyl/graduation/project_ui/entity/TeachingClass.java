@@ -2,6 +2,7 @@ package cuit.hyl.graduation.project_ui.entity;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
 import cuit.hyl.graduation.project_ui.annotation.ExcelAttributes;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -12,6 +13,7 @@ import java.sql.Timestamp;
  * @author makejava
  * @since 2020-04-09 17:43:52
  */
+@Data
 public class TeachingClass implements Serializable {
     private static final long serialVersionUID = -56385170110860765L;
     /**
@@ -43,9 +45,15 @@ public class TeachingClass implements Serializable {
     /**
     * 学时
     */
-    @Excel(name = "学时", orderNum = "4", width = 15)
+//    @Excel(name = "学时", orderNum = "4", width = 15)
+//    @ExcelAttributes(importSort = 3,exportSort = 3)
+//    private Integer hours;
+    @Excel(name = "理论学时", orderNum = "4", width = 15)
     @ExcelAttributes(importSort = 3,exportSort = 3)
-    private Integer hours;
+    private Integer theoryHours;
+    @Excel(name = "实践学时", orderNum = "4", width = 15)
+    @ExcelAttributes(importSort = 3,exportSort = 3)
+    private Integer practiceHours;
     /**
     * 学分
     */
@@ -67,100 +75,5 @@ public class TeachingClass implements Serializable {
 
     private Integer version;
 
-    public Long getPeopleId() {
-        return peopleId;
-    }
-
-    public void setPeopleId(Long peopleId) {
-        this.peopleId = peopleId;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
-
-    public Timestamp getUploadTime() {
-        return uploadTime;
-    }
-
-    public void setUploadTime(Timestamp uploadTime) {
-        this.uploadTime = uploadTime;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public String getCourseName() {
-        return courseName;
-    }
-
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
-    }
-
-    public String getSchoolYear() {
-        return schoolYear;
-    }
-
-    public void setSchoolYear(String schoolYear) {
-        this.schoolYear = schoolYear;
-    }
-
-    public Integer getSemester() {
-        return semester;
-    }
-
-    public void setSemester(Integer semester) {
-        this.semester = semester;
-    }
-
-    public Integer getHours() {
-        return hours;
-    }
-
-    public void setHours(Integer hours) {
-        this.hours = hours;
-    }
-
-    public Double getCredit() {
-        return credit;
-    }
-
-    public void setCredit(Double credit) {
-        this.credit = credit;
-    }
-
-    public String getCourseNum() {
-        return courseNum;
-    }
-
-    public void setCourseNum(String courseNum) {
-        this.courseNum = courseNum;
-    }
-
-    public Long getClassInfoId() {
-        return classInfoId;
-    }
-
-    public void setClassInfoId(Long classInfoId) {
-        this.classInfoId = classInfoId;
-    }
 
 }

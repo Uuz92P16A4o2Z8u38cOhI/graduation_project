@@ -1,5 +1,6 @@
 package cuit.hyl.graduation.project_ui.service;
 
+import com.alibaba.fastjson.JSONObject;
 import cuit.hyl.graduation.project_ui.entity.BasicInfo;
 import cuit.hyl.graduation.project_ui.entity.School;
 import cuit.hyl.graduation.project_ui.entity.vo.InitInfo;
@@ -18,6 +19,9 @@ public interface BasicInfoService {
      * 通过用户ID查询单条数据
      */
     List<BasicInfo> queryByPeopleId(Long id);
+
+    int insertInitInfo(JSONObject params);
+    int updateInitInfo(JSONObject params);
 
     /**
      * 通过用户ID查询初始化信息

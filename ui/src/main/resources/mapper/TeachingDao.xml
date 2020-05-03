@@ -17,7 +17,8 @@
         <result property="courseName" column="COURSE_NAME" jdbcType="VARCHAR"/>
         <result property="schoolYear" column="SCHOOL_YEAR" jdbcType="VARCHAR"/>
         <result property="semester" column="SEMESTER" jdbcType="INTEGER"/>
-        <result property="hours" column="HOURS" jdbcType="INTEGER"/>
+        <result property="theoryHours" column="THEORY_HOURS" jdbcType="INTEGER"/>
+        <result property="practiceHours" column="PRACTICE_HOURS" jdbcType="INTEGER"/>
         <result property="credit" column="CREDIT" jdbcType="NUMERIC"/>
         <result property="courseNum" column="COURSE_NUM" jdbcType="VARCHAR"/>
         <result property="classInfoId" column="CLASS_INFO_ID" jdbcType="INTEGER"/>

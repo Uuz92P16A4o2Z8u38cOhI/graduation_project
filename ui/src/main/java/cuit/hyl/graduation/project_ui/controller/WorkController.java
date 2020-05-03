@@ -1,14 +1,17 @@
 package cuit.hyl.graduation.project_ui.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import cuit.hyl.graduation.project_ui.entity.ResponseResult;
 import cuit.hyl.graduation.project_ui.entity.Work;
 import cuit.hyl.graduation.project_ui.service.WorkService;
+import cuit.hyl.graduation.project_ui.utils.snowflake.SnowflakeIdWorker;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 工作情况(Work)表控制层
@@ -24,12 +27,55 @@ public class WorkController {
     @Resource
     private WorkService workService;
 
+    SnowflakeIdWorker idWorker = new SnowflakeIdWorker(1,4);
+
     @ApiOperation("通过用户id查询工作页面初始化消息")
     @GetMapping("initInfo/{id}")
     public ResponseResult queryInitInfo(@PathVariable Long id) {
-
-        return new ResponseResult(ResponseResult.CodeStatus.OK,"成功查询initInfo数据", this.workService.queryInitInfo(id));
+        List<Work> works = this.workService.queryInitInfo(id);
+        if (works.size() == 0){
+            return new ResponseResult(ResponseResult.CodeStatus.OK,"未设置教师工作情况");
+        }else {
+            return new ResponseResult(ResponseResult.CodeStatus.OK,"成功查询数据", works);
+        }
+//        return new ResponseResult(ResponseResult.CodeStatus.OK,"成功查询initInfo数据", this.workService.queryInitInfo(id));
     }
+
+    @ApiOperation("用户新增工作情况")
+    @PostMapping("insertItem/{id}")
+    public ResponseResult insertItem(@PathVariable Long id, @RequestBody(required = false) JSONObject params) {
+        params.put("id", idWorker.nextId());
+        params.put("peopleId", id);
+        int i = this.workService.insertItem(params);
+        if (i == 0){
+            return new ResponseResult(ResponseResult.CodeStatus.FAIL,"新增失败");
+        }else {
+            return new ResponseResult(ResponseResult.CodeStatus.OK,"新增成功");
+        }
+    }
+    @ApiOperation("用户更新工作情况")
+    @PostMapping("updateItem")
+    public ResponseResult updateItem(@RequestBody(required = false) JSONObject params) {
+        int i = this.workService.updateItem(params);
+        if (i == 0){
+            return new ResponseResult(ResponseResult.CodeStatus.FAIL,"编辑失败");
+        }else {
+            return new ResponseResult(ResponseResult.CodeStatus.OK,"编辑成功");
+        }
+    }
+    @ApiOperation("用户删除工作情况")
+    @DeleteMapping("deleteItem/{id}")
+    public ResponseResult deleteItem(@PathVariable Long id) {
+        int i = this.workService.deleteItem(id);
+        if (i == 0){
+            return new ResponseResult(ResponseResult.CodeStatus.FAIL,"删除失败");
+        }else {
+            return new ResponseResult(ResponseResult.CodeStatus.OK,"删除成功");
+        }
+    }
+
+
+
 
     @ApiOperation("通过用户id 版本号查询工作消息")
     @GetMapping("version/{version}/{id}")

@@ -1,5 +1,6 @@
 package cuit.hyl.graduation.project_ui.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import cuit.hyl.graduation.project_ui.entity.Work;
 import cuit.hyl.graduation.project_ui.dao.WorkDao;
 import cuit.hyl.graduation.project_ui.entity.vo.Versions;
@@ -21,6 +22,24 @@ public class WorkServiceImpl implements WorkService {
     @Override
     public List<Work> queryInitInfo(Long id) {
         return this.workDao.queryInitInfo(id);
+    }
+
+    @Override
+    @Transactional
+    public int insertItem(JSONObject params) {
+        return this.workDao.insertItem(params);
+    }
+
+    @Override
+    @Transactional
+    public int updateItem(JSONObject params) {
+        return this.workDao.updateItem(params);
+    }
+
+    @Override
+    @Transactional
+    public int deleteItem(Long id) {
+        return workDao.deleteItem(id);
     }
 
     @Override

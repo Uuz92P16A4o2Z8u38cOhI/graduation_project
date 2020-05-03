@@ -187,6 +187,7 @@
     <select id="menuTree" resultMap="menuTree">
         SELECT *
         FROM graduation_authority.tb_menu
+        WHERE STATUS = 0
     </select>
 
     <!--删除某角色所有目录-->

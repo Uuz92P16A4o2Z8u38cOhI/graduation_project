@@ -41,8 +41,9 @@ public class AwardsController {
         ResponseResult result = new ResponseResult();
         Map<String, Object> map = new HashMap<>();
 
-        Awards awards = this.awardsService.initInfo(id).get(0);
-        if (awards != null){
+        List<Awards> awardsList = this.awardsService.initInfo(id);
+        if (awardsList.size() != 0){
+            Awards awards = awardsList.get(0);
             List<AwardsItem> academicHonorsList = this.awardsService.initItemInfo(awards.getAcademicHonors(), 1);
             List<AwardsItem> scientificAwardsList = this.awardsService.initItemInfo(awards.getScientificAwards(), 2);
             List<AwardsItem> otherAwardsList = this.awardsService.initItemInfo(awards.getOtherAwards(), 3);
@@ -54,6 +55,8 @@ public class AwardsController {
             map.put("otherAwardsList", otherAwardsList);
             map.put("honoraryTitleList", honoraryTitleList);
             map.put("honorWallList", honorWallList);
+        }else {
+            result.setMessage("未设置教师获奖情况");
         }
 
         result.setData(map);

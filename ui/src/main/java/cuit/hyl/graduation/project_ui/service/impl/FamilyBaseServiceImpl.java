@@ -1,5 +1,7 @@
 package cuit.hyl.graduation.project_ui.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSONPObject;
 import cuit.hyl.graduation.project_ui.entity.FamilyBase;
 import cuit.hyl.graduation.project_ui.dao.FamilyBaseDao;
 import cuit.hyl.graduation.project_ui.entity.FamilyMember;
@@ -29,6 +31,36 @@ public class FamilyBaseServiceImpl implements FamilyBaseService {
     @Override
     public List<FamilyMember> memberByBaseId(Long id) {
         return this.familyBaseDao.memberByBaseId(id);
+    }
+
+    @Override
+    @Transactional
+    public int insertbase(JSONObject params) {
+        return this.familyBaseDao.insertbase(params);
+    }
+
+    @Override
+    @Transactional
+    public int updatebase(JSONObject params) {
+        return this.familyBaseDao.updatebase(params);
+    }
+
+    @Override
+    @Transactional
+    public int insertItem(JSONObject params) {
+        return this.familyBaseDao.insertItem(params);
+    }
+
+    @Override
+    @Transactional
+    public int updateItem(JSONObject params) {
+        return this.familyBaseDao.updateItem(params);
+    }
+
+    @Override
+    @Transactional
+    public int deleteItem(Long id) {
+        return this.familyBaseDao.deleteItem(id);
     }
 
     @Override

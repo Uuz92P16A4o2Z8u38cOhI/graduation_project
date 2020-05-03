@@ -1,5 +1,6 @@
 package cuit.hyl.graduation.project_ui.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import cuit.hyl.graduation.project_ui.entity.BasicInfo;
 import cuit.hyl.graduation.project_ui.dao.BasicInfoDao;
 import cuit.hyl.graduation.project_ui.entity.School;
@@ -28,6 +29,16 @@ public class BasicInfoServiceImpl implements BasicInfoService {
     @Override
     public List<BasicInfo> queryByPeopleId(Long id) {
         return this.basicInfoDao.queryByPeopleId(id);
+    }
+
+    @Override
+    public int insertInitInfo(JSONObject params) {
+        return this.basicInfoDao.insertInitInfo(params);
+    }
+
+    @Override
+    public int updateInitInfo(JSONObject params) {
+        return this.basicInfoDao.updateInitInfo(params);
     }
 
     @Override

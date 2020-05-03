@@ -44,9 +44,9 @@ public class TeachingController {
         ResponseResult result = new ResponseResult();
         Map<String, Object> map = new HashMap<>();
 
-        Teaching teach = this.teachingService.initTeach(id).get(0);
-
-        if (teach != null){
+        List<Teaching> teachings = this.teachingService.initTeach(id);
+        if (teachings.size() != 0){
+        Teaching teach = teachings.get(0);
             //教学研究
             List<TeachingItem> research = this.teachingService.initTeachItem(1, teach.getResearch());
             //教学资源

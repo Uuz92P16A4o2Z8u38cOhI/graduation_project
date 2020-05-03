@@ -9,6 +9,7 @@
         <result property="avatatUrl" column="AVATAT_URL" jdbcType="VARCHAR"/>
         <result property="blog" column="BLOG" jdbcType="VARCHAR"/>
         <result property="icon" column="ICON" jdbcType="VARCHAR"/>
+        <result property="school" column="SCHOOL" jdbcType="VARCHAR"/>
     </resultMap>
 
     <resultMap type="cuit.hyl.graduation.project_ui.entity.School" id="SchoolMap">
@@ -58,6 +59,284 @@
         order by TIME desc
     </select>
 
+    <!-- 初始化新增 -->
+    <insert id="insertInitInfo" >
+        INSERT INTO graduation_ui.basic_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                ID,
+            </if>
+            <if test="name != null and '' != name">
+                NAME,
+            </if>
+            <if test="nickName != null and '' != nickName">
+                NICK_NAME,
+            </if>
+            <if test="sex != null and '' != sex">
+                SEX,
+            </if>
+            <if test="birthday != null and '' != birthday">
+                BIRTHDAY,
+            </if>
+            <if test="politicalStatus != null and '' != politicalStatus">
+                POLITICAL_STATUS,
+            </if>
+            <if test="age != null and '' != age">
+                AGE,
+            </if>
+            <if test="hometown != null and '' != hometown">
+                HOMETOWN,
+            </if>
+            <if test="avatarUrl != null and '' != avatarUrl">
+                AVATAT_URL,
+            </if>
+            <if test="phone != null and '' != phone">
+                PHONE,
+            </if>
+            <if test="fax != null and '' != fax">
+                FAX,
+            </if>
+            <if test="email != null and '' != email">
+                EMAIL,
+            </if>
+            <if test="qq != null and '' != qq">
+                QQ,
+            </if>
+            <if test="wechat != null and '' != wechat">
+                WECHAT,
+            </if>
+            <if test="blog != null and '' != blog">
+                BLOG,
+            </if>
+            <if test="postCode != null and '' != postCode">
+                POST_CODE,
+            </if>
+            <if test="address != null and '' != address">
+                ADDRESS,
+            </if>
+            <if test="department != null and '' != department">
+                DEPARTMENT,
+            </if>
+            <if test="degree != null and '' != degree">
+                DEGREE,
+            </if>
+            <if test="subject != null and '' != subject">
+                SUBJECT,
+            </if>
+            <if test="position != null and '' != position">
+                POSITION,
+            </if>
+            <if test="jobTitle != null and '' != jobTitle">
+                JOB_TITLE,
+            </if>
+            <if test="introduction != null and '' != introduction">
+                INTRODUCTION,
+            </if>
+            <if test="researchAreas != null and '' != researchAreas">
+                RESEARCH_AREAS,
+            </if>
+            <if test="unitId != null and '' != unitId">
+                UNIT_ID,
+            </if>
+            <if test="schoolId != null and '' != schoolId">
+                SCHOOL_ID,
+            </if>
+            <if test="peopleId != null and '' != peopleId">
+                PEOPLE_ID,
+            </if>
+            <if test="time != null and '' != time">
+                TIME,
+            </if>
+            <if test="version != null and '' != version">
+                VERSION,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                #{id},
+            </if>
+            <if test="name != null and '' != name">
+                #{name},
+            </if>
+            <if test="nickName != null and '' != nickName">
+                #{nickName},
+            </if>
+            <if test="sex != null and '' != sex">
+                #{sex},
+            </if>
+            <if test="birthday != null and '' != birthday">
+                #{birthday},
+            </if>
+            <if test="politicalStatus != null and '' != politicalStatus">
+                #{politicalStatus},
+            </if>
+            <if test="age != null and '' != age">
+                #{age},
+            </if>
+            <if test="hometown != null and '' != hometown">
+                #{hometown},
+            </if>
+            <if test="avatarUrl != null and '' != avatarUrl">
+                #{avatarUrl},
+            </if>
+            <if test="phone != null and '' != phone">
+                #{phone},
+            </if>
+            <if test="fax != null and '' != fax">
+                #{fax},
+            </if>
+            <if test="email != null and '' != email">
+                #{email},
+            </if>
+            <if test="qq != null and '' != qq">
+                #{qq},
+            </if>
+            <if test="wechat != null and '' != wechat">
+                #{wechat},
+            </if>
+            <if test="blog != null and '' != blog">
+                #{blog},
+            </if>
+            <if test="postCode != null and '' != postCode">
+                #{postCode},
+            </if>
+            <if test="address != null and '' != address">
+                #{address},
+            </if>
+            <if test="department != null and '' != department">
+                #{department},
+            </if>
+            <if test="degree != null and '' != degree">
+                #{degree},
+            </if>
+            <if test="subject != null and '' != subject">
+                #{subject},
+            </if>
+            <if test="position != null and '' != position">
+                #{position},
+            </if>
+            <if test="jobTitle != null and '' != jobTitle">
+                #{jobTitle},
+            </if>
+            <if test="introduction != null and '' != introduction">
+                #{introduction},
+            </if>
+            <if test="researchAreas != null and '' != researchAreas">
+                #{researchAreas},
+            </if>
+            <if test="unitId != null and '' != unitId">
+                #{unitId},
+            </if>
+            <if test="schoolId != null and '' != schoolId">
+                #{schoolId},
+            </if>
+            <if test="peopleId != null and '' != peopleId">
+                #{peopleId},
+            </if>
+            <if test="time != null and '' != time">
+                #{time},
+            </if>
+            <if test="version != null and '' != version">
+                #{version},
+            </if>
+        </trim>
+    </insert>
+    <!-- 修改  -->
+    <update id="updateInitInfo" >
+        UPDATE graduation_ui.basic_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                ID= #{id},
+            </if>
+            <if test="name != null and '' != name">
+                NAME= #{name},
+            </if>
+            <if test="nickName != null and '' != nickName">
+                NICK_NAME= #{nickName},
+            </if>
+            <if test="sex != null and '' != sex">
+                SEX= #{sex},
+            </if>
+            <if test="birthday != null and '' != birthday">
+                BIRTHDAY= #{birthday},
+            </if>
+            <if test="politicalStatus != null and '' != politicalStatus">
+                POLITICAL_STATUS= #{politicalStatus},
+            </if>
+            <if test="age != null and '' != age">
+                AGE= #{age},
+            </if>
+            <if test="hometown != null and '' != hometown">
+                HOMETOWN= #{hometown},
+            </if>
+            <if test="avatarUrl != null and '' != avatarUrl">
+                AVATAR_URL= #{avatarUrl},
+            </if>
+            <if test="phone != null and '' != phone">
+                PHONE= #{phone},
+            </if>
+            <if test="fax != null and '' != fax">
+                FAX= #{fax},
+            </if>
+            <if test="email != null and '' != email">
+                EMAIL= #{email},
+            </if>
+            <if test="qq != null and '' != qq">
+                QQ= #{qq},
+            </if>
+            <if test="wechat != null and '' != wechat">
+                WECHAT= #{wechat},
+            </if>
+            <if test="blog != null and '' != blog">
+                BLOG= #{blog},
+            </if>
+            <if test="postCode != null and '' != postCode">
+                POST_CODE= #{postCode},
+            </if>
+            <if test="address != null and '' != address">
+                ADDRESS= #{address},
+            </if>
+            <if test="department != null and '' != department">
+                DEPARTMENT= #{department},
+            </if>
+            <if test="degree != null and '' != degree">
+                DEGREE= #{degree},
+            </if>
+            <if test="subject != null and '' != subject">
+                SUBJECT= #{subject},
+            </if>
+            <if test="position != null and '' != position">
+                POSITION= #{position},
+            </if>
+            <if test="jobTitle != null and '' != jobTitle">
+                JOB_TITLE= #{jobTitle},
+            </if>
+            <if test="introduction != null and '' != introduction">
+                INTRODUCTION= #{introduction},
+            </if>
+            <if test="researchAreas != null and '' != researchAreas">
+                RESEARCH_AREAS= #{researchAreas},
+            </if>
+            <if test="unitId != null and '' != unitId">
+                UNIT_ID= #{unitId},
+            </if>
+            <if test="schoolId != null and '' != schoolId">
+                SCHOOL_ID= #{schoolId},
+            </if>
+            <if test="peopleId != null and '' != peopleId">
+                PEOPLE_ID= #{peopleId},
+            </if>
+            <if test="time != null and '' != time">
+                TIME= #{time},
+            </if>
+            <if test="version != null and '' != version">
+                VERSION= #{version},
+            </if>
+        </trim>
+        where id= #{id}
+    </update>
+
+
     <!--通过用户id 查询初始化信息-->
     <select id="queryInitInfo" resultMap="InitInfoMap">
         SELECT
@@ -66,11 +345,12 @@
             BI.NICK_NAME,
             BI.AVATAT_URL,
             BI.BLOG,
-            S.ICON
+            S.ICON,
+            S.NAME AS school
         FROM
             graduation_ui.basic_info AS BI
             LEFT JOIN graduation_ui.school AS S
-            ON BI.SCHOOL_ID = S.id
+            ON BI.SCHOOL_ID = S.CODE
         WHERE
             PEOPLE_ID = #{id}
         order by TIME desc
