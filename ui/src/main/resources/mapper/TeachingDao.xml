@@ -55,7 +55,247 @@
     </select>
 
 
+    <insert id="insertTeach">
+        INSERT INTO graduation_ui.teaching
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                ID,
+            </if>
+            <if test="research != null and '' != research">
+                RESEARCH,
+            </if>
+            <if test="resources != null and '' != resources">
+                RESOURCES,
+            </if>
+            <if test="classInfo != null and '' != classInfo">
+                CLASS_INFO,
+            </if>
+            <if test="achievements != null and '' != achievements">
+                ACHIEVEMENTS,
+            </if>
+            <if test="peopleId != null and '' != peopleId">
+                PEOPLE_ID,
+            </if>
+            <if test="uploadTime != null and '' != uploadTime">
+                UPLOAD_TIME,
+            </if>
+            <if test="version != null and '' != version">
+                VERSION,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                #{id},
+            </if>
+            <if test="research != null and '' != research">
+                #{research},
+            </if>
+            <if test="resources != null and '' != resources">
+                #{resources},
+            </if>
+            <if test="classInfo != null and '' != classInfo">
+                #{classInfo},
+            </if>
+            <if test="achievements != null and '' != achievements">
+                #{achievements},
+            </if>
+            <if test="peopleId != null and '' != peopleId">
+                #{peopleId},
+            </if>
+            <if test="uploadTime != null and '' != uploadTime">
+                #{uploadTime},
+            </if>
+            <if test="version != null and '' != version">
+                #{version},
+            </if>
+        </trim>
+    </insert>
 
+    <insert id="insertTeachItem">
+        INSERT INTO graduation_ui.teaching_item
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                ID,
+            </if>
+            <if test="item != null and '' != item">
+                ITEM,
+            </if>
+            <if test="parentId != null and '' != parentId">
+                PARENT_ID,
+            </if>
+            <if test="type != null and '' != type">
+                TYPE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                #{id},
+            </if>
+            <if test="item != null and '' != item">
+                #{item},
+            </if>
+            <if test="parentId != null and '' != parentId">
+                #{parentId},
+            </if>
+            <if test="type != null and '' != type">
+                #{type},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateTeachItem" >
+        UPDATE graduation_ui.teaching_item
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                ID = #{id},
+            </if>
+            <if test="item != null and '' != item">
+                ITEM = #{item},
+            </if>
+            <if test="parentId != null and '' != parentId">
+                PARENT_ID = #{parentId},
+            </if>
+            <if test="type != null and '' != type">
+                TYPE = #{type},
+            </if>
+        </trim>
+        where id= #{id}
+    </update>
+    <delete id="deleteTeachItem">
+        DELETE FROM graduation_ui.teaching_item WHERE id = #{id}
+    </delete>
 
+    <insert id="insertTeachClass">
+        INSERT INTO graduation_ui.teaching_class
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                ID,
+            </if>
+            <if test="type != null and '' != type">
+                TYPE,
+            </if>
+            <if test="courseName != null and '' != courseName">
+                COURSE_NAME,
+            </if>
+            <if test="schoolYear != null and '' != schoolYear">
+                SCHOOL_YEAR,
+            </if>
+            <if test="semester != null and '' != semester">
+                SEMESTER,
+            </if>
+            <if test="theoryHours != null and '' != theoryHours">
+                THEORY_HOURS,
+            </if>
+            <if test="practiceHours != null and '' != practiceHours">
+                PRACTICE_HOURS,
+            </if>
+            <if test="credit != null and '' != credit">
+                CREDIT,
+            </if>
+            <if test="courseNum != null and '' != courseNum">
+                COURSE_NUM,
+            </if>
+            <if test="classInfoId != null and '' != classInfoId">
+                CLASS_INFO_ID,
+            </if>
+            <if test="peopleId != null and '' != peopleId">
+                PEOPLE_ID,
+            </if>
+            <if test="uploadTime != null and '' != uploadTime">
+                UPLOAD_TIME,
+            </if>
+            <if test="version != null and '' != version">
+                VERSION,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                #{id},
+            </if>
+            <if test="type != null and '' != type">
+                #{type},
+            </if>
+            <if test="courseName != null and '' != courseName">
+                #{courseName},
+            </if>
+            <if test="schoolYear != null and '' != schoolYear">
+                #{schoolYear},
+            </if>
+            <if test="semester != null and '' != semester">
+                #{semester},
+            </if>
+            <if test="theoryHours != null and '' != theoryHours">
+                #{theoryHours},
+            </if>
+            <if test="practiceHours != null and '' != practiceHours">
+                #{practiceHours},
+            </if>
+            <if test="credit != null and '' != credit">
+                #{credit},
+            </if>
+            <if test="courseNum != null and '' != courseNum">
+                #{courseNum},
+            </if>
+            <if test="classInfoId != null and '' != classInfoId">
+                #{classInfoId},
+            </if>
+            <if test="peopleId != null and '' != peopleId">
+                #{peopleId},
+            </if>
+            <if test="uploadTime != null and '' != uploadTime">
+                #{uploadTime},
+            </if>
+            <if test="version != null and '' != version">
+                #{version},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateTeachClass" >
+        UPDATE graduation_ui.teaching_class
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                ID = #{id},
+            </if>
+            <if test="type != null and '' != type">
+                TYPE = #{type},
+            </if>
+            <if test="courseName != null and '' != courseName">
+                COURSE_NAME = #{courseName},
+            </if>
+            <if test="schoolYear != null and '' != schoolYear">
+                SCHOOL_YEAR = #{schoolYear},
+            </if>
+            <if test="semester != null and '' != semester">
+                SEMESTER = #{semester},
+            </if>
+            <if test="theoryHours != null and '' != theoryHours">
+                THEORY_HOURS = #{theoryHours},
+            </if>
+            <if test="practiceHours != null and '' != practiceHours">
+                PRACTICE_HOURS = #{practiceHours},
+            </if>
+            <if test="credit != null and '' != credit">
+                CREDIT = #{credit},
+            </if>
+            <if test="courseNum != null and '' != courseNum">
+                COURSE_NUM = #{courseNum},
+            </if>
+            <if test="classInfoId != null and '' != classInfoId">
+                CLASS_INFO_ID = #{classInfoId},
+            </if>
+            <if test="peopleId != null and '' != peopleId">
+                PEOPLE_ID = #{peopleId},
+            </if>
+            <if test="uploadTime != null and '' != uploadTime">
+                UPLOAD_TIME = #{uploadTime},
+            </if>
+            <if test="version != null and '' != version">
+                VERSION = #{version},
+            </if>
+        </trim>
+        where id= #{id}
+    </update>
+    <delete id="deleteTeachClass">
+        DELETE FROM graduation_ui.teaching_class WHERE id = #{id}
+    </delete>
 
 </mapper>
