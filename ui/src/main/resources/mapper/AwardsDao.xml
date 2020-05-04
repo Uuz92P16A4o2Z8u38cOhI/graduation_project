@@ -37,5 +37,128 @@
         where PARENT_ID = #{id} and TYPE = #{type}
     </select>
 
+    <insert id="insertAwards">
+        INSERT INTO graduation_ui.awards
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                ID,
+            </if>
+            <if test="academicHonors != null and '' != academicHonors">
+                ACADEMIC_HONORS,
+            </if>
+            <if test="scientificAwards != null and '' != scientificAwards">
+                SCIENTIFIC_AWARDS,
+            </if>
+            <if test="otherAwards != null and '' != otherAwards">
+                OTHER_AWARDS,
+            </if>
+            <if test="honoraryTitle != null and '' != honoraryTitle">
+                HONORARY_TITLE,
+            </if>
+            <if test="honorWall != null and '' != honorWall">
+                HONOR_WALL,
+            </if>
+            <if test="peopleId != null and '' != peopleId">
+                PEOPLE_ID,
+            </if>
+            <if test="uploadTime != null and '' != uploadTime">
+                UPLOAD_TIME,
+            </if>
+            <if test="version != null and '' != version">
+                VERSION,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                #{id},
+            </if>
+            <if test="academicHonors != null and '' != academicHonors">
+                #{academicHonors},
+            </if>
+            <if test="scientificAwards != null and '' != scientificAwards">
+                #{scientificAwards},
+            </if>
+            <if test="otherAwards != null and '' != otherAwards">
+                #{otherAwards},
+            </if>
+            <if test="honoraryTitle != null and '' != honoraryTitle">
+                #{honoraryTitle},
+            </if>
+            <if test="honorWall != null and '' != honorWall">
+                #{honorWall},
+            </if>
+            <if test="peopleId != null and '' != peopleId">
+                #{peopleId},
+            </if>
+            <if test="uploadTime != null and '' != uploadTime">
+                #{uploadTime},
+            </if>
+            <if test="version != null and '' != version">
+                #{version},
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="insertAwardsItem">
+        INSERT INTO graduation_ui.awards_item
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                ID,
+            </if>
+            <if test="itemName != null and '' != itemName">
+                ITEM_NAME,
+            </if>
+            <if test="itemContent != null and '' != itemContent">
+                ITEM_CONTENT,
+            </if>
+            <if test="parentId != null and '' != parentId">
+                PARENT_ID,
+            </if>
+            <if test="type != null and '' != type">
+                TYPE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                #{id},
+            </if>
+            <if test="itemName != null and '' != itemName">
+                #{itemName},
+            </if>
+            <if test="itemContent != null and '' != itemContent">
+                #{itemContent},
+            </if>
+            <if test="parentId != null and '' != parentId">
+                #{parentId},
+            </if>
+            <if test="type != null and '' != type">
+                #{type},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateAwardsItem" >
+        UPDATE graduation_ui.awards_item
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                ID = #{id},
+            </if>
+            <if test="itemName != null and '' != itemName">
+                ITEM_NAME = #{itemName},
+            </if>
+            <if test="itemContent != null and '' != itemContent">
+                ITEM_CONTENT = #{itemContent},
+            </if>
+            <if test="parentId != null and '' != parentId">
+                PARENT_ID = #{parentId},
+            </if>
+            <if test="type != null and '' != type">
+                TYPE = #{type},
+            </if>
+        </trim>
+        where id= #{id}
+    </update>
+    <delete id="deleteAwardsItem">
+        DELETE FROM graduation_ui.awards_item WHERE id = #{id}
+    </delete>
 
 </mapper>

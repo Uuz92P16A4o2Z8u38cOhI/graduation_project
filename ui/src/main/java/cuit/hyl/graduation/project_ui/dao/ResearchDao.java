@@ -1,5 +1,6 @@
 package cuit.hyl.graduation.project_ui.dao;
 
+import com.alibaba.fastjson.JSONObject;
 import cuit.hyl.graduation.project_ui.entity.Research;
 import cuit.hyl.graduation.project_ui.entity.ResearchItem;
 import org.apache.ibatis.annotations.Mapper;
@@ -18,4 +19,10 @@ public interface ResearchDao {
     List<Research> initInfo(Long id);
 
     List<ResearchItem> queryItems(Long id, Integer type);
+
+
+    int insertResearch(Research params);
+    int insertResearchItem(JSONObject params);
+    int updateResearchItem(JSONObject params);
+    int deleteResearchItem(Long id);
 }

@@ -1,5 +1,6 @@
 package cuit.hyl.graduation.project_ui.dao;
 
+import com.alibaba.fastjson.JSONObject;
 import cuit.hyl.graduation.project_ui.entity.Awards;
 import cuit.hyl.graduation.project_ui.entity.AwardsItem;
 import org.apache.ibatis.annotations.Mapper;
@@ -19,5 +20,9 @@ public interface AwardsDao {
 
     List<AwardsItem> initItemInfo(Long id, Integer type);
 
+    int insertAwards(Awards params);
+    int insertAwardsItem(JSONObject params);
+    int updateAwardsItem(JSONObject params);
+    int deleteAwardsItem(Long id);
 
 }

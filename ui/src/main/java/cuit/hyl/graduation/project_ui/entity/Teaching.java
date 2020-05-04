@@ -1,6 +1,7 @@
 package cuit.hyl.graduation.project_ui.entity;
 
 import cuit.hyl.graduation.project_ui.annotation.ExcelAttributes;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
@@ -13,6 +14,7 @@ import java.util.List;
  * @author makejava
  * @since 2020-04-09 17:43:05
  */
+@Data
 public class Teaching implements Serializable {
     private static final long serialVersionUID = -27930395255827298L;
     /**
@@ -43,90 +45,12 @@ public class Teaching implements Serializable {
     */
     private Date uploadTime;
 
+    private Long version;
+
     private List<TeachingItem> researchList;
 
     private List<TeachingItem> resourcesList;
 
     private List<TeachingItem> achievementsList;
 
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getResearch() {
-        return research;
-    }
-
-    public void setResearch(Long research) {
-        this.research = research;
-    }
-
-    public Long getResources() {
-        return resources;
-    }
-
-    public void setResources(Long resources) {
-        this.resources = resources;
-    }
-
-    public Long getClassInfo() {
-        return classInfo;
-    }
-
-    public void setClassInfo(Long classInfo) {
-        this.classInfo = classInfo;
-    }
-
-    public Long getAchievements() {
-        return achievements;
-    }
-
-    public void setAchievements(Long achievements) {
-        this.achievements = achievements;
-    }
-
-    public Long getPeopleId() {
-        return peopleId;
-    }
-
-    public void setPeopleId(Long peopleId) {
-        this.peopleId = peopleId;
-    }
-
-    public Date getUploadTime() {
-        return uploadTime;
-    }
-
-    public void setUploadTime(Date uploadTime) {
-        this.uploadTime = uploadTime;
-    }
-
-    public List<TeachingItem> getResearchList() {
-        return researchList;
-    }
-
-    public void setResearchList(List<TeachingItem> researchList) {
-        this.researchList = researchList;
-    }
-
-    public List<TeachingItem> getResourcesList() {
-        return resourcesList;
-    }
-
-    public void setResourcesList(List<TeachingItem> resourcesList) {
-        this.resourcesList = resourcesList;
-    }
-
-    public List<TeachingItem> getAchievementsList() {
-        return achievementsList;
-    }
-
-    public void setAchievementsList(List<TeachingItem> achievementsList) {
-        this.achievementsList = achievementsList;
-    }
 }

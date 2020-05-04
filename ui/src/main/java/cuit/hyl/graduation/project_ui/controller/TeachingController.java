@@ -1,10 +1,9 @@
 package cuit.hyl.graduation.project_ui.controller;
 
-import cuit.hyl.graduation.project_ui.entity.ResponseResult;
-import cuit.hyl.graduation.project_ui.entity.Teaching;
-import cuit.hyl.graduation.project_ui.entity.TeachingClass;
-import cuit.hyl.graduation.project_ui.entity.TeachingItem;
+import com.alibaba.fastjson.JSONObject;
+import cuit.hyl.graduation.project_ui.entity.*;
 import cuit.hyl.graduation.project_ui.service.TeachingService;
+import cuit.hyl.graduation.project_ui.utils.snowflake.SnowflakeIdWorker;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +30,8 @@ public class TeachingController {
      */
     @Resource
     private TeachingService teachingService;
+
+    SnowflakeIdWorker idWorker = new SnowflakeIdWorker(1,4);
 
     /**
      * 通过主键查询单条数据
@@ -59,19 +60,106 @@ public class TeachingController {
             //研究生
             List<TeachingClass> postgraduate = this.teachingService.initTeachClass(2, teach.getClassInfo());
 
+            map.put("teach", teach);
             map.put("research", research);
             map.put("resources", resources);
             map.put("achievements", achievements);
             map.put("undergraduate", undergraduate);
             map.put("postgraduate", postgraduate);
+            result.setData(map);
         }else{
+            Teaching teaching = new Teaching();
+            teaching.setId(idWorker.nextId());
+            teaching.setAchievements(idWorker.nextId());
+            teaching.setClassInfo(idWorker.nextId());
+            teaching.setPeopleId(id);
+            teaching.setResearch(idWorker.nextId());
+            teaching.setResources(idWorker.nextId());
+            this.teachingService.insertTeach(teaching);
             result.setMessage("目前没有教学活动信息！");
         }
 
-
-        result.setData(map);
-
         return result;
+    }
+
+    @ApiOperation("新增教学活动信息")
+    @PostMapping("insertTeach/{id}")
+    public ResponseResult insertTeach(@PathVariable Long id) {
+        ResponseResult result = new ResponseResult();
+        Teaching teaching = new Teaching();
+        teaching.setId(idWorker.nextId());
+        teaching.setAchievements(idWorker.nextId());
+        teaching.setClassInfo(idWorker.nextId());
+        teaching.setPeopleId(id);
+        teaching.setResearch(idWorker.nextId());
+        teaching.setResources(idWorker.nextId());
+        this.teachingService.insertTeach(teaching);
+        result.setMessage("更新家庭基础信息！");
+        return result;
+    }
+    @ApiOperation("新增教学活动")
+    @PostMapping("insertTeachItem/{id}")
+    public ResponseResult insertTeachItem(@PathVariable Long id, @RequestBody(required = false) JSONObject params) {
+        params.put("id", idWorker.nextId());
+        params.put("parentId", id);
+        int i = this.teachingService.insertTeachItem(params);
+        if (i == 0){
+            return new ResponseResult(ResponseResult.CodeStatus.FAIL,"新增失败");
+        }else {
+            return new ResponseResult(ResponseResult.CodeStatus.OK,"新增成功");
+        }
+    }
+    @ApiOperation("更新教学活动")
+    @PostMapping("updateTeachItem")
+    public ResponseResult updateTeachItem(@RequestBody(required = false) JSONObject params) {
+        int i = this.teachingService.updateTeachItem(params);
+        if (i == 0){
+            return new ResponseResult(ResponseResult.CodeStatus.FAIL,"编辑失败");
+        }else {
+            return new ResponseResult(ResponseResult.CodeStatus.OK,"编辑成功");
+        }
+    }
+    @ApiOperation("删除教学活动")
+    @DeleteMapping("deleteTeachItem/{id}")
+    public ResponseResult deleteTeachItem(@PathVariable Long id) {
+        int i = this.teachingService.deleteTeachItem(id);
+        if (i == 0){
+            return new ResponseResult(ResponseResult.CodeStatus.FAIL,"删除失败");
+        }else {
+            return new ResponseResult(ResponseResult.CodeStatus.OK,"删除成功");
+        }
+    }
+    @ApiOperation("新增教学课程活动")
+    @PostMapping("insertTeachClass/{id}")
+    public ResponseResult insertTeachClass(@PathVariable Long id, @RequestBody(required = false) JSONObject params) {
+        params.put("id", idWorker.nextId());
+        params.put("classInfoId", id);
+        int i = this.teachingService.insertTeachClass(params);
+        if (i == 0){
+            return new ResponseResult(ResponseResult.CodeStatus.FAIL,"新增失败");
+        }else {
+            return new ResponseResult(ResponseResult.CodeStatus.OK,"新增成功");
+        }
+    }
+    @ApiOperation("更新教学课程活动")
+    @PostMapping("updateTeachClass")
+    public ResponseResult updateTeachClass(@RequestBody(required = false) JSONObject params) {
+        int i = this.teachingService.updateTeachClass(params);
+        if (i == 0){
+            return new ResponseResult(ResponseResult.CodeStatus.FAIL,"编辑失败");
+        }else {
+            return new ResponseResult(ResponseResult.CodeStatus.OK,"编辑成功");
+        }
+    }
+    @ApiOperation("删除教学课程活动")
+    @DeleteMapping("deleteTeachClass/{id}")
+    public ResponseResult deleteTeachClass(@PathVariable Long id) {
+        int i = this.teachingService.deleteTeachClass(id);
+        if (i == 0){
+            return new ResponseResult(ResponseResult.CodeStatus.FAIL,"删除失败");
+        }else {
+            return new ResponseResult(ResponseResult.CodeStatus.OK,"删除成功");
+        }
     }
 
 }

@@ -38,4 +38,135 @@
     </select>
 
 
+    <insert id="insertResearch">
+        INSERT INTO graduation_ui.research
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                ID,
+            </if>
+            <if test="researchAreas != null and '' != researchAreas">
+                RESEARCH_AREAS,
+            </if>
+            <if test="thesisResults != null and '' != thesisResults">
+                THESIS_RESULTS,
+            </if>
+            <if test="patent != null and '' != patent">
+                PATENT,
+            </if>
+            <if test="achievements != null and '' != achievements">
+                ACHIEVEMENTS,
+            </if>
+            <if test="researchProjects != null and '' != researchProjects">
+                RESEARCH_PROJECTS,
+            </if>
+            <if test="researchTeam != null and '' != researchTeam">
+                RESEARCH_TEAM,
+            </if>
+            <if test="peopleId != null and '' != peopleId">
+                PEOPLE_ID,
+            </if>
+            <if test="uploadTime != null and '' != uploadTime">
+                UPLOAD_TIME,
+            </if>
+            <if test="version != null and '' != version">
+                VERSION,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                #{id},
+            </if>
+            <if test="researchAreas != null and '' != researchAreas">
+                #{researchAreas},
+            </if>
+            <if test="thesisResults != null and '' != thesisResults">
+                #{thesisResults},
+            </if>
+            <if test="patent != null and '' != patent">
+                #{patent},
+            </if>
+            <if test="achievements != null and '' != achievements">
+                #{achievements},
+            </if>
+            <if test="researchProjects != null and '' != researchProjects">
+                #{researchProjects},
+            </if>
+            <if test="researchTeam != null and '' != researchTeam">
+                #{researchTeam},
+            </if>
+            <if test="peopleId != null and '' != peopleId">
+                #{peopleId},
+            </if>
+            <if test="uploadTime != null and '' != uploadTime">
+                #{uploadTime},
+            </if>
+            <if test="version != null and '' != version">
+                #{version},
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="insertResearchItem">
+        INSERT INTO graduation_ui.research_item
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                ID,
+            </if>
+            <if test="itemName != null and '' != itemName">
+                ITEM_NAME,
+            </if>
+            <if test="itemContent != null and '' != itemContent">
+                ITEM_CONTENT,
+            </if>
+            <if test="parentId != null and '' != parentId">
+                PARENT_ID,
+            </if>
+            <if test="type != null and '' != type">
+                TYPE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                #{id},
+            </if>
+            <if test="itemName != null and '' != itemName">
+                #{itemName},
+            </if>
+            <if test="itemContent != null and '' != itemContent">
+                #{itemContent},
+            </if>
+            <if test="parentId != null and '' != parentId">
+                #{parentId},
+            </if>
+            <if test="type != null and '' != type">
+                #{type},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateResearchItem" >
+        UPDATE graduation_ui.research_item
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                ID = #{id},
+            </if>
+            <if test="itemName != null and '' != itemName">
+                ITEM_NAME = #{itemName},
+            </if>
+            <if test="itemContent != null and '' != itemContent">
+                ITEM_CONTENT = #{itemContent},
+            </if>
+            <if test="parentId != null and '' != parentId">
+                PARENT_ID = #{parentId},
+            </if>
+            <if test="type != null and '' != type">
+                TYPE = #{type},
+            </if>
+        </trim>
+        where id= #{id}
+    </update>
+    <delete id="deleteResearchItem">
+        DELETE FROM graduation_ui.research_item WHERE id = #{id}
+    </delete>
+
+
 </mapper>

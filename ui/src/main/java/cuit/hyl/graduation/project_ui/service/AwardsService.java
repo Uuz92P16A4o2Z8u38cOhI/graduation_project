@@ -1,5 +1,6 @@
 package cuit.hyl.graduation.project_ui.service;
 
+import com.alibaba.fastjson.JSONObject;
 import cuit.hyl.graduation.project_ui.entity.Awards;
 import cuit.hyl.graduation.project_ui.entity.AwardsItem;
 
@@ -19,4 +20,8 @@ public interface AwardsService {
     List<AwardsItem> initItemInfo(Long id, Integer type);
 
 
+    int insertAwards(Awards params);
+    int insertAwardsItem(JSONObject params);
+    int updateAwardsItem(JSONObject params);
+    int deleteAwardsItem(Long id);
 }

@@ -1,10 +1,12 @@
 package cuit.hyl.graduation.project_ui.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import cuit.hyl.graduation.project_ui.entity.Awards;
 import cuit.hyl.graduation.project_ui.entity.AwardsItem;
 import cuit.hyl.graduation.project_ui.entity.ResponseResult;
 import cuit.hyl.graduation.project_ui.service.AwardsService;
 import cuit.hyl.graduation.project_ui.service.feign.FastDFSService;
+import cuit.hyl.graduation.project_ui.utils.snowflake.SnowflakeIdWorker;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +36,7 @@ public class AwardsController {
     @Resource
     private AwardsService awardsService;
 
+    SnowflakeIdWorker idWorker = new SnowflakeIdWorker(1,4);
 
     @ApiOperation("通过用户id查询获奖情况页面初始化消息")
     @PostMapping("initInfo/{id}")
@@ -50,17 +53,61 @@ public class AwardsController {
             List<AwardsItem> honoraryTitleList = this.awardsService.initItemInfo(awards.getHonoraryTitle(), 4);
             List<AwardsItem> honorWallList = this.awardsService.initItemInfo(awards.getHonorWall(), 5);
 
+            map.put("awards", awards);
             map.put("academicHonorsList", academicHonorsList);
             map.put("scientificAwardsList", scientificAwardsList);
             map.put("otherAwardsList", otherAwardsList);
             map.put("honoraryTitleList", honoraryTitleList);
             map.put("honorWallList", honorWallList);
         }else {
+            Awards awards = new Awards();
+            awards.setId(this.idWorker.nextId());
+            awards.setAcademicHonors(this.idWorker.nextId());
+            awards.setHonoraryTitle(this.idWorker.nextId());
+            awards.setHonorWall(this.idWorker.nextId());
+            awards.setOtherAwards(this.idWorker.nextId());
+            awards.setPeopleId(id);
+            awards.setScientificAwards(this.idWorker.nextId());
+            this.awardsService.insertAwards(awards);
             result.setMessage("未设置教师获奖情况");
         }
 
         result.setData(map);
 
         return result;
+    }
+
+
+    @ApiOperation("新增获奖信息")
+    @PostMapping("insertAwardsItem/{id}")
+    public ResponseResult insertAwardsItem(@PathVariable Long id, @RequestBody(required = false) JSONObject params) {
+        params.put("id", idWorker.nextId());
+        params.put("parentId", id);
+        int i = this.awardsService.insertAwardsItem(params);
+        if (i == 0){
+            return new ResponseResult(ResponseResult.CodeStatus.FAIL,"新增失败");
+        }else {
+            return new ResponseResult(ResponseResult.CodeStatus.OK,"新增成功");
+        }
+    }
+    @ApiOperation("更新获奖信息")
+    @PostMapping("updateAwardsItem")
+    public ResponseResult updateAwardsItem(@RequestBody(required = false) JSONObject params) {
+        int i = this.awardsService.updateAwardsItem(params);
+        if (i == 0){
+            return new ResponseResult(ResponseResult.CodeStatus.FAIL,"编辑失败");
+        }else {
+            return new ResponseResult(ResponseResult.CodeStatus.OK,"编辑成功");
+        }
+    }
+    @ApiOperation("删除获奖信息")
+    @DeleteMapping("deleteAwardsItem/{id}")
+    public ResponseResult deleteAwardsItem(@PathVariable Long id) {
+        int i = this.awardsService.deleteAwardsItem(id);
+        if (i == 0){
+            return new ResponseResult(ResponseResult.CodeStatus.FAIL,"删除失败");
+        }else {
+            return new ResponseResult(ResponseResult.CodeStatus.OK,"删除成功");
+        }
     }
 }

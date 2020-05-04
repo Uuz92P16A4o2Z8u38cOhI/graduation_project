@@ -1,5 +1,6 @@
 package cuit.hyl.graduation.project_ui.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import cuit.hyl.graduation.project_ui.entity.Awards;
 import cuit.hyl.graduation.project_ui.dao.AwardsDao;
 import cuit.hyl.graduation.project_ui.entity.AwardsItem;
@@ -29,5 +30,25 @@ public class AwardsServiceImpl implements AwardsService {
     @Override
     public List<AwardsItem> initItemInfo(Long id, Integer type) {
         return this.awardsDao.initItemInfo(id, type);
+    }
+
+    @Override
+    public int insertAwards(Awards params) {
+        return this.awardsDao.insertAwards(params);
+    }
+
+    @Override
+    public int insertAwardsItem(JSONObject params) {
+        return this.awardsDao.insertAwardsItem(params);
+    }
+
+    @Override
+    public int updateAwardsItem(JSONObject params) {
+        return this.awardsDao.updateAwardsItem(params);
+    }
+
+    @Override
+    public int deleteAwardsItem(Long id) {
+        return this.awardsDao.deleteAwardsItem(id);
     }
 }

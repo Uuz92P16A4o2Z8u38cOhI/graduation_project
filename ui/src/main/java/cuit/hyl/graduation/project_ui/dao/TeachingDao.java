@@ -1,5 +1,6 @@
 package cuit.hyl.graduation.project_ui.dao;
 
+import com.alibaba.fastjson.JSONObject;
 import cuit.hyl.graduation.project_ui.entity.Teaching;
 import cuit.hyl.graduation.project_ui.entity.TeachingClass;
 import cuit.hyl.graduation.project_ui.entity.TeachingItem;
@@ -21,4 +22,14 @@ public interface TeachingDao {
     List<TeachingClass> initTeachClass(Integer type,Long id);
 
     List<TeachingItem> initTeachItem(Integer type,Long id);
+
+
+    int insertTeach(Teaching params);
+    int insertTeachItem(JSONObject params);
+    int updateTeachItem(JSONObject params);
+    int deleteTeachItem(Long id);
+    int insertTeachClass(JSONObject params);
+    int updateTeachClass(JSONObject params);
+    int deleteTeachClass(Long id);
+
 }

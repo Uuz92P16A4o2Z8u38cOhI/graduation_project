@@ -1,5 +1,6 @@
 package cuit.hyl.graduation.project_ui.service;
 
+import com.alibaba.fastjson.JSONObject;
 import cuit.hyl.graduation.project_ui.entity.Research;
 import cuit.hyl.graduation.project_ui.entity.ResearchItem;
 
@@ -18,5 +19,8 @@ public interface ResearchService {
     List<ResearchItem> queryItems(Long id, Integer type);
 
 
-
+    int insertResearch(Research params);
+    int insertResearchItem(JSONObject params);
+    int updateResearchItem(JSONObject params);
+    int deleteResearchItem(Long id);
 }

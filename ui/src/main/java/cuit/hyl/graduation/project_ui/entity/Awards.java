@@ -46,7 +46,7 @@ public class Awards implements Serializable {
     */
     private Date uploadTime;
 
-
+    private Long version;
 
 
 }
