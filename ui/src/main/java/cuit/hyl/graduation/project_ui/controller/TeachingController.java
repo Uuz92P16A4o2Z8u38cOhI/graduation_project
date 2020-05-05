@@ -40,12 +40,12 @@ public class TeachingController {
      * @return 单条数据
      */
     @ApiOperation("通过用户id查询教学活动页面初始化消息")
-    @PostMapping("initInfo/{id}")
-    public ResponseResult initInfo(@PathVariable Long id) {
+    @PostMapping("initInfo/{id}/{version}")
+    public ResponseResult initInfo(@PathVariable Long id, @PathVariable Long version) {
         ResponseResult result = new ResponseResult();
         Map<String, Object> map = new HashMap<>();
 
-        List<Teaching> teachings = this.teachingService.initTeach(id);
+        List<Teaching> teachings = this.teachingService.initTeach(id, version);
         if (teachings.size() != 0){
         Teaching teach = teachings.get(0);
             //教学研究

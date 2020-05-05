@@ -17,7 +17,7 @@ import java.util.List;
 @Mapper
 public interface FamilyBaseDao {
 
-    List<FamilyBase> initInfo(Long id);
+    List<FamilyBase> initInfo(Long id,Long version);
 
     List<FamilyMember> memberByBaseId(Long id);
 

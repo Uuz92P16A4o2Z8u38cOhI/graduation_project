@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface ResearchService {
 
-    List<Research> initInfo(Long id);
+    List<Research> initInfo(Long id,Long version);
 
     List<ResearchItem> queryItems(Long id, Integer type);
 

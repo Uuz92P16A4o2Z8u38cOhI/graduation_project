@@ -8,6 +8,7 @@ import cuit.hyl.graduation.project_ui.utils.snowflake.SnowflakeIdWorker;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -33,9 +34,9 @@ public class EducationController {
     SnowflakeIdWorker idWorker = new SnowflakeIdWorker(1,4);
 
     @ApiOperation("通过用户id查询受教育页面初始化消息")
-    @GetMapping("initInfo/{id}")
-    public ResponseResult queryInitInfo(@PathVariable Long id) {
-        List<Education> educationList = this.educationService.queryInitInfo(id);
+    @GetMapping("initInfo/{id}/{version}")
+    public ResponseResult queryInitInfo(@PathVariable Long id, @PathVariable Long version) {
+        List<Education> educationList = this.educationService.queryInitInfo(id,version);
         if (educationList.size() == 0){
             return new ResponseResult(ResponseResult.CodeStatus.OK,"未设置教师受教育情况");
         }else {

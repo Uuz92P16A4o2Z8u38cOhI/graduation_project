@@ -9,6 +9,7 @@ import cuit.hyl.graduation.project_ui.utils.snowflake.SnowflakeIdWorker;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -38,12 +39,12 @@ public class FamilyBaseController {
     SnowflakeIdWorker idWorker = new SnowflakeIdWorker(1,4);
 
     @ApiOperation("通过用户id查询家庭情况页面初始化消息")
-    @PostMapping("initInfo/{id}")
-    public ResponseResult initInfo(@PathVariable Long id) {
+    @PostMapping("initInfo/{id}/{version}")
+    public ResponseResult initInfo(@PathVariable Long id, @PathVariable Long version) {
         ResponseResult result = new ResponseResult();
         Map<String, Object> map = new HashMap<>();
 
-        List<FamilyBase> familyBases = familyBaseService.initInfo(id);
+        List<FamilyBase> familyBases = familyBaseService.initInfo(id, version);
         if (familyBases.size() == 0){
             result.setMessage("未设置家庭信息！");
         }else {
@@ -66,7 +67,7 @@ public class FamilyBaseController {
     @PostMapping("insertOrUpdateBase/{id}")
     public ResponseResult insertOrUpdateBase(@PathVariable Long id,@RequestBody(required = false) JSONObject params) {
         ResponseResult result = new ResponseResult();
-        List<FamilyBase> familyBases = familyBaseService.initInfo(id);
+        List<FamilyBase> familyBases = familyBaseService.initInfo(id, 0l);
         if (familyBases.size() == 0) {
             params.put("id", idWorker.nextId());
             params.put("peopleId", id);

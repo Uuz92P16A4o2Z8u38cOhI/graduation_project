@@ -17,11 +17,13 @@ public interface EducationService {
     /**
      * 通过ID查询单条数据
      */
-    List<Education> queryInitInfo(Long id);
+    List<Education> queryInitInfo(Long id,Long version);
 
     int insertItem(JSONObject params);
     int updateItem(JSONObject params);
     int deleteItem(Long id);
+
+    int insertForeach(List<Education> list);
 
     /**
      * 通过版本查询

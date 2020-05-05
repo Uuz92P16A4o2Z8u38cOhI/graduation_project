@@ -23,8 +23,8 @@ public class EducationServiceImpl implements EducationService {
     private EducationDao educationDao;
 
     @Override
-    public List<Education> queryInitInfo(Long id) {
-        return this.educationDao.queryInitInfo(id);
+    public List<Education> queryInitInfo(Long id,Long version) {
+        return this.educationDao.queryInitInfo(id, version);
     }
 
     @Override
@@ -43,6 +43,11 @@ public class EducationServiceImpl implements EducationService {
     @Transactional
     public int deleteItem(Long id) {
         return this.educationDao.deleteItem(id);
+    }
+
+    @Override
+    public int insertForeach(List<Education> list) {
+        return this.educationDao.insertForeach(list);
     }
 
     @Override

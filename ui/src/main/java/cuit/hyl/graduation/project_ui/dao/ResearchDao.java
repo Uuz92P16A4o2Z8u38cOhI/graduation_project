@@ -16,7 +16,7 @@ import java.util.List;
 @Mapper
 public interface ResearchDao {
 
-    List<Research> initInfo(Long id);
+    List<Research> initInfo(Long id,Long version);
 
     List<ResearchItem> queryItems(Long id, Integer type);
 

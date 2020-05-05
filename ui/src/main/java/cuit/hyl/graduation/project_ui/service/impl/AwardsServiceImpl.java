@@ -23,8 +23,8 @@ public class AwardsServiceImpl implements AwardsService {
 
 
     @Override
-    public List<Awards> initInfo(Long id) {
-        return this.awardsDao.initInfo(id);
+    public List<Awards> initInfo(Long id,Long version) {
+        return this.awardsDao.initInfo(id, version);
     }
 
     @Override

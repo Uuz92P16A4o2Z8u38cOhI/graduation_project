@@ -16,7 +16,7 @@ import java.util.List;
 @Mapper
 public interface AwardsDao {
 
-    List<Awards> initInfo(Long id);
+    List<Awards> initInfo(Long id,Long version);
 
     List<AwardsItem> initItemInfo(Long id, Integer type);
 

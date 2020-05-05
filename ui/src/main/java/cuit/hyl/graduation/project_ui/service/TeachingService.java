@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface TeachingService {
 
-    List<Teaching> initTeach(Long id);
+    List<Teaching> initTeach(Long id,Long version);
 
     List<TeachingClass> initTeachClass(Integer type, Long id);
 

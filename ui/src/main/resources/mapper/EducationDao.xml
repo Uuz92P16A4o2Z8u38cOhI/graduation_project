@@ -30,7 +30,7 @@
         select
             ID, SCHOOLE, DEGREE, SUBJECT, START_TIME, END_TIME, PEOPLE_ID, VERSION
         from graduation_ui.education
-        where PEOPLE_ID = #{id} AND VERSION = 0
+        where PEOPLE_ID = #{id} AND VERSION = #{version}
         order by START_TIME desc
     </select>
 
@@ -134,6 +134,23 @@
     <delete id="deleteItem">
         DELETE FROM graduation_ui.education WHERE id = #{id}
     </delete>
+
+    <!--批量新增-->
+    <insert id="insertForeach">
+        INSERT INTO graduation_ui.education (ID, SCHOOLE, DEGREE, SUBJECT, START_TIME, END_TIME, PEOPLE_ID, VERSION)
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.id},
+            #{item.schole},
+            #{item.degree},
+            #{item.suject},
+            #{item.startTime},
+            #{item.endTime},
+            #{item.peopleId},
+            #{item.version}
+            )
+        </foreach>
+    </insert>
 
 
     <!--通过版本查询 -->

@@ -39,12 +39,12 @@ public class AwardsController {
     SnowflakeIdWorker idWorker = new SnowflakeIdWorker(1,4);
 
     @ApiOperation("通过用户id查询获奖情况页面初始化消息")
-    @PostMapping("initInfo/{id}")
-    public ResponseResult initInfo(@PathVariable Long id) {
+    @PostMapping("initInfo/{id}/{version}")
+    public ResponseResult initInfo(@PathVariable Long id, @PathVariable Long version) {
         ResponseResult result = new ResponseResult();
         Map<String, Object> map = new HashMap<>();
 
-        List<Awards> awardsList = this.awardsService.initInfo(id);
+        List<Awards> awardsList = this.awardsService.initInfo(id, version);
         if (awardsList.size() != 0){
             Awards awards = awardsList.get(0);
             List<AwardsItem> academicHonorsList = this.awardsService.initItemInfo(awards.getAcademicHonors(), 1);

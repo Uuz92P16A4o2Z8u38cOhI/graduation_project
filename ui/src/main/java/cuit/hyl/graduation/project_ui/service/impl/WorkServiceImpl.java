@@ -20,8 +20,8 @@ public class WorkServiceImpl implements WorkService {
     private WorkDao workDao;
 
     @Override
-    public List<Work> queryInitInfo(Long id) {
-        return this.workDao.queryInitInfo(id);
+    public List<Work> queryInitInfo(Long id,Long version) {
+        return this.workDao.queryInitInfo(id, version);
     }
 
     @Override
@@ -40,6 +40,11 @@ public class WorkServiceImpl implements WorkService {
     @Transactional
     public int deleteItem(Long id) {
         return workDao.deleteItem(id);
+    }
+
+    @Override
+    public int insertForeach(List<Work> list) {
+        return this.workDao.insertForeach(list);
     }
 
     @Override

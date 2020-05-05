@@ -15,7 +15,7 @@ import java.util.List;
 public interface AwardsService {
 
 
-    List<Awards> initInfo(Long id);
+    List<Awards> initInfo(Long id,Long version);
 
     List<AwardsItem> initItemInfo(Long id, Integer type);
 

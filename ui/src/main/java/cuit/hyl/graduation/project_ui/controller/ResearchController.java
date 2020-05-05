@@ -35,12 +35,12 @@ public class ResearchController {
 
 
     @ApiOperation("通过用户id查询科研活动页面初始化消息")
-    @PostMapping("initInfo/{id}")
-    public ResponseResult initInfo(@PathVariable Long id) {
+    @PostMapping("initInfo/{id}/{version}")
+    public ResponseResult initInfo(@PathVariable Long id, @PathVariable Long version) {
         ResponseResult result = new ResponseResult();
         Map<String, Object> map = new HashMap<>();
 
-        List<Research> researchList = researchService.initInfo(id);
+        List<Research> researchList = researchService.initInfo(id, version);
         if (researchList.size() != 0){
             Research research = researchList.get(0);
             List<ResearchItem> researchAreas = researchService.queryItems(research.getResearchAreas() , 1);

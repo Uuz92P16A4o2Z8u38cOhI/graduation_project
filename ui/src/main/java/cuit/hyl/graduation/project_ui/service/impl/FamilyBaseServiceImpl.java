@@ -24,8 +24,8 @@ public class FamilyBaseServiceImpl implements FamilyBaseService {
     private FamilyBaseDao familyBaseDao;
 
     @Override
-    public List<FamilyBase> initInfo(Long id) {
-        return this.familyBaseDao.initInfo(id);
+    public List<FamilyBase> initInfo(Long id,Long version) {
+        return this.familyBaseDao.initInfo(id,version);
     }
 
     @Override

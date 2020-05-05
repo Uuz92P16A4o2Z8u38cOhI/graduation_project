@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface FamilyBaseService {
 
-    List<FamilyBase> initInfo(Long id);
+    List<FamilyBase> initInfo(Long id,Long version);
 
     List<FamilyMember> memberByBaseId(Long id);
 

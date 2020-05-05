@@ -23,8 +23,8 @@ public class ResearchServiceImpl implements ResearchService {
 
 
     @Override
-    public List<Research> initInfo(Long id) {
-        return this.researchDao.initInfo(id);
+    public List<Research> initInfo(Long id,Long version) {
+        return this.researchDao.initInfo(id, version);
     }
 
     @Override

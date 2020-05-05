@@ -35,7 +35,7 @@
         select
           ID, RESEARCH, RESOURCES, CLASS_INFO, ACHIEVEMENTS, PEOPLE_ID, UPLOAD_TIME
         from graduation_ui.teaching
-        where PEOPLE_ID = #{id}
+        where PEOPLE_ID = #{id} AND VERSION = #{version}
         order by UPLOAD_TIME desc
     </select>
 

@@ -26,7 +26,7 @@
         select
           ID, RESEARCH_AREAS, THESIS_RESULTS, PATENT, ACHIEVEMENTS, RESEARCH_PROJECTS, RESEARCH_TEAM, PEOPLE_ID, UPLOAD_TIME
         from graduation_ui.research
-        where PEOPLE_ID = #{id}
+        where PEOPLE_ID = #{id} AND VERSION = #{version}
         order by UPLOAD_TIME desc
     </select>
 

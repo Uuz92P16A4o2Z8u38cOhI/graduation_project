@@ -55,7 +55,7 @@
         select
           ID, NAME, NICK_NAME, SEX, BIRTHDAY, POLITICAL_STATUS, AGE, HOMETOWN, AVATAT_URL, PHONE, FAX, EMAIL, QQ, WECHAT, BLOG, POST_CODE, ADDRESS, DEPARTMENT, DEGREE, SUBJECT, POSITION, JOB_TITLE, INTRODUCTION, RESEARCH_AREAS, UNIT_ID, SCHOOL_ID, PEOPLE_ID
         from graduation_ui.basic_info
-        where PEOPLE_ID = #{id}
+        where PEOPLE_ID = #{id} AND VERSION = #{version}
         order by TIME desc
     </select>
 
@@ -352,7 +352,7 @@
             LEFT JOIN graduation_ui.school AS S
             ON BI.SCHOOL_ID = S.CODE
         WHERE
-            PEOPLE_ID = #{id}
+            PEOPLE_ID = #{id} AND bi.VERSION = 0
         order by TIME desc
     </select>
 
@@ -388,7 +388,7 @@
             graduation_ui.school AS s
                 LEFT JOIN basic_info AS bi ON s.`CODE` = bi.SCHOOL_ID
         WHERE
-            bi.ID = #{id}
+            bi.PEOPLE_ID = #{id} AND bi.VERSION = 0
     </select>
 
 

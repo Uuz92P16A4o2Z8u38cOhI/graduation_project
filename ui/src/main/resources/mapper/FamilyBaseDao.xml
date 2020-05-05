@@ -28,7 +28,7 @@
         select
           ID, POPULATION, ADDRESS, PEOPLE_ID, UPLOAD_TIME
         from graduation_ui.family_base
-        where PEOPLE_ID = #{id}
+        where PEOPLE_ID = #{id} AND VERSION = #{version}
         order by UPLOAD_TIME desc
     </select>
     <select id="memberByBaseId" resultMap="FamilyMemberMap">

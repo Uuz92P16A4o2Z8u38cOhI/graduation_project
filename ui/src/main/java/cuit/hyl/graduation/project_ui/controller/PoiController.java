@@ -46,8 +46,8 @@ public class PoiController {
     }
 
     @ApiOperation("导出定制化Excel--个人")
-    @PostMapping("exportModelExcel/{type}/{id}")
-    public void exportModelExcel(@PathVariable String type,@PathVariable Long id,HttpServletResponse response) {
+    @PostMapping("exportModelExcel/{type}/{id}/{version}")
+    public void exportModelExcel(@PathVariable String type,@PathVariable Long id,@PathVariable Long version,HttpServletResponse response) {
         response.addHeader("Access-Control-Expose-Headers", "Content-Disposition");
         ExportExcel<BasicInfo> exportExcel = new ExportExcel<>();
 
@@ -57,7 +57,7 @@ public class PoiController {
 
         switch(type){
             case "BasicInfo":
-                List<BasicInfo> BasicInfoList = basicInfoService.queryByPeopleId(id);
+                List<BasicInfo> BasicInfoList = basicInfoService.queryByPeopleId(id, version);
                 param.put("list", BasicInfoList);
                 param.put("fileName","BasicInfo.xlsx");
                 param.put("path","static/excel/BasicInfo.xlsx");
@@ -82,8 +82,8 @@ public class PoiController {
                 break;
             case "Family":
                 Map<String, Object> familyMap = new HashMap<>();
-                FamilyBase familyBase = familyBaseService.initInfo(id).get(0);
-                familyMap.put("基础信息", familyBaseService.initInfo(id));
+                FamilyBase familyBase = familyBaseService.initInfo(id,version).get(0);
+                familyMap.put("基础信息", familyBaseService.initInfo(id,version));
                 if (familyBase != null){
                     List<FamilyMember> members = familyBaseService.memberByBaseId(familyBase.getId());
                     familyMap.put("家庭成员", members);
@@ -96,7 +96,7 @@ public class PoiController {
                 break;
             case "Teaching":
                 Map<String, Object> TeachingMap = new HashMap<>();
-                Teaching teach = this.teachingService.initTeach(id).get(0);
+                Teaching teach = this.teachingService.initTeach(id,version).get(0);
                 if (teach != null){
                     List<TeachingItem> research = this.teachingService.initTeachItem(1, teach.getResearch());
                     List<TeachingItem> resources = this.teachingService.initTeachItem(2, teach.getResources());
@@ -118,7 +118,7 @@ public class PoiController {
                 break;
             case "Research":
                 Map<String, Object> researchMap = new HashMap<>();
-                Research research = researchService.initInfo(id).get(0);
+                Research research = researchService.initInfo(id,version).get(0);
                 if (research != null){
                     List<ResearchItem> researchAreas = researchService.queryItems(research.getResearchAreas() , 1);
                     List<ResearchItem> thesisResults = researchService.queryItems(research.getThesisResults() , 2);
@@ -141,7 +141,7 @@ public class PoiController {
                 break;
             case "Awards":
                 Map<String, Object> awardsMap = new HashMap<>();
-                Awards awards = this.awardsService.initInfo(id).get(0);
+                Awards awards = this.awardsService.initInfo(id,version).get(0);
                 if (awards != null){
                     List<AwardsItem> academicHonorsList = this.awardsService.initItemInfo(awards.getAcademicHonors(), 1);
                     List<AwardsItem> scientificAwardsList = this.awardsService.initItemInfo(awards.getScientificAwards(), 2);

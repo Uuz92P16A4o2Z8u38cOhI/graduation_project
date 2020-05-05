@@ -25,7 +25,7 @@
         select
           ID, ACADEMIC_HONORS, SCIENTIFIC_AWARDS, OTHER_AWARDS, HONORARY_TITLE, HONOR_WALL, PEOPLE_ID, UPLOAD_TIME
         from graduation_ui.awards
-        where PEOPLE_ID = #{id}
+        where PEOPLE_ID = #{id} AND VERSION = #{version}
         order by UPLOAD_TIME desc
     </select>
 

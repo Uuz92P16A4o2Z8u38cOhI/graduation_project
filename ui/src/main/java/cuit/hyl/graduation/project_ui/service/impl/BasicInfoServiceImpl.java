@@ -27,8 +27,8 @@ public class BasicInfoServiceImpl implements BasicInfoService {
      * 通过用户ID查询单条数据
      */
     @Override
-    public List<BasicInfo> queryByPeopleId(Long id) {
-        return this.basicInfoDao.queryByPeopleId(id);
+    public List<BasicInfo> queryByPeopleId(Long id, Long version) {
+        return this.basicInfoDao.queryByPeopleId(id,version);
     }
 
     @Override
@@ -42,8 +42,8 @@ public class BasicInfoServiceImpl implements BasicInfoService {
     }
 
     @Override
-    public List<InitInfo> queryInitInfo(Long id) {
-        return this.basicInfoDao.queryInitInfo(id);
+    public List<InitInfo> queryInitInfo(Long id,Long version) {
+        return this.basicInfoDao.queryInitInfo(id, version);
     }
 
     @Override

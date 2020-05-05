@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,13 +49,13 @@ public class EasyPoiController {
     private AwardsService awardsService;
 
     @ApiOperation("导出Excel")
-    @PostMapping("exportExcel/{type}/{id}")
-    public void exportExcel(@PathVariable String type, @PathVariable Long id, HttpServletResponse response) {
+    @PostMapping("exportExcel/{type}/{id}/{version}")
+    public void exportExcel(@PathVariable String type, @PathVariable Long id, @PathVariable Long version, HttpServletResponse response) {
         response.addHeader("Access-Control-Expose-Headers", "Content-Disposition");
         try {
             switch(type){
                 case "BasicInfo":
-                    List<BasicInfo> basicInfoList = basicInfoService.queryByPeopleId(id);
+                    List<BasicInfo> basicInfoList = basicInfoService.queryByPeopleId(id, version);
                     ExcelUtils.exportExcel(basicInfoList, "教师基础信息", "基础信息", BasicInfo.class, "BasicInfo", response );
                     break;
                 case "Education":
@@ -66,7 +67,7 @@ public class EasyPoiController {
                     ExcelUtils.exportExcel(workList, "教师工作情况", "工作情况", Work.class, "Work", response );
                     break;
                 case "Family":
-                    List<FamilyBase> familyBaseList = familyBaseService.initInfo(id);
+                    List<FamilyBase> familyBaseList = familyBaseService.initInfo(id,version);
 //                    FamilyBase familyBase = familyBaseList.get(0);
                     if (familyBaseList != null){
                         for(FamilyBase family : familyBaseList){
@@ -79,7 +80,7 @@ public class EasyPoiController {
                 case "Teaching":
                     List<Map<String, Object>> teachSheetsList = new ArrayList<>(); //sheets
                     Map<String, Object> TeachingMap = new HashMap<>();
-                    Teaching teach = this.teachingService.initTeach(id).get(0);
+                    Teaching teach = this.teachingService.initTeach(id,version).get(0);
                     if (teach != null){
                         List<TeachingItem> research = this.teachingService.initTeachItem(1, teach.getResearch());
                         List<TeachingItem> resources = this.teachingService.initTeachItem(2, teach.getResources());
@@ -118,7 +119,7 @@ public class EasyPoiController {
                 case "Research":
                     List<Map<String, Object>> researchSheetsList = new ArrayList<>(); //sheets
                     Map<String, Object> researchMap = new HashMap<>();
-                    Research research = researchService.initInfo(id).get(0);
+                    Research research = researchService.initInfo(id,version).get(0);
                     if (research != null){
                         List<ResearchItem> researchAreas = researchService.queryItems(research.getResearchAreas() , 1);
                         List<ResearchItem> thesisResults = researchService.queryItems(research.getThesisResults() , 2);
@@ -149,7 +150,7 @@ public class EasyPoiController {
                 case "Awards":
                     List<Map<String, Object>> awardsSheetsList = new ArrayList<>(); //sheets
                     Map<String, Object> awardsMap = new HashMap<>();
-                    Awards awards = this.awardsService.initInfo(id).get(0);
+                    Awards awards = this.awardsService.initInfo(id,version).get(0);
                     if (awards != null){
                         List<AwardsItem> academicHonorsList = this.awardsService.initItemInfo(awards.getAcademicHonors(), 1);
                         List<AwardsItem> scientificAwardsList = this.awardsService.initItemInfo(awards.getScientificAwards(), 2);

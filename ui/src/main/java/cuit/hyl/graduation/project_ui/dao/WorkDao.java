@@ -19,11 +19,13 @@ public interface WorkDao {
     /**
      * 通过ID查询单条数据
      */
-    List<Work> queryInitInfo(Long id);
+    List<Work> queryInitInfo(Long id,Long version);
 
     int insertItem(JSONObject params);
     int updateItem(JSONObject params);
     int deleteItem(Long id);
+
+    int insertForeach(List<Work> list);
 
     /**
      * 通过版本查询

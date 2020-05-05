@@ -24,8 +24,8 @@ public class TeachingServiceImpl implements TeachingService {
 
 
     @Override
-    public List<Teaching> initTeach(Long id) {
-        return this.teachingDao.initTeach(id);
+    public List<Teaching> initTeach(Long id,Long version) {
+        return this.teachingDao.initTeach(id,version);
     }
 
     @Override

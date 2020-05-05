@@ -18,7 +18,7 @@ public interface BasicInfoService {
     /**
      * 通过用户ID查询单条数据
      */
-    List<BasicInfo> queryByPeopleId(Long id);
+    List<BasicInfo> queryByPeopleId(Long id, Long version);
 
     int insertInitInfo(JSONObject params);
     int updateInitInfo(JSONObject params);
@@ -26,7 +26,7 @@ public interface BasicInfoService {
     /**
      * 通过用户ID查询初始化信息
      */
-    List<InitInfo> queryInitInfo(Long id);
+    List<InitInfo> queryInitInfo(Long id, Long version);
 
     /**
      * excel导入

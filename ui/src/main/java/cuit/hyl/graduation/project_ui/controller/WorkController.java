@@ -30,9 +30,9 @@ public class WorkController {
     SnowflakeIdWorker idWorker = new SnowflakeIdWorker(1,4);
 
     @ApiOperation("通过用户id查询工作页面初始化消息")
-    @GetMapping("initInfo/{id}")
-    public ResponseResult queryInitInfo(@PathVariable Long id) {
-        List<Work> works = this.workService.queryInitInfo(id);
+    @GetMapping("initInfo/{id}/{version}")
+    public ResponseResult queryInitInfo(@PathVariable Long id,@PathVariable Long version) {
+        List<Work> works = this.workService.queryInitInfo(id,version);
         if (works.size() == 0){
             return new ResponseResult(ResponseResult.CodeStatus.OK,"未设置教师工作情况");
         }else {

@@ -45,9 +45,9 @@ public class BasicInfoController {
 
 
     @ApiOperation("通过用户id查询单条数据")
-    @GetMapping("queryByPeopleId/{id}")
-    public ResponseResult queryByPeopleId(@PathVariable Long id) {
-        List<BasicInfo> basicInfoList = this.basicInfoService.queryByPeopleId(id);
+    @GetMapping("queryByPeopleId/{id}/{version}")
+    public ResponseResult queryByPeopleId(@PathVariable Long id, @PathVariable Long version) {
+        List<BasicInfo> basicInfoList = this.basicInfoService.queryByPeopleId(id, version);
         if (basicInfoList.size() == 0){
             return new ResponseResult(ResponseResult.CodeStatus.OK,"未设置教师基础信息");
         }else {
@@ -58,7 +58,7 @@ public class BasicInfoController {
     @ApiOperation("用户初始设置或修改基础信息")
     @PostMapping("insertOrUpdate/{id}")
     public ResponseResult insertOrUpdate(@PathVariable Long id,@RequestBody(required = false) JSONObject params) {
-        List<BasicInfo> basicInfoList = this.basicInfoService.queryByPeopleId(id);
+        List<BasicInfo> basicInfoList = this.basicInfoService.queryByPeopleId(id, 0l);
         int i;
         if (basicInfoList.size() == 0){
             params.put("id", idWorker.nextId());
@@ -78,7 +78,7 @@ public class BasicInfoController {
     @ApiOperation("通过用户id查询初始化数据")
     @GetMapping("queryInitInfo/{id}")
     public ResponseResult queryInitInfo(@PathVariable Long id) {
-        List<InitInfo> initInfos = this.basicInfoService.queryInitInfo(id);
+        List<InitInfo> initInfos = this.basicInfoService.queryInitInfo(id, 0l);
         if (initInfos.size() == 0){
             return new ResponseResult(ResponseResult.CodeStatus.OK,"暂无您的数据，请进行设置");
         }else {
@@ -104,7 +104,7 @@ public class BasicInfoController {
 
         String fileName  = fastDFSService.uploadAvatar(dropFile);
 
-        this.basicInfoService.updateAvatar(fileName, this.basicInfoService.queryInitInfo(id).get(0).getId());
+        this.basicInfoService.updateAvatar(fileName, this.basicInfoService.queryInitInfo(id,0l).get(0).getId());
 
         result.setData(fileName);
         return result;
