@@ -50,16 +50,16 @@
             <if test="subject != null and '' != subject">
                 SUBJECT,
             </if>
-            <if test="startTime != null and '' != startTime">
+            <if test="startTime != null ">
                 START_TIME,
             </if>
-            <if test="endTime != null and '' != endTime">
+            <if test="endTime != null">
                 END_TIME,
             </if>
             <if test="peopleId != null and '' != peopleId">
                 PEOPLE_ID,
             </if>
-            <if test="uploadTime != null and '' != uploadTime">
+            <if test="uploadTime != null ">
                 UPLOAD_TIME,
             </if>
             <if test="version != null and '' != version">
@@ -79,16 +79,16 @@
             <if test="subject != null and '' != subject">
                 #{subject},
             </if>
-            <if test="startTime != null and '' != startTime">
+            <if test="startTime != null ">
                 #{startTime},
             </if>
-            <if test="endTime != null and '' != endTime">
+            <if test="endTime != null ">
                 #{endTime},
             </if>
             <if test="peopleId != null and '' != peopleId">
                 #{peopleId},
             </if>
-            <if test="uploadTime != null and '' != uploadTime">
+            <if test="uploadTime != null ">
                 #{uploadTime},
             </if>
             <if test="version != null and '' != version">
@@ -112,16 +112,16 @@
         <if test="subject != null and '' != subject">
             SUBJECT = #{subject},
         </if>
-        <if test="startTime != null and '' != startTime">
+        <if test="startTime != null ">
             START_TIME = #{startTime},
         </if>
-        <if test="endTime != null and '' != endTime">
+        <if test="endTime != null">
             END_TIME = #{endTime},
         </if>
         <if test="peopleId != null and '' != peopleId">
             PEOPLE_ID = #{peopleId},
         </if>
-        <if test="uploadTime != null and '' != uploadTime">
+        <if test="uploadTime != null ">
             UPLOAD_TIME = #{uploadTime},
         </if>
         <if test="version != null and '' != version">
@@ -138,12 +138,13 @@
     <!--批量新增-->
     <insert id="insertForeach">
         INSERT INTO graduation_ui.education (ID, SCHOOLE, DEGREE, SUBJECT, START_TIME, END_TIME, PEOPLE_ID, VERSION)
+        VALUES
         <foreach collection="list" item="item" index="index" separator=",">
             (
             #{item.id},
-            #{item.schole},
+            #{item.schoole},
             #{item.degree},
-            #{item.suject},
+            #{item.subject},
             #{item.startTime},
             #{item.endTime},
             #{item.peopleId},

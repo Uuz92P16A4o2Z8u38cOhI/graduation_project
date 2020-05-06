@@ -3,6 +3,7 @@ package cuit.hyl.graduation.project_ui.entity;
 import cn.afterturn.easypoi.excel.annotation.Excel;
 import cn.afterturn.easypoi.excel.annotation.ExcelCollection;
 import cuit.hyl.graduation.project_ui.annotation.ExcelAttributes;
+import lombok.Data;
 
 import java.util.Date;
 import java.io.Serializable;
@@ -14,6 +15,7 @@ import java.util.List;
  * @author makejava
  * @since 2020-04-09 16:29:14
  */
+@Data
 public class FamilyBase implements Serializable {
     private static final long serialVersionUID = 697277860571375369L;
     /**
@@ -46,52 +48,5 @@ public class FamilyBase implements Serializable {
     @ExcelCollection(name = "家庭成员", orderNum = "2")
     private List<FamilyMember> familyMembers;
 
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Integer getPopulation() {
-        return population;
-    }
-
-    public void setPopulation(Integer population) {
-        this.population = population;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public Long getPeopleId() {
-        return peopleId;
-    }
-
-    public void setPeopleId(Long peopleId) {
-        this.peopleId = peopleId;
-    }
-
-    public Date getUploadTime() {
-        return uploadTime;
-    }
-
-    public void setUploadTime(Date uploadTime) {
-        this.uploadTime = uploadTime;
-    }
-
-    public List<FamilyMember> getFamilyMembers() {
-        return familyMembers;
-    }
-
-    public void setFamilyMembers(List<FamilyMember> familyMembers) {
-        this.familyMembers = familyMembers;
-    }
+    private Long version;
 }

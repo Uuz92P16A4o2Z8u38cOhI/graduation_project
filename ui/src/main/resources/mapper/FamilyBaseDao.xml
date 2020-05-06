@@ -54,7 +54,7 @@
             <if test="peopleId != null and '' != peopleId">
                 PEOPLE_ID,
             </if>
-            <if test="uploadTime != null and '' != uploadTime">
+            <if test="uploadTime != null">
                 UPLOAD_TIME,
             </if>
             <if test="version != null and '' != version">
@@ -74,7 +74,7 @@
             <if test="peopleId != null and '' != peopleId">
                 #{peopleId},
             </if>
-            <if test="uploadTime != null and '' != uploadTime">
+            <if test="uploadTime != null ">
                 #{uploadTime},
             </if>
             <if test="version != null and '' != version">
@@ -98,7 +98,7 @@
             <if test="peopleId != null and '' != peopleId">
                 PEOPLE_ID = #{peopleId},
             </if>
-            <if test="uploadTime != null and '' != uploadTime">
+            <if test="uploadTime != null ">
                 UPLOAD_TIME = #{uploadTime},
             </if>
             <if test="version != null and '' != version">
@@ -124,7 +124,7 @@
             <if test="sex != null and '' != sex">
                 SEX,
             </if>
-            <if test="birth != null and '' != birth">
+            <if test="birth != null">
                 BIRTH,
             </if>
             <if test="job != null and '' != job">
@@ -159,7 +159,7 @@
             <if test="sex != null and '' != sex">
                 #{sex},
             </if>
-            <if test="birth != null and '' != birth">
+            <if test="birth != null ">
                 #{birth},
             </if>
             <if test="job != null and '' != job">
@@ -198,7 +198,7 @@
             <if test="sex != null and '' != sex">
                 SEX = #{sex},
             </if>
-            <if test="birth != null and '' != birth">
+            <if test="birth != null">
                 BIRTH = #{birth},
             </if>
             <if test="job != null and '' != job">

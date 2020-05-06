@@ -3,6 +3,7 @@ package cuit.hyl.graduation.security_oauth.config.service;
 import com.alibaba.fastjson.JSON;
 import cuit.hyl.graduation.security_oauth.entity.TbPermission;
 import cuit.hyl.graduation.security_oauth.entity.TbUser;
+import cuit.hyl.graduation.security_oauth.entity.UserVo;
 import cuit.hyl.graduation.security_oauth.service.TbPermissionService;
 import cuit.hyl.graduation.security_oauth.service.TbUserService;
 import org.assertj.core.util.Lists;
@@ -43,8 +44,8 @@ public class UserDetailServiceImpl implements UserDetailsService {
                 }
             });
         }
-        TbUser TbUserInfo = new TbUser();
-        TbUserInfo.setId(tbUser.getId());
+        UserVo TbUserInfo = new UserVo();
+        TbUserInfo.setId(tbUser.getId().toString());
         TbUserInfo.setUsername(tbUser.getUsername());
         TbUserInfo.setEmail(tbUser.getEmail());
         TbUserInfo.setPhone(tbUser.getPhone());

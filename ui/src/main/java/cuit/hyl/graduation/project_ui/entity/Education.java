@@ -63,6 +63,6 @@ public class Education implements Serializable {
     */
     @Excel(name = "版本号", orderNum = "6", width = 25)
     @ExcelAttributes(exportSort = 5, importSort = 5)
-    private Integer version;
+    private Long version;
 
 }

@@ -61,7 +61,7 @@
             <if test="peopleId != null and '' != peopleId">
                 PEOPLE_ID,
             </if>
-            <if test="uploadTime != null and '' != uploadTime">
+            <if test="uploadTime != null">
                 UPLOAD_TIME,
             </if>
             <if test="version != null and '' != version">
@@ -90,7 +90,7 @@
             <if test="peopleId != null and '' != peopleId">
                 #{peopleId},
             </if>
-            <if test="uploadTime != null and '' != uploadTime">
+            <if test="uploadTime != null ">
                 #{uploadTime},
             </if>
             <if test="version != null and '' != version">
