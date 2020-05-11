@@ -41,6 +41,9 @@ public class FamilyBaseController {
     @ApiOperation("通过用户id查询家庭情况页面初始化消息")
     @PostMapping("initInfo/{id}/{version}")
     public ResponseResult initInfo(@PathVariable Long id, @PathVariable Long version) {
+//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+//        Long id = userVo.getId();
         ResponseResult result = new ResponseResult();
         Map<String, Object> map = new HashMap<>();
 
@@ -66,6 +69,9 @@ public class FamilyBaseController {
     @ApiOperation("新增、更新家庭基础信息")
     @PostMapping("insertOrUpdateBase/{id}")
     public ResponseResult insertOrUpdateBase(@PathVariable Long id,@RequestBody(required = false) JSONObject params) {
+//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+//        Long id = userVo.getId();
         ResponseResult result = new ResponseResult();
         List<FamilyBase> familyBases = familyBaseService.initInfo(id, 0l);
         if (familyBases.size() == 0) {
@@ -83,6 +89,9 @@ public class FamilyBaseController {
     @ApiOperation("新增家庭成员")
     @PostMapping("insertItem/{id}")
     public ResponseResult insertItem(@PathVariable Long id, @RequestBody(required = false) JSONObject params) {
+//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+//        Long id = userVo.getId();
         params.put("id", idWorker.nextId());
         params.put("baseId", id);
         int i = this.familyBaseService.insertItem(params);
@@ -95,6 +104,9 @@ public class FamilyBaseController {
     @ApiOperation("更新家庭成员")
     @PostMapping("updateItem")
     public ResponseResult updateItem(@RequestBody(required = false) JSONObject params) {
+//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+//        Long id = userVo.getId();
         int i = this.familyBaseService.updateItem(params);
         if (i == 0){
             return new ResponseResult(ResponseResult.CodeStatus.FAIL,"编辑失败");
@@ -105,6 +117,9 @@ public class FamilyBaseController {
     @ApiOperation("删除家庭成员")
     @DeleteMapping("deleteItem/{id}")
     public ResponseResult deleteItem(@PathVariable Long id) {
+//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+//        Long id = userVo.getId();
         int i = this.familyBaseService.deleteItem(id);
         if (i == 0){
             return new ResponseResult(ResponseResult.CodeStatus.FAIL,"删除失败");

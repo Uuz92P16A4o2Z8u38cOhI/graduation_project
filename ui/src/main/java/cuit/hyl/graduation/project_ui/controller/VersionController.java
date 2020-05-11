@@ -56,13 +56,18 @@ public class VersionController {
     @ApiOperation("查询一条版本信息---主键id")
     @PostMapping("selectOne/{id}")
     public ResponseResult selectOne(@PathVariable Long id) {
-
+//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+//        Long id = userVo.getId();
         return new ResponseResult(ResponseResult.CodeStatus.OK,"成功查询数据", this.versionService.queryById(id));
     }
 
     @ApiOperation("查询用户所有版本信息---用户id")
     @PostMapping("selectAll/{id}")
     public ResponseResult selectAll(@PathVariable Long id) {
+//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+//        Long id = userVo.getId();
         Version version = new Version();
         version.setPeopleId(id);
         return new ResponseResult(ResponseResult.CodeStatus.OK,"成功查询数据", this.versionService.queryAll(id));
@@ -72,9 +77,13 @@ public class VersionController {
     @PostMapping("save/{id}")
     @Transactional
     public ResponseResult save(@PathVariable Long id, @RequestBody(required = false) JSONObject params) {
+//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+//        Long id = userVo.getId();
         Long version = idWorker.nextId();
         params.put("id", version);
         params.put("peopleId", id);
+        params.put("time", null);
         int i = this.versionService.insert(params);
 
         saveVersion(id, version);
@@ -89,6 +98,9 @@ public class VersionController {
     @ApiOperation("修改某版本信息")
     @PostMapping("update")
     public ResponseResult update(@RequestBody(required = false) JSONObject params) {
+//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+//        Long id = userVo.getId();
         int i = this.versionService.update(params);
         if (i == 0){
             return new ResponseResult(ResponseResult.CodeStatus.FAIL,"新增失败");
@@ -99,6 +111,9 @@ public class VersionController {
 
     @Transactional
     public void saveVersion(Long id, Long version){
+//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+//        Long id = userVo.getId();
         List<BasicInfo> basicInfoList = this.basicInfoService.queryByPeopleId(id, 0l);
         if (basicInfoList.size() != 0){
             BasicInfo basicInfo = basicInfoList.get(0);

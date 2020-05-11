@@ -28,7 +28,7 @@ public interface EducationService {
     /**
      * 通过版本查询
      */
-    List<Education> queryByVersion(Long id, Integer version);
+    List<Education> queryByVersion(Long id, String version);
 
     /**
      * 查询所有版本号

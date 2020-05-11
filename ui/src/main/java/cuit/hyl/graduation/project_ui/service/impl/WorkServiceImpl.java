@@ -48,7 +48,7 @@ public class WorkServiceImpl implements WorkService {
     }
 
     @Override
-    public List<Work> queryByVersion(Long id, Integer version) {
+    public List<Work> queryByVersion(Long id, String version) {
         return this.workDao.queryByVersion(id,version);
     }
 

@@ -7,7 +7,7 @@ import java.io.Serializable;
 @Data
 public class Versions implements Serializable {
 
-    private Integer version;
+    private Long version;
     private java.util.Date uploadTime;
 
 }

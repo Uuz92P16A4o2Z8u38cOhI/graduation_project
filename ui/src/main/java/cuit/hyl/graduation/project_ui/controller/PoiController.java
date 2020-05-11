@@ -49,6 +49,9 @@ public class PoiController {
     @PostMapping("exportModelExcel/{type}/{id}/{version}")
     public void exportModelExcel(@PathVariable String type,@PathVariable Long id,@PathVariable Long version,HttpServletResponse response) {
         response.addHeader("Access-Control-Expose-Headers", "Content-Disposition");
+//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+//        Long id = userVo.getId();
         ExportExcel<BasicInfo> exportExcel = new ExportExcel<>();
 
         Map<String, Object> param = new HashMap<>();
@@ -65,7 +68,8 @@ public class PoiController {
                 exportExcel.exportByXSSF(param);
                 break;
             case "Education":
-                List<Education> educationList = educationService.queryAll(id);
+                List<Education> educationList = educationService.queryInitInfo(id, version);
+//                List<Education> educationList = educationService.queryAll(id);
                 param.put("list", educationList);
                 param.put("fileName","Education.xlsx");
                 param.put("path","static/excel/Education.xlsx");
@@ -73,7 +77,8 @@ public class PoiController {
                 exportExcel.exportByXSSF(param);
                 break;
             case "Work":
-                List<Work> workList = workService.queryAll(id);
+                List<Work> workList = workService.queryInitInfo(id, version);
+//                List<Work> workList = workService.queryAll(id);
                 param.put("list", workList);
                 param.put("fileName","Work.xlsx");
                 param.put("path","static/excel/Work.xlsx");
@@ -169,7 +174,7 @@ public class PoiController {
 
     }
 
-    @ApiOperation("导入Excel")
+   /* @ApiOperation("导入Excel")
     @PostMapping("importExcel/{type}/{id}")
     public ResponseResult importExcel(@PathVariable String type,@PathVariable Long id, MultipartFile multipartFile) {
         ImportExcel importExcel;
@@ -199,7 +204,7 @@ public class PoiController {
             return new ResponseResult(ResponseResult.CodeStatus.FAIL,"操作失败");
         }
         return new ResponseResult(ResponseResult.CodeStatus.OK,"成功导入" + num + "条数据");
-    }
+    }*/
 
 
 }

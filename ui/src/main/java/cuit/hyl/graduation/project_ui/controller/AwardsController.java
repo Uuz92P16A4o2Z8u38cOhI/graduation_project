@@ -41,6 +41,9 @@ public class AwardsController {
     @ApiOperation("通过用户id查询获奖情况页面初始化消息")
     @PostMapping("initInfo/{id}/{version}")
     public ResponseResult initInfo(@PathVariable Long id, @PathVariable Long version) {
+//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+//        Long id = userVo.getId();
         ResponseResult result = new ResponseResult();
         Map<String, Object> map = new HashMap<>();
 
@@ -81,6 +84,9 @@ public class AwardsController {
     @ApiOperation("新增获奖信息")
     @PostMapping("insertAwardsItem/{id}")
     public ResponseResult insertAwardsItem(@PathVariable Long id, @RequestBody(required = false) JSONObject params) {
+//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+//        Long id = userVo.getId();
         params.put("id", idWorker.nextId());
         params.put("parentId", id);
         int i = this.awardsService.insertAwardsItem(params);
@@ -90,9 +96,13 @@ public class AwardsController {
             return new ResponseResult(ResponseResult.CodeStatus.OK,"新增成功");
         }
     }
+
     @ApiOperation("更新获奖信息")
     @PostMapping("updateAwardsItem")
     public ResponseResult updateAwardsItem(@RequestBody(required = false) JSONObject params) {
+//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+//        Long id = userVo.getId();
         int i = this.awardsService.updateAwardsItem(params);
         if (i == 0){
             return new ResponseResult(ResponseResult.CodeStatus.FAIL,"编辑失败");
@@ -100,9 +110,13 @@ public class AwardsController {
             return new ResponseResult(ResponseResult.CodeStatus.OK,"编辑成功");
         }
     }
+
     @ApiOperation("删除获奖信息")
     @DeleteMapping("deleteAwardsItem/{id}")
     public ResponseResult deleteAwardsItem(@PathVariable Long id) {
+//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+//        Long id = userVo.getId();
         int i = this.awardsService.deleteAwardsItem(id);
         if (i == 0){
             return new ResponseResult(ResponseResult.CodeStatus.FAIL,"删除失败");

@@ -30,7 +30,7 @@ public interface WorkDao {
     /**
      * 通过版本查询
      */
-    List<Work> queryByVersion(Long id, Integer version);
+    List<Work> queryByVersion(Long id, String version);
 
     /**
      * 查询所有版本号

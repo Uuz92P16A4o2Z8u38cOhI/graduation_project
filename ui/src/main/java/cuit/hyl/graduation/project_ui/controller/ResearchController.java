@@ -37,6 +37,9 @@ public class ResearchController {
     @ApiOperation("通过用户id查询科研活动页面初始化消息")
     @PostMapping("initInfo/{id}/{version}")
     public ResponseResult initInfo(@PathVariable Long id, @PathVariable Long version) {
+//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+//        Long id = userVo.getId();
         ResponseResult result = new ResponseResult();
         Map<String, Object> map = new HashMap<>();
 
@@ -79,6 +82,9 @@ public class ResearchController {
     @ApiOperation("新增科研活动")
     @PostMapping("insertResearchItem/{id}")
     public ResponseResult insertResearchItem(@PathVariable Long id, @RequestBody(required = false) JSONObject params) {
+//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+//        Long id = userVo.getId();
         params.put("id", idWorker.nextId());
         params.put("parentId", id);
         int i = this.researchService.insertResearchItem(params);
@@ -91,6 +97,9 @@ public class ResearchController {
     @ApiOperation("更新科研活动")
     @PostMapping("updateResearchItem")
     public ResponseResult updateResearchItem(@RequestBody(required = false) JSONObject params) {
+//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+//        Long id = userVo.getId();
         int i = this.researchService.updateResearchItem(params);
         if (i == 0){
             return new ResponseResult(ResponseResult.CodeStatus.FAIL,"编辑失败");
@@ -101,6 +110,9 @@ public class ResearchController {
     @ApiOperation("删除科研活动")
     @DeleteMapping("deleteResearchItem/{id}")
     public ResponseResult deleteResearchItem(@PathVariable Long id) {
+//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+//        Long id = userVo.getId();
         int i = this.researchService.deleteResearchItem(id);
         if (i == 0){
             return new ResponseResult(ResponseResult.CodeStatus.FAIL,"删除失败");

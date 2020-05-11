@@ -31,8 +31,47 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into graduation_ui.version(ID, NAME, SIGN, REMARKS, PEOPLE_ID, TIME)
-        values (#{id}, #{name}, #{sign}, #{remarks}, #{peopleId}, #{time})
+        insert into graduation_ui.version
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                ID,
+            </if>
+            <if test="name != null and '' != name">
+                NAME,
+            </if>
+            <if test="sign != null and '' != sign">
+                SIGN,
+            </if>
+            <if test="remarks != null and '' != remarks">
+                REMARKS,
+            </if>
+            <if test="peopleId != null and '' != peopleId">
+                PEOPLE_ID,
+            </if>
+            <if test="time != null">
+                TIME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and '' != id">
+                #{id},
+            </if>
+            <if test="name != null and '' != name">
+                #{name},
+            </if>
+            <if test="sign != null and '' != sign">
+                #{sign},
+            </if>
+            <if test="remarks != null and '' != remarks">
+                #{remarks},
+            </if>
+            <if test="peopleId != null and '' != peopleId">
+                #{peopleId},
+            </if>
+            <if test="time != null">
+                #{time},
+            </if>
+        </trim>
     </insert>
 
     <!--通过主键修改数据-->

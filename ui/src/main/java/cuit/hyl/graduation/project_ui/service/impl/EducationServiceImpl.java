@@ -51,7 +51,7 @@ public class EducationServiceImpl implements EducationService {
     }
 
     @Override
-    public List<Education> queryByVersion(Long id, Integer version) {
+    public List<Education> queryByVersion(Long id, String version) {
         return this.educationDao.queryByVersion(id, version);
     }
 
