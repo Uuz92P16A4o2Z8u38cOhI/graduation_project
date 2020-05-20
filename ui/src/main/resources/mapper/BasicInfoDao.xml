@@ -391,5 +391,12 @@
             bi.PEOPLE_ID = #{id} AND bi.VERSION = 0
     </select>
 
+    <!--通过用户id 查询-->
+    <select id="queryUserBaseInfo" resultMap="BasicInfoMap">
+        select
+            ID, NAME, NICK_NAME, SEX, BIRTHDAY, AGE, HOMETOWN, AVATAT_URL, PHONE, EMAIL, QQ, WECHAT, BLOG, ADDRESS, DEGREE, SUBJECT, POSITION, JOB_TITLE
+        from graduation_ui.basic_info
+        where PEOPLE_ID = #{id} AND VERSION = 0
+    </select>
 
 </mapper>

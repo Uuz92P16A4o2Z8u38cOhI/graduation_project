@@ -5,6 +5,7 @@ import cuit.hyl.graduation.project_ui.entity.BasicInfo;
 import cuit.hyl.graduation.project_ui.entity.ResponseResult;
 import cuit.hyl.graduation.project_ui.entity.School;
 import cuit.hyl.graduation.project_ui.entity.vo.InitInfo;
+import cuit.hyl.graduation.project_ui.entity.vo.UserVo;
 import cuit.hyl.graduation.project_ui.service.BasicInfoService;
 import cuit.hyl.graduation.project_ui.service.feign.FastDFSService;
 import cuit.hyl.graduation.project_ui.utils.snowflake.SnowflakeIdWorker;
@@ -13,6 +14,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -45,11 +47,11 @@ public class BasicInfoController {
 
 
     @ApiOperation("通过用户id查询单条数据")
-    @GetMapping("queryByPeopleId/{id}/{version}")
-    public ResponseResult queryByPeopleId(@PathVariable Long id, @PathVariable Long version) {
-//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
-//        Long id = userVo.getId();
+    @GetMapping("queryByPeopleId/{version}")
+    public ResponseResult queryByPeopleId(@PathVariable Long version) {
+        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+        Long id = Long.parseLong(userVo.getId());
         List<BasicInfo> basicInfoList = this.basicInfoService.queryByPeopleId(id, version);
         if (basicInfoList.size() == 0){
             return new ResponseResult(ResponseResult.CodeStatus.OK,"未设置教师基础信息");
@@ -59,11 +61,11 @@ public class BasicInfoController {
     }
 
     @ApiOperation("用户初始设置或修改基础信息")
-    @PostMapping("insertOrUpdate/{id}")
-    public ResponseResult insertOrUpdate(@PathVariable Long id,@RequestBody(required = false) JSONObject params) {
-//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
-//        Long id = userVo.getId();
+    @PostMapping("insertOrUpdate")
+    public ResponseResult insertOrUpdate(@RequestBody(required = false) JSONObject params) {
+        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+        Long id = Long.parseLong(userVo.getId());
         List<BasicInfo> basicInfoList = this.basicInfoService.queryByPeopleId(id, 0l);
         int i;
         if (basicInfoList.size() == 0){
@@ -82,11 +84,11 @@ public class BasicInfoController {
     }
 
     @ApiOperation("通过用户id查询初始化数据")
-    @GetMapping("queryInitInfo/{id}")
-    public ResponseResult queryInitInfo(@PathVariable Long id) {
-//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
-//        Long id = userVo.getId();
+    @GetMapping("queryInitInfo")
+    public ResponseResult queryInitInfo() {
+        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+        Long id = Long.parseLong(userVo.getId());
         List<InitInfo> initInfos = this.basicInfoService.queryInitInfo(id, 0l);
         if (initInfos.size() == 0){
             return new ResponseResult(ResponseResult.CodeStatus.OK,"暂无您的数据，请进行设置");
@@ -96,11 +98,11 @@ public class BasicInfoController {
     }
 
     @ApiOperation("通过用户id查询初始化数据")
-    @PostMapping("querySchoolInfo/{id}")
-    public ResponseResult querySchoolInfo(@PathVariable Long id) {
-//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
-//        Long id = userVo.getId();
+    @PostMapping("querySchoolInfo")
+    public ResponseResult querySchoolInfo() {
+        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+        Long id = Long.parseLong(userVo.getId());
         School school = this.basicInfoService.schoolInfo(id);
         if (school == null){
             return new ResponseResult(ResponseResult.CodeStatus.OK,"您暂无学校信息，请进行设置");
@@ -110,11 +112,11 @@ public class BasicInfoController {
     }
 
     @ApiOperation("上传头像")
-    @PostMapping(value = "uploadAvatar/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseResult uploadAvatar(@PathVariable Long id, MultipartFile dropFile) {
-//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
-//        Long id = userVo.getId();
+    @PostMapping(value = "uploadAvatar", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseResult uploadAvatar(MultipartFile dropFile) {
+        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+        Long id = Long.parseLong(userVo.getId());
         ResponseResult result = new ResponseResult();
 
         String fileName  = fastDFSService.uploadAvatar(dropFile);

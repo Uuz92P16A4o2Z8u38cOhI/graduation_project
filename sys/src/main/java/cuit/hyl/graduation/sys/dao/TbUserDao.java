@@ -3,6 +3,9 @@ package cuit.hyl.graduation.sys.dao;
 import com.alibaba.fastjson.JSONObject;
 import cuit.hyl.graduation.sys.entity.TbUser;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -14,6 +17,9 @@ import java.util.List;
  */
 @Mapper
 public interface TbUserDao {
+
+    @Select("SELECT * FROM graduation_authority.tb_user WHERE id = #{id}")
+    TbUser queryById(@Param("id") Long id);
 
     List<TbUser> queryAllUser(JSONObject params);
 
@@ -27,4 +33,7 @@ public interface TbUserDao {
 
     int updatePasswordByEmail(String email, String password);
     Long checkEmail(String email);
+
+    @Update("UPDATE graduation_authority.tb_user set `password` = #{password} where id = #{id}")
+    int updatePassword(Long id, String password);
 }

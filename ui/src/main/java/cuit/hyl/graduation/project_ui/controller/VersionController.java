@@ -2,11 +2,13 @@ package cuit.hyl.graduation.project_ui.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import cuit.hyl.graduation.project_ui.entity.*;
+import cuit.hyl.graduation.project_ui.entity.vo.UserVo;
 import cuit.hyl.graduation.project_ui.service.*;
 import cuit.hyl.graduation.project_ui.utils.snowflake.SnowflakeIdWorker;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,39 +56,39 @@ public class VersionController {
     private AwardsService awardsService;
 
     @ApiOperation("查询一条版本信息---主键id")
-    @PostMapping("selectOne/{id}")
-    public ResponseResult selectOne(@PathVariable Long id) {
-//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
-//        Long id = userVo.getId();
+    @PostMapping("selectOne")
+    public ResponseResult selectOne() {
+        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+        Long id = Long.parseLong(userVo.getId());
         return new ResponseResult(ResponseResult.CodeStatus.OK,"成功查询数据", this.versionService.queryById(id));
     }
 
     @ApiOperation("查询用户所有版本信息---用户id")
-    @PostMapping("selectAll/{id}")
-    public ResponseResult selectAll(@PathVariable Long id) {
-//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
-//        Long id = userVo.getId();
+    @PostMapping("selectAll")
+    public ResponseResult selectAll() {
+        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+        Long id = Long.parseLong(userVo.getId());
         Version version = new Version();
         version.setPeopleId(id);
         return new ResponseResult(ResponseResult.CodeStatus.OK,"成功查询数据", this.versionService.queryAll(id));
     }
 
     @ApiOperation("保存新版本信息")
-    @PostMapping("save/{id}")
+    @PostMapping("save")
     @Transactional
-    public ResponseResult save(@PathVariable Long id, @RequestBody(required = false) JSONObject params) {
-//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
-//        Long id = userVo.getId();
+    public ResponseResult save(@RequestBody(required = false) JSONObject params) {
+        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+        Long id = Long.parseLong(userVo.getId());
         Long version = idWorker.nextId();
         params.put("id", version);
         params.put("peopleId", id);
         params.put("time", null);
         int i = this.versionService.insert(params);
 
-        saveVersion(id, version);
+        saveVersion(version);
 
         if (i == 0){
             return new ResponseResult(ResponseResult.CodeStatus.FAIL,"新增失败");
@@ -110,10 +112,10 @@ public class VersionController {
     }
 
     @Transactional
-    public void saveVersion(Long id, Long version){
-//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
-//        Long id = userVo.getId();
+    public void saveVersion(Long version){
+        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+        Long id = Long.parseLong(userVo.getId());
         List<BasicInfo> basicInfoList = this.basicInfoService.queryByPeopleId(id, 0l);
         if (basicInfoList.size() != 0){
             BasicInfo basicInfo = basicInfoList.get(0);

@@ -1,6 +1,8 @@
 package cuit.hyl.graduation.project_ui.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import cuit.hyl.graduation.project_ui.entity.*;
+import cuit.hyl.graduation.project_ui.entity.vo.UserVo;
 import cuit.hyl.graduation.project_ui.service.*;
 import cuit.hyl.graduation.project_ui.utils.poi.excel.ExportExcel;
 import cuit.hyl.graduation.project_ui.utils.poi.excel.ImportExcel;
@@ -8,6 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -46,12 +49,12 @@ public class PoiController {
     }
 
     @ApiOperation("导出定制化Excel--个人")
-    @PostMapping("exportModelExcel/{type}/{id}/{version}")
-    public void exportModelExcel(@PathVariable String type,@PathVariable Long id,@PathVariable Long version,HttpServletResponse response) {
+    @PostMapping("exportModelExcel/{type}/{version}")
+    public void exportModelExcel(@PathVariable String type, @PathVariable Long version,HttpServletResponse response) {
         response.addHeader("Access-Control-Expose-Headers", "Content-Disposition");
-//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
-//        Long id = userVo.getId();
+        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+        Long id = Long.parseLong(userVo.getId());
         ExportExcel<BasicInfo> exportExcel = new ExportExcel<>();
 
         Map<String, Object> param = new HashMap<>();

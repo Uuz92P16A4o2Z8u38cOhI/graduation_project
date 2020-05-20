@@ -2,11 +2,13 @@ package cuit.hyl.graduation.project_ui.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import cuit.hyl.graduation.project_ui.entity.*;
+import cuit.hyl.graduation.project_ui.entity.vo.UserVo;
 import cuit.hyl.graduation.project_ui.service.TeachingService;
 import cuit.hyl.graduation.project_ui.utils.snowflake.SnowflakeIdWorker;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -40,11 +42,11 @@ public class TeachingController {
      * @return 单条数据
      */
     @ApiOperation("通过用户id查询教学活动页面初始化消息")
-    @PostMapping("initInfo/{id}/{version}")
-    public ResponseResult initInfo(@PathVariable Long id, @PathVariable Long version) {
-//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
-//        Long id = userVo.getId();
+    @PostMapping("initInfo/{version}")
+    public ResponseResult initInfo(@PathVariable Long version) {
+        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+        Long id = Long.parseLong(userVo.getId());
         ResponseResult result = new ResponseResult();
         Map<String, Object> map = new HashMap<>();
 
@@ -86,11 +88,11 @@ public class TeachingController {
     }
 
     @ApiOperation("新增教学活动信息")
-    @PostMapping("insertTeach/{id}")
-    public ResponseResult insertTeach(@PathVariable Long id) {
-//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
-//        Long id = userVo.getId();
+    @PostMapping("insertTeach")
+    public ResponseResult insertTeach() {
+        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+        Long id = Long.parseLong(userVo.getId());
         ResponseResult result = new ResponseResult();
         Teaching teaching = new Teaching();
         teaching.setId(idWorker.nextId());
@@ -106,9 +108,6 @@ public class TeachingController {
     @ApiOperation("新增教学活动")
     @PostMapping("insertTeachItem/{id}")
     public ResponseResult insertTeachItem(@PathVariable Long id, @RequestBody(required = false) JSONObject params) {
-//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
-//        Long id = userVo.getId();
         params.put("id", idWorker.nextId());
         params.put("parentId", id);
         int i = this.teachingService.insertTeachItem(params);
@@ -121,9 +120,6 @@ public class TeachingController {
     @ApiOperation("更新教学活动")
     @PostMapping("updateTeachItem")
     public ResponseResult updateTeachItem(@RequestBody(required = false) JSONObject params) {
-//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
-//        Long id = userVo.getId();
         int i = this.teachingService.updateTeachItem(params);
         if (i == 0){
             return new ResponseResult(ResponseResult.CodeStatus.FAIL,"编辑失败");
@@ -134,9 +130,6 @@ public class TeachingController {
     @ApiOperation("删除教学活动")
     @DeleteMapping("deleteTeachItem/{id}")
     public ResponseResult deleteTeachItem(@PathVariable Long id) {
-//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
-//        Long id = userVo.getId();
         int i = this.teachingService.deleteTeachItem(id);
         if (i == 0){
             return new ResponseResult(ResponseResult.CodeStatus.FAIL,"删除失败");
@@ -147,9 +140,6 @@ public class TeachingController {
     @ApiOperation("新增教学课程活动")
     @PostMapping("insertTeachClass/{id}")
     public ResponseResult insertTeachClass(@PathVariable Long id, @RequestBody(required = false) JSONObject params) {
-//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
-//        Long id = userVo.getId();
         params.put("id", idWorker.nextId());
         params.put("classInfoId", id);
         int i = this.teachingService.insertTeachClass(params);
@@ -162,9 +152,6 @@ public class TeachingController {
     @ApiOperation("更新教学课程活动")
     @PostMapping("updateTeachClass")
     public ResponseResult updateTeachClass(@RequestBody(required = false) JSONObject params) {
-//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
-//        Long id = userVo.getId();
         int i = this.teachingService.updateTeachClass(params);
         if (i == 0){
             return new ResponseResult(ResponseResult.CodeStatus.FAIL,"编辑失败");
@@ -175,9 +162,6 @@ public class TeachingController {
     @ApiOperation("删除教学课程活动")
     @DeleteMapping("deleteTeachClass/{id}")
     public ResponseResult deleteTeachClass(@PathVariable Long id) {
-//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
-//        Long id = userVo.getId();
         int i = this.teachingService.deleteTeachClass(id);
         if (i == 0){
             return new ResponseResult(ResponseResult.CodeStatus.FAIL,"删除失败");

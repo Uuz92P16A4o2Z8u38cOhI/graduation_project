@@ -68,5 +68,10 @@ public class BasicInfoServiceImpl implements BasicInfoService {
         return this.basicInfoDao.updateAvatar(avatar, id);
     }
 
+    @Override
+    public BasicInfo queryUserBaseInfo(Long id) {
+        return this.basicInfoDao.queryUserBaseInfo(id);
+    }
+
 
 }

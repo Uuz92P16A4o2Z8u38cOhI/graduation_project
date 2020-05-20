@@ -6,6 +6,7 @@ import com.github.pagehelper.PageInfo;
 import cuit.hyl.graduation.sys.entity.ResponseResult;
 import cuit.hyl.graduation.sys.entity.TbRole;
 import cuit.hyl.graduation.sys.entity.TbUser;
+import cuit.hyl.graduation.sys.entity.vo.UserVo;
 import cuit.hyl.graduation.sys.service.TbUserService;
 import cuit.hyl.graduation.sys.utils.RedisUtils;
 import cuit.hyl.graduation.sys.utils.SnowflakeIdWorker;
@@ -13,6 +14,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -116,6 +118,30 @@ public class UserController {
                 return new ResponseResult(ResponseResult.CodeStatus.FAIL,"验证码过期或错误");
             }
         }
+    }
+
+    @ApiOperation(value="用户修改密码")
+    @PutMapping("updatePassword")
+    ResponseResult updatePassword(@RequestBody JSONObject params){
+        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+        Long id = Long.parseLong(userVo.getId());
+        ResponseResult responseResult = new ResponseResult();
+
+        TbUser tbUser = tbUserService.queryById(id);
+        String password = (String) params.get("password");
+        String newPassword = (String) params.get("newPassword");
+
+        boolean i = new BCryptPasswordEncoder().matches(password,tbUser.getPassword());
+        if (i){
+            int j = this.tbUserService.updatePassword(id, new BCryptPasswordEncoder().encode(newPassword));
+            responseResult.setMessage("密码修改成功！！  请重新登录！");
+            responseResult.setCode(ResponseResult.CodeStatus.OK);
+        }else {
+            responseResult.setMessage("密码错误！！");
+            responseResult.setCode(ResponseResult.CodeStatus.FAIL);
+        }
+        return responseResult;
     }
 
 

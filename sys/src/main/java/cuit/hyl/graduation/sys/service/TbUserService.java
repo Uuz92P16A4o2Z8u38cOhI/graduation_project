@@ -2,6 +2,7 @@ package cuit.hyl.graduation.sys.service;
 
 import com.alibaba.fastjson.JSONObject;
 import cuit.hyl.graduation.sys.entity.TbUser;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -12,6 +13,8 @@ import java.util.List;
  * @since 2019-12-07 13:32:07
  */
 public interface TbUserService {
+
+    TbUser queryById(@Param("id") Long id);
 
     List<TbUser> queryAllUser(JSONObject params);
 
@@ -25,4 +28,6 @@ public interface TbUserService {
 
     int updatePasswordByEmail(String email, String password);
     Long checkEmail(String email);
+
+    int updatePassword(Long id, String password);
 }

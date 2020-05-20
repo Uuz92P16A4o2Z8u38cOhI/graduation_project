@@ -4,11 +4,13 @@ import com.alibaba.fastjson.JSONObject;
 import cuit.hyl.graduation.project_ui.entity.FamilyBase;
 import cuit.hyl.graduation.project_ui.entity.FamilyMember;
 import cuit.hyl.graduation.project_ui.entity.ResponseResult;
+import cuit.hyl.graduation.project_ui.entity.vo.UserVo;
 import cuit.hyl.graduation.project_ui.service.FamilyBaseService;
 import cuit.hyl.graduation.project_ui.utils.snowflake.SnowflakeIdWorker;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,17 +41,22 @@ public class FamilyBaseController {
     SnowflakeIdWorker idWorker = new SnowflakeIdWorker(1,4);
 
     @ApiOperation("通过用户id查询家庭情况页面初始化消息")
-    @PostMapping("initInfo/{id}/{version}")
-    public ResponseResult initInfo(@PathVariable Long id, @PathVariable Long version) {
-//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
-//        Long id = userVo.getId();
+    @PostMapping("initInfo/{version}")
+    public ResponseResult initInfo(@PathVariable Long version) {
+        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+        Long id = Long.parseLong(userVo.getId());
         ResponseResult result = new ResponseResult();
         Map<String, Object> map = new HashMap<>();
 
         List<FamilyBase> familyBases = familyBaseService.initInfo(id, version);
         if (familyBases.size() == 0){
             result.setMessage("未设置家庭信息！");
+
+            JSONObject params = new JSONObject();
+            params.put("id", idWorker.nextId());
+            params.put("peopleId", id);
+            this.familyBaseService.insertbase(params);
         }else {
             FamilyBase familyBase = familyBases.get(0);
             List<FamilyMember> members = null;
@@ -67,11 +74,11 @@ public class FamilyBaseController {
 
 
     @ApiOperation("新增、更新家庭基础信息")
-    @PostMapping("insertOrUpdateBase/{id}")
-    public ResponseResult insertOrUpdateBase(@PathVariable Long id,@RequestBody(required = false) JSONObject params) {
-//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
-//        Long id = userVo.getId();
+    @PostMapping("insertOrUpdateBase")
+    public ResponseResult insertOrUpdateBase(@RequestBody(required = false) JSONObject params) {
+        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+        Long id = Long.parseLong(userVo.getId());
         ResponseResult result = new ResponseResult();
         List<FamilyBase> familyBases = familyBaseService.initInfo(id, 0l);
         if (familyBases.size() == 0) {
@@ -89,9 +96,6 @@ public class FamilyBaseController {
     @ApiOperation("新增家庭成员")
     @PostMapping("insertItem/{id}")
     public ResponseResult insertItem(@PathVariable Long id, @RequestBody(required = false) JSONObject params) {
-//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
-//        Long id = userVo.getId();
         params.put("id", idWorker.nextId());
         params.put("baseId", id);
         int i = this.familyBaseService.insertItem(params);
@@ -104,9 +108,6 @@ public class FamilyBaseController {
     @ApiOperation("更新家庭成员")
     @PostMapping("updateItem")
     public ResponseResult updateItem(@RequestBody(required = false) JSONObject params) {
-//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
-//        Long id = userVo.getId();
         int i = this.familyBaseService.updateItem(params);
         if (i == 0){
             return new ResponseResult(ResponseResult.CodeStatus.FAIL,"编辑失败");

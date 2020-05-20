@@ -22,6 +22,11 @@ public class TbUserServiceImpl implements TbUserService {
     private TbUserDao tbUserDao;
 
     @Override
+    public TbUser queryById(Long id) {
+        return this.tbUserDao.queryById(id);
+    }
+
+    @Override
     public List<TbUser> queryAllUser(JSONObject params) {
         return this.tbUserDao.queryAllUser(params);
     }
@@ -59,5 +64,10 @@ public class TbUserServiceImpl implements TbUserService {
     @Override
     public Long checkEmail(String email) {
         return this.tbUserDao.checkEmail(email);
+    }
+
+    @Override
+    public int updatePassword(Long id, String password) {
+        return this.tbUserDao.updatePassword(id, password);
     }
 }

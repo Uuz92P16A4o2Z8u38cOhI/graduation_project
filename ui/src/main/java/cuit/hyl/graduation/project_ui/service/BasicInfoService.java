@@ -39,4 +39,6 @@ public interface BasicInfoService {
 
     int updateAvatar(String avatar, Long id);
 
+    BasicInfo queryUserBaseInfo(Long id);
+
 }

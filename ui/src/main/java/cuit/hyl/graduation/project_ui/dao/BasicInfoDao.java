@@ -47,4 +47,5 @@ public interface BasicInfoDao {
 
     int updateAvatar(String avatar, Long id);
 
+    BasicInfo queryUserBaseInfo(Long id);
 }

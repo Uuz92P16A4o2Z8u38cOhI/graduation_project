@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import cuit.hyl.graduation.project_ui.entity.Awards;
 import cuit.hyl.graduation.project_ui.entity.AwardsItem;
 import cuit.hyl.graduation.project_ui.entity.ResponseResult;
+import cuit.hyl.graduation.project_ui.entity.vo.UserVo;
 import cuit.hyl.graduation.project_ui.service.AwardsService;
 import cuit.hyl.graduation.project_ui.service.feign.FastDFSService;
 import cuit.hyl.graduation.project_ui.utils.snowflake.SnowflakeIdWorker;
@@ -11,6 +12,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -39,11 +41,11 @@ public class AwardsController {
     SnowflakeIdWorker idWorker = new SnowflakeIdWorker(1,4);
 
     @ApiOperation("通过用户id查询获奖情况页面初始化消息")
-    @PostMapping("initInfo/{id}/{version}")
-    public ResponseResult initInfo(@PathVariable Long id, @PathVariable Long version) {
-//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
-//        Long id = userVo.getId();
+    @PostMapping("initInfo/{version}")
+    public ResponseResult initInfo(@PathVariable Long version) {
+        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+        Long id = Long.parseLong(userVo.getId());
         ResponseResult result = new ResponseResult();
         Map<String, Object> map = new HashMap<>();
 
@@ -84,9 +86,6 @@ public class AwardsController {
     @ApiOperation("新增获奖信息")
     @PostMapping("insertAwardsItem/{id}")
     public ResponseResult insertAwardsItem(@PathVariable Long id, @RequestBody(required = false) JSONObject params) {
-//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
-//        Long id = userVo.getId();
         params.put("id", idWorker.nextId());
         params.put("parentId", id);
         int i = this.awardsService.insertAwardsItem(params);
@@ -100,9 +99,6 @@ public class AwardsController {
     @ApiOperation("更新获奖信息")
     @PostMapping("updateAwardsItem")
     public ResponseResult updateAwardsItem(@RequestBody(required = false) JSONObject params) {
-//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
-//        Long id = userVo.getId();
         int i = this.awardsService.updateAwardsItem(params);
         if (i == 0){
             return new ResponseResult(ResponseResult.CodeStatus.FAIL,"编辑失败");
@@ -114,9 +110,6 @@ public class AwardsController {
     @ApiOperation("删除获奖信息")
     @DeleteMapping("deleteAwardsItem/{id}")
     public ResponseResult deleteAwardsItem(@PathVariable Long id) {
-//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
-//        Long id = userVo.getId();
         int i = this.awardsService.deleteAwardsItem(id);
         if (i == 0){
             return new ResponseResult(ResponseResult.CodeStatus.FAIL,"删除失败");

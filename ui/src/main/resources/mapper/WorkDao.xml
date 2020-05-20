@@ -93,7 +93,7 @@
             <if test="peopleId != null and '' != peopleId">
                 #{peopleId},
             </if>
-            <if test="uploadTime != null a">
+            <if test="uploadTime != null">
                 #{uploadTime},
             </if>
             <if test="version != null and '' != version">

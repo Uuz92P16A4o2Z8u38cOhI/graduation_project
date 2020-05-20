@@ -56,8 +56,8 @@ public class Work implements Serializable {
     private Date endTime;
     @ExcelAttributes(importSort = 999)
     private Long peopleId;
-    @Excel(name = "版本", orderNum = "7", width = 5)
-    @ExcelAttributes(exportSort = 6, importSort = 6)
+//    @Excel(name = "版本", orderNum = "7", width = 5)
+//    @ExcelAttributes(exportSort = 6, importSort = 6)
     private Long version;
 
     private java.util.Date uploadTime;

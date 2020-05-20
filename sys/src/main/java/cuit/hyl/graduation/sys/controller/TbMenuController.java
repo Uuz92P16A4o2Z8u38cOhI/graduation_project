@@ -1,13 +1,16 @@
 package cuit.hyl.graduation.sys.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import cuit.hyl.graduation.sys.entity.ResponseResult;
 import cuit.hyl.graduation.sys.entity.TbMenu;
 import cuit.hyl.graduation.sys.entity.vo.MenuTree;
 import cuit.hyl.graduation.sys.entity.vo.PermissionTree;
+import cuit.hyl.graduation.sys.entity.vo.UserVo;
 import cuit.hyl.graduation.sys.service.TbMenuService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -33,8 +36,11 @@ public class TbMenuController {
     private TbMenuService tbMenuService;
 
     @ApiOperation(value="根据用户id查询目录菜单")
-    @PostMapping("menuInfo/{id}")
-    public List<TbMenu> menuInfo(@PathVariable("id") Long id) {
+    @PostMapping("menuInfo")
+    public List<TbMenu> menuInfo() {
+        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserVo userVo = JSONObject.parseObject(principal, UserVo.class);
+        Long id = Long.parseLong(userVo.getId());
         List<TbMenu> sortMenu = new ArrayList<TbMenu>();
         List<TbMenu> menuList = this.tbMenuService.queryById(id);
 
