@@ -13,9 +13,8 @@ import com.itextpdf.text.Document;
 import cuit.hyl.graduation.project_ui.entity.*;
 import cuit.hyl.graduation.project_ui.entity.vo.UserVo;
 import cuit.hyl.graduation.project_ui.service.*;
+import cuit.hyl.graduation.project_ui.utils.PdfUtil;
 import cuit.hyl.graduation.project_ui.utils.easypoi.ExcelUtils;
-import cuit.hyl.graduation.project_ui.utils.poi.excel.ExportExcel;
-import cuit.hyl.graduation.project_ui.utils.snowflake.SnowflakeIdWorker;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -23,26 +22,16 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.oauth2.provider.OAuth2Authentication;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-import sun.plugin.liveconnect.SecurityContextHelper;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.*;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.*;
 
 import static javax.swing.UIManager.get;
@@ -385,7 +374,7 @@ public class EasyPoiController {
                         TeachingWordMap.put("postgraduate", postgraduate);
 
                         XWPFDocument doc = WordExportUtil.exportWord07(
-                                Objects.requireNonNull(EasyPoiController.class.getClassLoader().getResource("static/word/BasicInfo.docx").getPath(), "模板文件路径问题")
+                                Objects.requireNonNull(EasyPoiController.class.getClassLoader().getResource("static/word/Teaching.docx").getPath(), "模板文件路径问题")
                                 , TeachingWordMap);
                         response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(type, "UTF-8") + ".docx");
                         doc.write(response.getOutputStream());
@@ -411,7 +400,7 @@ public class EasyPoiController {
                         researchWordMap.put("researchTeam", researchTeam);
 
                         XWPFDocument doc = WordExportUtil.exportWord07(
-                                Objects.requireNonNull(EasyPoiController.class.getClassLoader().getResource("static/word/BasicInfo.docx").getPath(), "模板文件路径问题")
+                                Objects.requireNonNull(EasyPoiController.class.getClassLoader().getResource("static/word/Research.docx").getPath(), "模板文件路径问题")
                                 , researchWordMap);
                         response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(type, "UTF-8") + ".docx");
                         doc.write(response.getOutputStream());
@@ -435,7 +424,7 @@ public class EasyPoiController {
                         awardsWordMap.put("honorWallList", honorWallList);
 
                         XWPFDocument doc = WordExportUtil.exportWord07(
-                                Objects.requireNonNull(EasyPoiController.class.getClassLoader().getResource("static/word/BasicInfo.docx").getPath(), "模板文件路径问题")
+                                Objects.requireNonNull(EasyPoiController.class.getClassLoader().getResource("static/word/Awards.docx").getPath(), "模板文件路径问题")
                                 , awardsWordMap);
                         response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(type, "UTF-8") + ".docx");
                         doc.write(response.getOutputStream());
@@ -470,27 +459,23 @@ public class EasyPoiController {
             switch(type){
                 case "BasicInfo":
                     List<BasicInfo> basicInfoList = basicInfoService.queryByPeopleId(id, version);
-                    Map<String, Object> basicInfoWordMap = new HashMap<String, Object>();
+                    Map<String, Object> basicInfoPdfMap = new HashMap<String, Object>();
                     if (basicInfoList != null){
                         BasicInfo basicInfo = basicInfoList.get(0);
-                        basicInfoWordMap.put("basicInfo", basicInfo);
-                        basicInfoWordMap.put("birthday", sdf.format(basicInfo.getBirthday()));
+                        basicInfoPdfMap.put("basicInfo", basicInfo);
+                        basicInfoPdfMap.put("birthday", sdf.format(basicInfo.getBirthday()));
                         School school = basicInfoService.schoolInfo(id);
-                        basicInfoWordMap.put("schoolName", school.getName());
+                        basicInfoPdfMap.put("schoolName", school.getName());
 
-                        ImageEntity image = new ImageEntity();
-                        image.setHeight(200);
-                        image.setWidth(200);
-                        image.setUrl(fastDFSURL + basicInfo.getAvatatUrl());
-                        image.setType(ImageEntity.URL);
-                        basicInfoWordMap.put("avatar", image);
-
-                        XWPFDocument doc = WordExportUtil.exportWord07(
-                                Objects.requireNonNull(EasyPoiController.class.getClassLoader().getResource("static/word/BasicInfo.docx").getPath(), "模板文件路径问题")
-                                , basicInfoWordMap);
+                        basicInfoPdfMap.put("avatar", fastDFSURL + basicInfo.getAvatatUrl());
 
                         response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(type, "UTF-8") + ".pdf");
-                        doc.write(response.getOutputStream());
+                        PdfUtil pdfUtil = new PdfUtil();
+                        pdfUtil.fillTemplate(
+                                basicInfoPdfMap,
+                                response.getOutputStream(),
+                                Objects.requireNonNull(EasyPoiController.class.getClassLoader().getResource("static/pdf/BasicInfo.pdf").getPath(), "模板文件路径问题")
+                                );
                     }
                     break;
                 case "Education":
