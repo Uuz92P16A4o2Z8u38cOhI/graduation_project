@@ -4,6 +4,7 @@ eureka:
       defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/
   instance:
     hostname: 127.0.0.1
+#    hostname: 192.168.91.128
     port: 7001
     prefer-ip-address: true
 

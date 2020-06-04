@@ -14,7 +14,7 @@ import java.util.List;
 @SpringBootTest
 class ProjectUiApplicationTests {
 
-    @Test
+   /* @Test
     void contextLoads() {
         saveVersion(1l, 11111111111111111l);
     }
@@ -303,6 +303,6 @@ class ProjectUiApplicationTests {
                 }
             }
         }
-    }
+    }*/
 
 }

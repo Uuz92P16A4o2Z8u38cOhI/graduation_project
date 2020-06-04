@@ -4,6 +4,7 @@ eureka:
       defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/
   instance:
     hostname: 127.0.0.1
+#    hostname: 192.168.91.128
     port: 7001
     prefer-ip-address: true
 feign:
@@ -30,6 +31,7 @@ spring:
       minimum-idle: 5
       pool-name: MyHikariCP
     jdbc-url: jdbc:mysql://127.0.0.1:3306/graduation_authority?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT&useSSL=false
+#    jdbc-url: jdbc:mysql://192.168.91.128:3306/graduation_authority?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT&useSSL=false
     password: 123456
     type: com.zaxxer.hikari.HikariDataSource
     username: root
